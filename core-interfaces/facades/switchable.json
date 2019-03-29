@@ -1,0 +1,24 @@
+{
+    "name": "Facades/Switchable",
+    "version": "0.0.1",
+    "commands": {
+        "on": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        },
+        "off": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        }
+    },
+    "state": {
+        "power": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(on|off)$"
+            }
+        }
+    },
+    "events": { }
+}

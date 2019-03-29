@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Override",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "override": {
+            "readOnly": false,
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    },
+    "events": { }
+}

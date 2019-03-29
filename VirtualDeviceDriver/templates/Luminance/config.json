@@ -1,0 +1,7 @@
+{
+    "name": "Core/Devices/Virtual/Luminance",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/HasLuminance"
+    ]
+}

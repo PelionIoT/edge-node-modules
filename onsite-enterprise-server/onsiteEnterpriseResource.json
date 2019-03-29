@@ -1,0 +1,5 @@
+{
+    "name": "onsite-enterprise-server",
+    "version": "0.0.1",
+    "interfaces": [ "OnsiteEnterpriseInterface" ]
+}

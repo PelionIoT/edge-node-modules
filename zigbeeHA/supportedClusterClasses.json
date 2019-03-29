@@ -1,0 +1,653 @@
+{
+    "0": {
+        "identifier": "basic",
+        "cluster_class": {
+            "name": "basic",
+            "path": "./../../../cluster_classes/basic",
+            "id": 0
+        }
+    },
+    "6": {
+        "identifier": "on_off",
+        "devjsInterface": {
+            "Facades/Switchable": {}
+        },
+        "cluster_class": {
+            "name": "on_off",
+            "path": "./../../../cluster_classes/on_off",
+            "id": 6
+        }
+    },
+    "8": {
+        "identifier": "level",
+        "devjsInterface": {
+            "Facades/Dimmable": {}
+        },
+        "cluster_class": {
+            "name": "level",
+            "path": "./../../../cluster_classes/level",
+            "id": 8
+        }
+    },
+    "768": {
+        "identifier": "color_control",
+        "devjsInterface": {
+            "Facades/Colorable": {},
+            "Facades/hasWhiteTemp": {},
+            "Facades/LastColorCall": {}
+        },
+        "cluster_class": {
+            "name": "color_control",
+            "path": "./../../../cluster_classes/color_control",
+            "id": 768
+        }
+    },
+    "513": {
+        "identifier": "thermostat",
+        "devjsInterface": {
+            "Facades/ThermostatMode": {},
+            "Facades/ThermostatDeadband": {},
+            "Facades/OccupancyMode": {},
+            "Facades/OccupiedCoolTemperatureLevel": {},
+            "Facades/OccupiedHeatTemperatureLevel": {},
+            "Facades/OccupiedAutoTemperatureLevel": {},
+            "Facades/UnoccupiedCoolTemperatureLevel": {},
+            "Facades/UnoccupiedHeatTemperatureLevel": {},
+            "Facades/UnoccupiedAutoTemperatureLevel": {},
+            "Facades/ThermostatReturnTemperature": {},
+            "Facades/ThermostatSupplyTemperature": {},
+            "Facades/ThermostatW1Status": {},
+            "Facades/ThermostatW2Status": {},
+            "Facades/ThermostatY1Status": {},
+            "Facades/ThermostatY2Status": {},
+            "Facades/ThermostatGStatus": {},
+            "Core/Interfaces/Configuration": {}
+        },
+        "cluster_class": {
+            "name": "thermostat",
+            "path": "./../../../cluster_classes/thermostat",
+            "id": 513,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "r",
+                    "default": "",
+                    "name": "localTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Local Temperature",
+                    "description": "LocalTemperature represents the temperature, as measured locally or remotely (over the network). The maximum resolution this format allows is 0.01 oC. A LocalTemperature of 0x8000 indicates that the temperature measurement is invalid.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "r",
+                    "default": "",
+                    "name": "outdoorTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Outdoor Temperature",
+                    "description": "OutdoorTemperature represents the outdoor temperature, as measured locally or remotely (over the network).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2": {
+                    "attrId": 2,
+                    "access": "r",
+                    "default": "",
+                    "name": "occupancy",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "(Unitless)",
+                    "title": "Occupancy",
+                    "description": "Occupancy specifies whether the heated/cooled space is occupied or not, as measured locally or remotely (over the network). If bit 0 = 1, the space is occupied, else it is unoccupied.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "pattern": "^([0-1])$"
+                },
+                "3": {
+                    "attrId": 3,
+                    "access": "r",
+                    "default": "",
+                    "name": "absMinHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Min Heat Setpoint Limit",
+                    "description": "The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "4": {
+                    "attrId": 4,
+                    "access": "r",
+                    "default": "",
+                    "name": "absMaxHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Max Heat Setpoint Limit",
+                    "description": "The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "5": {
+                    "attrId": 5,
+                    "access": "r",
+                    "default": "",
+                    "name": "absMinCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Min Cool Setpoint Limit",
+                    "description": "The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "6": {
+                    "attrId": 6,
+                    "access": "r",
+                    "default": "",
+                    "name": "absMaxCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Max Cool Setpoint Limit",
+                    "description": "The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "7": {
+                    "attrId": 7,
+                    "access": "r",
+                    "default": "",
+                    "name": "pICoolingDemand",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "percentage",
+                    "title": "PI Cooling Demand",
+                    "description": "The PICoolingDemand attribute is 8 bits in length and specifies the level of cooling demanded by the PI (proportional integral) control loop in use by the thermostat (if any), in percent. This value is 0 when the thermostat is in “off” or “heating” mode. This attribute is reported regularly and may be used to control a heating device.",
+                    "operation": "",
+                    "range": "[0 to 100]",
+                    "pattern": "^([0-9][0-9]{0,1}|100)$"
+                },
+                "8": {
+                    "attrId": 8,
+                    "access": "r",
+                    "default": "",
+                    "name": "pIHeatingDemand",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "percentage",
+                    "title": "PI Heating Demand",
+                    "description": "The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI loop in percent. This value is 0 when the thermostat is in “off” or “cooling” mode. This attribute is reported regularly and may be used to control a cooling device.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        100
+                    ],
+                    "pattern": "^([0-9][0-9]{0,1}|100)$"
+                },
+                "16": {
+                    "attrId": 16,
+                    "access": "rw",
+                    "default": 32,
+                    "name": "localTemperatureCalibration",
+                    "type": "ZCL_DATATYPE_INT8",
+                    "unit": "Fahrenheit",
+                    "title": "Local Temperature Calibration",
+                    "description": "The LocalTemperatureCalibration attribute specifies the offset that can be added/ subtracted to the actual displayed room temperature, in steps of 0.1°C. The range of this offset is –2.5 °C to +2.5 °C).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[13.00 to 77.00]",
+                    "pattern": "^(1[3-9]|[2-6][0-9]{0,1}|7[0-7]+(\\.[0-9]{1,2})?)$"
+                },
+                "17": {
+                    "attrId": 17,
+                    "access": "rw",
+                    "default": 78.8,
+                    "name": "occupiedCoolingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Occupied Cooling Setpoint",
+                    "description": "The OccupiedCoolingSetpoint attribute is 16 bits in length and specifies the cooling mode setpoint when the room is occupied. It shall be set to a value in the range defined by the MinCoolSetpointLimit and MaxCoolSetpointLimit attributes. The OccupiedHeatingSetpoint attribute shall always be below the value specified in the OccupiedCoolingSetpoint by at least SetpointDeadband. If an attempt is made to set it such that this condition is violated, a default response command with the status code INVALID_VALUE shall be returned. This shall apply to all attempts to set values of attributes which violate similar conditions. If it is unknown if the room is occupied or not, this attribute shall be used as the cooling mode setpoint.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[MinCoolSetpointLimit to MaxCoolSetpointLimit]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "18": {
+                    "attrId": 18,
+                    "access": "rw",
+                    "default": 68,
+                    "name": "occupiedHeatingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Occupied Heating Setpoint",
+                    "description": "The OccupiedHeatingSetpoint attribute is 16 bits in length and specifies the heating mode setpoint when the room is occupied. It shall be set to a value in the range defined by the MinHeatSetpointLimit and MaxHeatSetpointLimit attributes. The OccupiedCoolingSetpoint attribute shall always be above the value specified in the OccupiedHeatingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall be used as the cooling mode setpoint.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[MinHeatSetpointLimit to MaxHeatSetpointLimit]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "19": {
+                    "attrId": 19,
+                    "access": "rw",
+                    "default": 78.8,
+                    "name": "unoccupiedCoolingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Unoccupied Cooling Setpoint",
+                    "description": "The UnoccupiedCoolingSetpoint attribute is 16 bits in length and specifies the cooling mode setpoint when the room is unoccupied. It shall be set to a value inthe range defined by the MinCoolSetpointLimit and MaxCoolSetpointLimit attributes. The UnoccupiedHeatingSetpoint attribute shall always be below the value specified in the UnoccupiedCoolingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall not be used.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[MinCoolSetpointLimit to MaxCoolSetpointLimit]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "20": {
+                    "attrId": 20,
+                    "access": "rw",
+                    "default": 68,
+                    "name": "unoccupiedHeatingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Unoccupied Heating Setpoint",
+                    "description": "The UnoccupiedHeatingSetpoint attribute is 16 bits in length and specifies the heating mode setpoint when the room is unoccupied. It shall be set to a value in the range defined by the MinHeatSetpointLimit and MaxHeatSetpointLimit attributes. The UnoccupiedCoolingSetpoint attribute shall always be below the value specified in the UnoccupiedHeatingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall not be used.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[MinHeatSetpointLimit to MaxHeatSetpointLimit]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "21": {
+                    "attrId": 21,
+                    "access": "rw",
+                    "default": 44.6,
+                    "name": "minHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Min Heat Setpoint Limit",
+                    "description": "The MinHeatSetpointLimit attribute specifies the minimum level that the heating setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "22": {
+                    "attrId": 22,
+                    "access": "rw",
+                    "default": 86,
+                    "name": "maxHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Max Heat Setpoint Limit",
+                    "description": "The MaxHeatSetpointLimit attribute specifies the maximum level that the heating setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "23": {
+                    "attrId": 23,
+                    "access": "rw",
+                    "default": 44.6,
+                    "name": "minCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Min Cool Setpoint Limit",
+                    "description": "The MinCoolSetpointLimit attribute specifies the minimum level that the cooling setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "24": {
+                    "attrId": 24,
+                    "access": "rw",
+                    "default": 86,
+                    "name": "maxCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Max Cool Setpoint Limit",
+                    "description": "The MaxCoolSetpointLimit attribute specifies the maximum level that the cooling setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "outgoingOperation": "(({{value}} - 32) * (5 / 9) * 100)",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "25": {
+                    "attrId": 25,
+                    "access": "rw",
+                    "default": 2.5,
+                    "name": "minSetpointDeadBand",
+                    "type": "ZCL_DATATYPE_INT8",
+                    "unit": "Fahrenheit",
+                    "title": "Min Setpoint DeadBand",
+                    "description": "The MinSetpointDeadBand attribute specifies the minimum difference between the Heat Setpoint and the Cool SetPoint, in steps of 0.1°C.",
+                    "operation": "({{value}}/10)",
+                    "outgoingOperation": "({{value}} * 10)",
+                    "range": "[1 to 2.5]",
+                    "pattern": "^(1+(\\.[0-9]{1,2})?)|(2+(\\.[0-5]{1,2})?)$"
+                },
+                "26": {
+                    "attrId": 26,
+                    "access": "rw",
+                    "default": 0,
+                    "name": "remoteSensing",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "(Unitless)",
+                    "title": "Remote Sensing",
+                    "description": "The RemoteSensing attribute is an 8-bit bitmap that specifies whether the local temperature, outdoor temperature and occupancy are being sensed by internal sensors or remote networked sensors. Bit Number 0 Description 0 – local temperature sensed internally, 1 – local temperature sensed remotely; Bit Number 1 Description 0 – outdoor temperature sensed internally, 1 – outdoor temperature sensed remotely; Bit Number 2 Description 0 – occupancy sensed internally, 1 – occupancy sensed remotely",
+                    "operation": "",
+                    "range": "[0 - 7]",
+                    "pattern": "^([0-7])$"
+                },
+                "27": {
+                    "attrId": 27,
+                    "access": "rw",
+                    "default": 4,
+                    "name": "controlSequenceOf",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Control Sequence Of Operation",
+                    "description": "The ControlSequenceOfOperation attribute specifies the overall operating environment of the thermostat, and thus the possible system modes that the thermostat can operate in.",
+                    "operation": "",
+                    "range": "[0 to 5]",
+                    "pattern": "^([0-5])$"
+                },
+                "28": {
+                    "attrId": 28,
+                    "access": "rw",
+                    "default": 1,
+                    "name": "systemMode",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "System Mode",
+                    "description": "The SystemMode attribute specifies the current operating mode of the thermostat. Modes- off: 0x00, auto: 0x01, cool: 0x02,heat: 0x03",
+                    "operation": "",
+                    "range": "[0 to 7]",
+                    "pattern": "^([0-7])$"
+                },
+                "29": {
+                    "attrId": 29,
+                    "access": "r",
+                    "default": 0,
+                    "name": "alarmMask",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "(Unitless)",
+                    "title": "Alarm Mask",
+                    "description": "The AlarmMask attribute specifies whether each of the alarms listed is enabled. When the bit number corresponding to the alarm code is set to 1, the alarm is enabled, else it is disabled. Bits not corresponding to a code in the table are reserved. Code 0x00- Initialization failure. The device failed to complete initialization at power-up.; Code 0x01- Hardware failure; Code 0x02- Self-calibration failure",
+                    "operation": "",
+                    "range": "[0 to 7]",
+                    "pattern": "^([0-7])$"
+                },
+                "1616": {
+                    "attrId": 1616,
+                    "access": "rw",
+                    "default": 0,
+                    "name": "occupancyCommand",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Occupancy Command",
+                    "description": "Specifies the occupancy mode. 0x00- Local occupancy, 0x01- Occupied, 0x02- Unoccupied.",
+                    "operation": "",
+                    "range": "[0 to 2]",
+                    "pattern": "^([0-2])$"
+                },
+                "1898": {
+                    "attrId": 1898,
+                    "access": "r",
+                    "default": "",
+                    "name": "supplyTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Supply Temperature",
+                    "description": "Supply temperature represents the temperature closest to the unit. The maximum resolution this format allows is 0.01 oC. A supplyTemperature of 0x8000 indicates that the temperature measurement is invalid.",
+                    "operation": "({{value}}/10)",
+                    "range": "",
+                    "pattern": ""
+                },
+                "1901": {
+                    "attrId": 1901,
+                    "access": "r",
+                    "default": "",
+                    "name": "returnTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Return Temperature",
+                    "description": "Return temperature represents the temperature farthest to the unit. The maximum resolution this format allows is 0.01 oC. A returnTemperature of 0x8000 indicates that the temperature measurement is invalid.",
+                    "operation": "({{value}}/10)",
+                    "range": "",
+                    "pattern": ""
+                },
+                "1900": {
+                    "attrId": 1900,
+                    "access": "r",
+                    "default": "",
+                    "name": "roomTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Room Temperature",
+                    "description": "Room temperature represents local temperature. The maximum resolution this format allows is 0.01 oC. A roomTemperature of 0x8000 indicates that the temperature measurement is invalid.",
+                    "operation": "({{value}}/10)",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2141": {
+                    "attrId": 2141,
+                    "access": "r",
+                    "default": "",
+                    "name": "w1Status",
+                    "type": "ZCL_DATATYPE_BOOLEAN",
+                    "unit": "",
+                    "title": "W1 Status",
+                    "description": "Stage 1 heat relay",
+                    "operation": "{{value}} === 0 ? 'open': 'closed'",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2140": {
+                    "attrId": 2140,
+                    "access": "r",
+                    "default": "",
+                    "name": "w2Status",
+                    "type": "ZCL_DATATYPE_BOOLEAN",
+                    "unit": "",
+                    "title": "W2 Status",
+                    "description": "Stage 2 heat relay",
+                    "operation": "{{value}} === 0 ? 'open': 'closed'",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2138": {
+                    "attrId": 2138,
+                    "access": "r",
+                    "default": "",
+                    "name": "y1Status",
+                    "type": "ZCL_DATATYPE_BOOLEAN",
+                    "unit": "",
+                    "title": "Y1 Status",
+                    "description": "Stage 1 compressor relay",
+                    "operation": "{{value}} === 0 ? 'open': 'closed'",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2139": {
+                    "attrId": 2139,
+                    "access": "r",
+                    "default": "",
+                    "name": "y2Status",
+                    "type": "ZCL_DATATYPE_BOOLEAN",
+                    "unit": "",
+                    "title": "Y2 Status",
+                    "description": "Stage 2 compressor relay",
+                    "operation": "{{value}} === 0 ? 'open': 'closed'",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2150": {
+                    "attrId": 2150,
+                    "access": "r",
+                    "default": "",
+                    "name": "gStatus",
+                    "type": "ZCL_DATATYPE_BOOLEAN",
+                    "unit": "",
+                    "title": "G Status",
+                    "description": "Fan Relay",
+                    "operation": "{{value}} === 0 ? 'open': 'closed'",
+                    "range": "",
+                    "pattern": ""
+                }
+            }
+        }
+    },
+    "1026": {
+        "identifier": "temperature",
+        "devjsInterface": {
+            "Facades/HasTemperature": {},
+            "Core/Interfaces/Configuration": {}
+        },
+        "cluster_class": {
+            "name": "temperature",
+            "path": "./../../../cluster_classes/temperature",
+            "id": 1026,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "r",
+                    "default": "",
+                    "name": "measuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Measured Value",
+                    "description": "MeasuredValue represents the temperature in degrees Celsius. A MeasuredValue of 0x8000 indicates that the temperature measurement is invalid. MeasuredValue is updated continuously as new measurements are made.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "[MinMeasuredValue to MaxMeasuredValue]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "r",
+                    "default": "",
+                    "name": "minMeasuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Min Measured Value",
+                    "description": "The MinMeasuredValue attribute indicates the minimum value of MeasuredValue that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that the minimum value is unknown.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "2": {
+                    "attrId": 2,
+                    "access": "r",
+                    "default": "",
+                    "name": "maxMeasuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Max Measured Value",
+                    "description": "The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue that is capable of being measured. MaxMeasuredValue shall be greater than MinMeasuredValue. MinMeasuredValue and MaxMeasuredValue define the range of the sensor. A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "[-459.67 to 621.80]",
+                    "pattern": "^-?[0-9]+(\\.[0-9]{1,2})?$"
+                },
+                "3": {
+                    "attrId": 3,
+                    "access": "r",
+                    "default": "",
+                    "name": "tolerance",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Tolerance",
+                    "description": "The Tolerance attribute indicates the magnitude of the possible error that is associated with MeasuredValue . The true value is located in the range (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "[0 to 2048]",
+                    "pattern": "^([0-9][0-9]{0,2}|[0-1][0-9]{0,3}|2[0][0-4][0-8])$"
+                }
+            }
+        }
+    },
+    "514": {
+        "identifier": "fan_control",
+        "devjsInterface": {
+            "Facades/ThermostatFanMode": {},
+            "Core/Interfaces/Configuration": {}
+        },
+        "cluster_class": {
+            "name": "fan_control",
+            "path": "./../../../cluster_classes/fan_control",
+            "id": 514,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "rw",
+                    "default": 5,
+                    "name": "fanMode",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Fan Mode",
+                    "description": "The FanMode attribute is an 8-bit value that specifies the current speed of the fan. 0- off, 1 - low, 2- medium, 3- high, 4- on, 5- auto, 6- smart.",
+                    "operation": "",
+                    "range": "[0 to 6]",
+                    "pattern": "^([0-6])$"
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "rw",
+                    "default": 2,
+                    "name": "fanModeSequence",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Fan Mode Sequence",
+                    "description": "The FanModeSequence attribute is an 8-bit value that specifies the possible fan speeds that the thermostat can set. 0- Low/Med/High, 1- Low/High, 2- Low/Med/High/Auto, 3- Low/High/Auto, 4- On/Auto",
+                    "operation": "",
+                    "range": "[0 to 4]",
+                    "pattern": "^([0-4])$"
+                }
+            }
+        }
+    },
+    "516": {
+        "identifier": "thermostatUserInterface",
+        "devjsInterface": {
+            "Facades/KeypadLockLevel": {},
+            "Facades/TemperatureDisplayMode": {},
+            "Core/Interfaces/Configuration": {}
+        },
+        "cluster_class": {
+            "name": "thermostatUserInterface",
+            "path": "./../../../cluster_classes/thermostatUserInterface",
+            "id": 516,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "rw",
+                    "default": 0,
+                    "name": "temperatureDisplayMode",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Temperature Display Mode",
+                    "description": "The TemperatureDisplayMode attribute specifies the units of the temperature displayed on the thermostat screen. 0- Celcius, 1- Fahrenheit",
+                    "operation": "",
+                    "range": "[0 to 1]",
+                    "pattern": "^([0-1])$"
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "rw",
+                    "default": 0,
+                    "name": "keypadLockout",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "(Unitless)",
+                    "title": "Keypad Lockout",
+                    "description": "The KeypadLockout attribute specifies the level of functionality that is available to the user via the keypad. 0- No Lockout, 1- Level 1 Lockout, 2- Level 2 Lockout, 3- Level 3 Lockout, 4- Level 4 Lockout, 5- Level5 Lockout (least functionality available to user).",
+                    "operation": "",
+                    "range": "[0 to 5]",
+                    "pattern": "^([0-5])$"
+                }
+            }
+        }
+    }
+}

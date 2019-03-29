@@ -1,0 +1,15 @@
+{
+    "name": "Facades/CO2_Setpoint",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "setpoint": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum":0
+            }
+        }
+    },
+    "events": { }
+}

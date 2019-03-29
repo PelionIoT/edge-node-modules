@@ -1,0 +1,1902 @@
+{
+    "project": {
+        "name": "ZigBee Home Automation TI Stack's znp-host-framework node implementation",
+        "description": "Establish and manage zigbee mesh network, implements cluster library.",
+        "version": "1.0.0"
+    },
+    "files": {
+        "controllers/generic_device_controller/controller.js": {
+            "name": "controllers/generic_device_controller/controller.js",
+            "modules": {},
+            "classes": {
+                "ZigBeeDeviceController": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "controllers/monitor/controller.js": {
+            "name": "controllers/monitor/controller.js",
+            "modules": {},
+            "classes": {
+                "ZigbeeDriver": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "controllers/supportedDeviceTypes/Viconics_254_10/controller.js": {
+            "name": "controllers/supportedDeviceTypes/Viconics_254_10/controller.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "controllers/supportedDeviceTypes/Viconics_8000_SERIES/controller.js": {
+            "name": "controllers/supportedDeviceTypes/Viconics_8000_SERIES/controller.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "lib/defs.js": {
+            "name": "lib/defs.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/znpcontroller.js": {
+            "name": "src/znpcontroller.js",
+            "modules": {},
+            "classes": {
+                "ZNPController": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {
+        "ZigBeeDeviceController": {
+            "name": "ZigBeeDeviceController",
+            "shortname": "ZigBeeDeviceController",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 34,
+            "description": "ZigBee device controller"
+        },
+        "ZigbeeDriver": {
+            "name": "ZigbeeDriver",
+            "shortname": "ZigbeeDriver",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "controllers/monitor/controller.js",
+            "line": 5,
+            "description": "ZigBee Home Automation Monitor (id='ZigbeeDriver')"
+        },
+        "ZNPController": {
+            "name": "ZNPController",
+            "shortname": "ZNPController",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/znpcontroller.js",
+            "line": 45,
+            "description": "ZigBee Network Processor (ZNP) controller",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "config",
+                    "description": "options required to setup zigbee mesh network",
+                    "type": "Object"
+                }
+            ]
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 123,
+            "description": "Fired when a device is online",
+            "itemtype": "event",
+            "name": "reachable",
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 133,
+            "description": "Fired when a device is offline",
+            "itemtype": "event",
+            "name": "unreachable",
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 146,
+            "description": "Get power state of the device\n\nUsage: dev$.select('id=*').get('power');",
+            "itemtype": "method",
+            "name": "power get",
+            "return": {
+                "description": "return power state 'off' or 'on'",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 157,
+            "description": "Set power state of the device\n\nUsage: dev$.select('id=*').set('power', 'on');",
+            "itemtype": "method",
+            "name": "power set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "power state 'on' or 'off'",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 172,
+            "description": "Get brightness state of the device\n\nUsage: dev$.select('id=*').get('brightness');",
+            "itemtype": "method",
+            "name": "brightness get",
+            "return": {
+                "description": "return value between 0-1",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 183,
+            "description": "Set brightness state of the device\n\nUsage: dev$.select('id=*').set('brightness', 0.3);",
+            "itemtype": "method",
+            "name": "brightness set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes in value between 0-1",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 198,
+            "description": "Get color temperature state of the device\n\nUsage: dev$.select('id=*').get('K');",
+            "itemtype": "method",
+            "name": "K get",
+            "return": {
+                "description": "return color temperature between 2000-8000",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 209,
+            "description": "Set color temperature of the device\n\nUsage: dev$.select('id=*').set('K', 3000);",
+            "itemtype": "method",
+            "name": "K set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes value between 2000-8000",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 226,
+            "description": "Get hsl state of the device\n\nUsage: dev$.select('id=*').get('hsl');",
+            "itemtype": "method",
+            "name": "hsl get",
+            "return": {
+                "description": "return an object with h, s, l values",
+                "type": "Object"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 237,
+            "description": "Set hsl state of the device\n\nUsage: dev$.select('id=*').set('hsl', {h:0.2, s:1, l:0.5});",
+            "itemtype": "method",
+            "name": "hsl set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes in an object with h, s, l keys",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 252,
+            "description": "Get thermostatMode of the device\n\nUsage: dev$.select('id=*').get('thermostatMode');",
+            "itemtype": "method",
+            "name": "thermostatMode get",
+            "return": {
+                "description": "return thermostatMode off, auto, cool or heat",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 263,
+            "description": "Set thermostatMode of the device\n\nUsage: dev$.select('id=*').set('thermostatMode', 'cool');",
+            "itemtype": "method",
+            "name": "thermostatMode set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "thermostat mode- cool, heat, auto, off",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 278,
+            "description": "Get occupiedCoolTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('occupiedCoolTemperatureLevel');",
+            "itemtype": "method",
+            "name": "occupiedCoolTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 301,
+            "description": "Set occupiedCoolTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('occupiedCoolTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "occupiedCoolTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 332,
+            "description": "Get occupiedHeatTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('occupiedHeatTemperatureLevel');",
+            "itemtype": "method",
+            "name": "occupiedHeatTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 355,
+            "description": "Set occupiedHeatTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('occupiedHeatTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "occupiedHeatTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 402,
+            "description": "Get unoccupiedCoolTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('unoccupiedCoolTemperatureLevel');",
+            "itemtype": "method",
+            "name": "unoccupiedCoolTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 424,
+            "description": "Set unoccupiedCoolTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('unoccupiedCoolTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "unoccupiedCoolTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 455,
+            "description": "Get unoccupiedHeatTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('unoccupiedHeatTemperatureLevel');",
+            "itemtype": "method",
+            "name": "unoccupiedHeatTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 478,
+            "description": "Set unoccupiedHeatTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('unoccupiedHeatTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "unoccupiedHeatTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 509,
+            "description": "Get occupiedAutoTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('occupiedAutoTemperatureLevel');",
+            "itemtype": "method",
+            "name": "occupiedAutoTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 538,
+            "description": "Set occupiedAutoTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('occupiedAutoTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "occupiedAutoTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 573,
+            "description": "Get unoccupiedAutoTemperatureLevel of the device\n\nUsage: dev$.select('id=*').get('unoccupiedAutoTemperatureLevel');",
+            "itemtype": "method",
+            "name": "unoccupiedAutoTemperatureLevel get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 601,
+            "description": "Set unoccupiedAutoTemperatureLevel of the device\n\nUsage: dev$.select('id=*').set('unoccupiedAutoTemperatureLevel', 76);",
+            "itemtype": "method",
+            "name": "unoccupiedAutoTemperatureLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 628,
+            "description": "Get Deadband returns the minimum difference between the heat setpoint and cool setpoint\n\nUsage: dev$.select('id=*').get('deadband');",
+            "itemtype": "method",
+            "name": "deadband get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 639,
+            "description": "Set Deadband, a minimum difference between the heat setpoint and cool setpoint\n\nUsage: dev$.select('id=*').set('deadband', 2); //2 Fahrenheit difference",
+            "itemtype": "method",
+            "name": "deadband set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 655,
+            "description": "Get occupancyMode returns the occupancy mode of the thermostat\n\nUsage: dev$.select('id=*').get('occupancyMode');",
+            "itemtype": "method",
+            "name": "occupancyMode get",
+            "return": {
+                "description": "return occupancy mode either occupied or unoccupied",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 666,
+            "description": "Set occupancyMode, set the occupancy mode of the thermostat\n\nUsage: dev$.select('id=*').set('occupancyMode', 'occupied');",
+            "itemtype": "method",
+            "name": "occupancyMode set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes occupied or unoccupied string",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 686,
+            "description": "Get temperature of the device\n\nUsage: dev$.select('id=*').get('temperature');",
+            "itemtype": "method",
+            "name": "temperature get",
+            "return": {
+                "description": "return temperature level in fahrenheit upto 2 decimal place",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 697,
+            "description": "Set temperature of the device\n\nUsage: dev$.select('id=*').set('temperature', 76);",
+            "itemtype": "method",
+            "name": "temperature set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes temperature level in fahrenheit",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 712,
+            "description": "Get thermostatUserInterface of the device\n\nUsage: dev$.select('id=*').get('thermostatUserInterface');",
+            "itemtype": "method",
+            "name": "thermostatUserInterface get",
+            "return": {
+                "description": "return temperatureDisplayMode attribute 0x0000 value-- 0=celcius, 1=fahrenheit",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 723,
+            "description": "Set thermostatUserInterface of the device\n\nUsage: dev$.select('id=*').set('thermostatUserInterface', {attrId: 0x0001, value: 0x02});",
+            "itemtype": "method",
+            "name": "thermostatUserInterface set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "attrid: 0x0000 (temperatureDisplayMode), value: 0 (celcius), 1 (fahrenheit);\nattrid: 0x0001 (keypadLockout), value: 0: noLockout, 1: level1Lockout, 2: level2Lockout, 3: level3Lockout, 4: level4Lockout, 5: level5Lockout",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 739,
+            "description": "Get keypadLockLevel of the device\n\nUsage: dev$.select('id=*').get('keypadLockLevel');",
+            "itemtype": "method",
+            "name": "keypadLockLevel get",
+            "return": {
+                "description": "return keypad lock level ranging 0 (No lock) to 2 (High level)",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 750,
+            "description": "Set keypadLockLevel of the device\n\nUsage: dev$.select('id=*').set('keypadLockLevel', {attrId: 0x0001, value: 0x02});",
+            "itemtype": "method",
+            "name": "keypadLockLevel set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "attrid: 0x0001 (keypadLockLevel), value: 0 or 1 or 2;",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 765,
+            "description": "Get temperatureDisplayMode of the device\n\nUsage: dev$.select('id=*').get('temperatureDisplayMode');",
+            "itemtype": "method",
+            "name": "temperatureDisplayMode get",
+            "return": {
+                "description": "return temperature display mode values- 0=celcius, 1=fahrenheit",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 776,
+            "description": "Set temperatureDisplayMode of the device\n\nUsage: dev$.select('id=*').set('temperatureDisplayMode', {attrId: 0x0000, value: 'fahrenheit'});",
+            "itemtype": "method",
+            "name": "temperatureDisplayMode set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "attrid: 0x0000 (temperatureDisplayMode), value: celsius or fahrenheit;",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 791,
+            "description": "Get thermostatFanMode of the device\n\nUsage: dev$.select('id=*').get('thermostatFanMode');",
+            "itemtype": "method",
+            "name": "thermostatFanMode get",
+            "return": {
+                "description": "return fan modes-- off, low, medium, high, on, auto, smart",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 802,
+            "description": "Set thermostatFanMode of the device\n\nUsage: dev$.select('id=*').set('thermostatFanMode', 'auto');",
+            "itemtype": "method",
+            "name": "thermostatFanMode set",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "takes in values-- off, low, medium, high, on, auto, smart",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 817,
+            "description": "Get humidity of the device\n\nUsage: dev$.select('id=*').get('humidity');",
+            "itemtype": "method",
+            "name": "humidity get",
+            "return": {
+                "description": "return 16 bit value multiply 100 gives relative humidiy",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 833,
+            "description": "Get motion of the device\n\nUsage: dev$.select('id=*').get('motion');",
+            "itemtype": "method",
+            "name": "motion get",
+            "return": {
+                "description": "return 0=unoccupied, 1=occupied",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 849,
+            "description": "Get Stage 1 heat relay status\n\nUsage: dev$.select('id=*').get('w1Status');",
+            "itemtype": "method",
+            "name": "w1Status get",
+            "return": {
+                "description": "return open or closed",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 865,
+            "description": "Get Stage 2 heat relay status\n\nUsage: dev$.select('id=*').get('w2Status');",
+            "itemtype": "method",
+            "name": "w2Status get",
+            "return": {
+                "description": "return open or closed",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 881,
+            "description": "Get Stage 1 compressor relay status\n\nUsage: dev$.select('id=*').get('y1Status');",
+            "itemtype": "method",
+            "name": "y1Status get",
+            "return": {
+                "description": "return open or closed",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 897,
+            "description": "Get Stage 2 compressor relay status\n\nUsage: dev$.select('id=*').get('y2Status');",
+            "itemtype": "method",
+            "name": "y2Status get",
+            "return": {
+                "description": "return open or closed",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 913,
+            "description": "Get fan relay status\n\nUsage: dev$.select('id=*').get('gStatus');",
+            "itemtype": "method",
+            "name": "gStatus get",
+            "return": {
+                "description": "return open or closed",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 929,
+            "description": "Get supply temperature, which is the temperature closest to the unit\n\nUsage: dev$.select('id=*').get('supplyTemperature');",
+            "itemtype": "method",
+            "name": "supplyTemperature get",
+            "return": {
+                "description": "return temperature in Fahrenheit",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 945,
+            "description": "Get return temperature, which is the temperature farthest to the unit\n\nUsage: dev$.select('id=*').get('returnTemperature');",
+            "itemtype": "method",
+            "name": "returnTemperature get",
+            "return": {
+                "description": "return temperature in Fahrenheit",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 961,
+            "description": "Get state of a device\n\nUsage: dev$.select('id=*').get();",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "return object with all the writable state properties",
+                "type": "Object"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1155,
+            "description": "Set state of a device\n\nPreferred way to use this method is by calling get on device controller\nand then modifying those state properties and setting the state using this method\n\nUsage: dev$.select('id=*').set({power: 'on', brightness: 0.5, K: 5000});",
+            "itemtype": "method",
+            "name": "setState",
+            "params": [
+                {
+                    "name": "getStateObject",
+                    "description": "State properties object returned when called get on device controller",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1196,
+            "description": "Set power state to 'on' of a device\n\nUsage: dev$.select('id=*').call('on');",
+            "itemtype": "method",
+            "name": "on",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1208,
+            "description": "Set power state to 'off' of a device\n\nUsage: dev$.select('id=*').call('off');",
+            "itemtype": "method",
+            "name": "off",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1220,
+            "description": "Get the state of motion sensor\n\nUsage: dev$.select('id=*').call('isOccupied');",
+            "itemtype": "method",
+            "name": "isOccupied",
+            "return": {
+                "description": "@return  return 0=unoccupied, 1=occupied",
+                "type": "Number"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1231,
+            "description": "Get metadata/information about the device\n\nUsage: dev$.select('id=*').call('metadata');",
+            "itemtype": "method",
+            "name": "metadata",
+            "return": {
+                "description": "@return  return object with device information",
+                "type": "String"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1242,
+            "description": "Get attribute value of thermostat cluster\n\nUsage: dev$.select('id=*').call('getAttribute', 0x001c);",
+            "itemtype": "method",
+            "name": "getAttribute",
+            "params": [
+                {
+                    "name": "attrId",
+                    "description": "2 byte number, refer ZCL document to know the attribute Ids",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1255,
+            "description": "Get all attributes values of thermostat cluster\n\nUsage: dev$.select('id=*').call('getAllAttributes');",
+            "itemtype": "method",
+            "name": "getAllAttributes",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/generic_device_controller/controller.js",
+            "line": 1376,
+            "description": "Get all device configurations\n\nUsage: dev$.select('id=*').call('getConfiguration');",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZigBeeDeviceController"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 21,
+            "description": "Provide the state of the ZigBee HA controller\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getState')",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "true is the controller is up otherwise false",
+                "type": "Boolean"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 33,
+            "description": "Get config options with which znp (TI stack) is started\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getConfigOptions')",
+            "itemtype": "method",
+            "name": "getConfigOptions",
+            "return": {
+                "description": "config options",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 45,
+            "description": "Change the throttle rate on fly\n\nUsage: dev$.selectByID('ZigbeeDriver').call('newThrottleRate', 100)",
+            "itemtype": "method",
+            "name": "newThrottleRate",
+            "params": [
+                {
+                    "name": "rate",
+                    "description": "new throttle rate in ms",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 57,
+            "description": "CAUTION! This could destory the existing zigbee network\n\nDelete the existing zigbee database\n\nUsage: dev$.selectByID('ZigbeeDriver').call('deleteZigbeeDatabase')",
+            "itemtype": "method",
+            "name": "deleteZigbeeDatabase",
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 69,
+            "description": "CAUTION! This could destory the existing zigbee network\n\nDelete the existing zigbee database and reboot the module\n\nUsage: dev$.selectByID('ZigbeeDriver').call('factoryReset')",
+            "itemtype": "method",
+            "name": "factoryReset",
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 82,
+            "description": "CAUTION! This could destory the existing zigbee network\n\nRestart module with specified network state, channel or panid. This will sigterm the process. Reboot will take in effect the new config.\nOn relay wait for Runner to restart the process, otherwise manually restart.\n\nUsage: dev$.selectByID('ZigbeeDriver').call('restartModule', true, 9, 25)",
+            "itemtype": "method",
+            "name": "restartModule",
+            "params": [
+                {
+                    "name": "newNetwork",
+                    "description": "true=new, false=restore",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "panId",
+                    "description": "new network pan id",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "specify channel range 11-25",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 102,
+            "description": "CAUTION! This WILL destory the existing zigbee network\n\nStart new network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('startNewNetwork')",
+            "itemtype": "method",
+            "name": "startNewNetwork",
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 115,
+            "description": "Get the panid of the existing network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getPanId')",
+            "itemtype": "method",
+            "name": "getPanId",
+            "return": {
+                "description": "panId returns panid of the existing network range 1-65533",
+                "type": "Number"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 129,
+            "description": "CAUTION! This WILL destory the existing zigbee network\n\nSpecify new pan id of the network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('setPanId', 40)",
+            "itemtype": "method",
+            "name": "setPanId",
+            "params": [
+                {
+                    "name": "panId",
+                    "description": "specify the new pan id of the new network, range=1-65533",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 143,
+            "description": "Get channel of the existing network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getChannel')",
+            "itemtype": "method",
+            "name": "getChannel",
+            "return": {
+                "description": "channel returns channel of the existing network",
+                "type": "Number"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 157,
+            "description": "CAUTION! This WILL destory the existing zigbee network\n\nSpecify new channel of the network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('setChannel', 25)",
+            "itemtype": "method",
+            "name": "setChannel",
+            "params": [
+                {
+                    "name": "channel",
+                    "description": "specify new channel of the network, range=11-25",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 174,
+            "description": "Get extended source address of the network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getExtendedSrcAddress')",
+            "itemtype": "method",
+            "name": "getExtendedSrcAddress",
+            "return": {
+                "description": "returns 8 byte of extended source address",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 188,
+            "description": "Get extended PAN id of the network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getExtendedPanId')",
+            "itemtype": "method",
+            "name": "getExtendedPanId",
+            "return": {
+                "description": "returns 8 byte of extended source address",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 201,
+            "description": "Get network key used in commissioning process\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getNetworkKey')",
+            "itemtype": "method",
+            "name": "getNetworkKey",
+            "return": {
+                "description": "returns 16 bytes of network key",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 215,
+            "description": "Get value of non-volatile item of ZNP stack running on cc2530. Refer defs.js for more info\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getNVItem', 0x0001)",
+            "itemtype": "method",
+            "name": "getNVItem",
+            "params": [
+                {
+                    "name": "nvId",
+                    "description": "2 byte id of the nv item",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "returns the value of the nv item requested",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 228,
+            "description": "Explicit LQI request to specified network address device\n\nUsage: dev$.selectByID('ZigbeeDriver').call('sendLqiRequest', 0x2345)",
+            "itemtype": "method",
+            "name": "sendLqiRequest",
+            "params": [
+                {
+                    "name": "nwkAddr",
+                    "description": "specify network address (short address 2 bytes) of the node from which you want to request link quality estimation. 0x0000 is server",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 240,
+            "description": "Get the network topology of existing zigbee network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getNetworkTopology')",
+            "itemtype": "method",
+            "name": "getNetworkTopology",
+            "return": {
+                "description": "returns the network topology with device type and child count",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 252,
+            "description": "Ping all the nodes in ZigBee network and return topology\n\nUsage: dev$.selectByID('ZigbeeDriver').call('ping')",
+            "itemtype": "method",
+            "name": "ping",
+            "return": {
+                "description": "returns the network topology with device type, child count and life status",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 273,
+            "description": "Get life status of each node in the network\n\nUsage: dev$.selectByID('ZigbeeDriver').call('status')",
+            "itemtype": "method",
+            "name": "status",
+            "return": {
+                "description": "returns the status of each node in the network",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 285,
+            "description": "Get all the onboarded nodes metadata\n\nUsage: dev$.selectByID('ZigbeeDriver').call('getNodes')",
+            "itemtype": "method",
+            "name": "getNodes",
+            "return": {
+                "description": "returns an object which has all the nodes metadata onboarded on the module",
+                "type": "Object"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/monitor/controller.js",
+            "line": 297,
+            "description": "Change log level\n\nUsage: dev$.selectByID('ZigbeeDriver').call('logLevel', 3)",
+            "itemtype": "method",
+            "name": "logLevel",
+            "return": {
+                "description": "level info- 2, debug- 3, trace- 4, error- 0, warn- 1",
+                "type": "Number"
+            },
+            "class": "ZigbeeDriver"
+        },
+        {
+            "file": "controllers/supportedDeviceTypes/Viconics_254_10/controller.js",
+            "line": 829,
+            "description": "Get all device configurations\n\nUsage: dev$.select('id=*').call('getConfiguration');",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "controllers/supportedDeviceTypes/Viconics_8000_SERIES/controller.js",
+            "line": 809,
+            "description": "Get all device configurations\n\nUsage: dev$.select('id=*').call('getConfiguration');",
+            "itemtype": "method",
+            "name": "getConfiguration",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "lib/defs.js",
+            "line": 103,
+            "class": "ZNPController"
+        },
+        {
+            "file": "lib/defs.js",
+            "line": 164,
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 54,
+            "description": "Device Type- 0=Coordinator, 1=Router, 2=End device",
+            "itemtype": "property",
+            "name": "devType",
+            "type": "Number",
+            "default": "0",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 63,
+            "description": "New or restore network- true=New, false=Restore",
+            "itemtype": "property",
+            "name": "newNwk",
+            "type": "Boolen",
+            "default": "false",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 72,
+            "description": "ZigBee Channel",
+            "itemtype": "property",
+            "name": "devType",
+            "type": "Number",
+            "default": "25",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 81,
+            "description": "Baud Rate",
+            "itemtype": "property",
+            "name": "baudRate",
+            "type": "Number",
+            "default": "115200",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 90,
+            "description": "PAN ID selection scheme",
+            "itemtype": "property",
+            "name": "panIdSelection",
+            "type": "String",
+            "default": "\"randomInRange\"",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 112,
+            "description": "Serial I/O port",
+            "itemtype": "property",
+            "name": "siodev",
+            "type": "String",
+            "default": "\"/dev/ttyUSB0\"",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 125,
+            "description": "Throttle rate",
+            "itemtype": "property",
+            "name": "throttleRate",
+            "type": "Number",
+            "default": "100ms",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 144,
+            "description": "Start ZNP node module and event listeners",
+            "itemtype": "method",
+            "name": "start",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 196,
+            "description": "Fired when a device is online",
+            "itemtype": "event",
+            "name": "reachable + nwkAddr",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "true if device is online, false otherwise",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 233,
+            "description": "When new device is discovered, notify other resources",
+            "itemtype": "event",
+            "name": "pairingProgressEvent",
+            "params": [
+                {
+                    "name": "progressId",
+                    "description": "onboarding progress percentage",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 241,
+            "description": "Notify manager to inspect the metadata and start controller",
+            "itemtype": "event",
+            "name": "node discovered",
+            "params": [
+                {
+                    "name": "nwkAddr",
+                    "description": "network address of the device",
+                    "type": "Number"
+                },
+                {
+                    "name": "metadata",
+                    "description": "node info of the device",
+                    "type": "Object"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 274,
+            "description": "Fired when receive command response from the device\n\n\tMT_RPC_SUCCESS = 0,         success\n\tMT_RPC_ERR_SUBSYSTEM = 1,   invalid subsystem\n\tMT_RPC_ERR_COMMAND_ID = 2,  invalid command ID\n\tMT_RPC_ERR_PARAMETER = 3,   invalid parameter\n\tMT_RPC_ERR_LENGTH = 4       invalid length",
+            "itemtype": "event",
+            "name": "message + nwkAddr",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "command response",
+                    "type": "Object"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 311,
+            "description": "Fired when receive attribute response from the device",
+            "itemtype": "event",
+            "name": "attrResponse + nwkAddr",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "attribute response",
+                    "type": "Object"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 377,
+            "description": "Send LQI request to all the known devices and accordingly report their reachability on response",
+            "itemtype": "method",
+            "name": "requestNetworkTopology",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 426,
+            "description": "Start periodic network all-link estimation",
+            "itemtype": "method",
+            "name": "startPeriodicNetworkRefresh",
+            "params": [
+                {
+                    "name": "duration",
+                    "description": "0 indicate no network refresh (all-link estimation), otherwise minimum 30 seconds",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 442,
+            "description": "Stop periodic network all-link estimation",
+            "itemtype": "method",
+            "name": "stopNetworkRefresh",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 452,
+            "description": "Enable permit join (commissioning) for specified duration",
+            "itemtype": "method",
+            "name": "addDevice",
+            "params": [
+                {
+                    "name": "duration",
+                    "description": "commissioning duration",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 478,
+            "description": "Call this after start, this instantiate serial communication interface",
+            "itemtype": "method",
+            "name": "connect",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 498,
+            "description": "Disconnect serial communication interface",
+            "itemtype": "method",
+            "name": "disconnect",
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 517,
+            "description": "Generate random pan id",
+            "itemtype": "method",
+            "name": "generateNewPanId",
+            "return": {
+                "description": "random number ranging 0-65500",
+                "type": "Number"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 527,
+            "description": "Set log level",
+            "itemtype": "method",
+            "name": "logLevel",
+            "return": {
+                "description": "level info- 2, debug- 3, trace- 4, error- 0, warn- 1",
+                "type": "Number"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 539,
+            "description": "Represents the running state of the znp controller",
+            "itemtype": "method",
+            "name": "setState",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "true=setup successful, false=otherwise",
+                    "type": "Boolean"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 549,
+            "description": "Get current state of the znp controller",
+            "itemtype": "method",
+            "name": "getState",
+            "return": {
+                "description": "true=setup successful, false=otherwise",
+                "type": "Boolean"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 559,
+            "description": "Used by multiplexer module to tag the commands from different device controllers",
+            "itemtype": "method",
+            "name": "getNextSeqId",
+            "return": {
+                "description": "sequential number, range 0-255",
+                "type": "Number"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 569,
+            "description": "Return the config options with which zigbee network is setup",
+            "itemtype": "method",
+            "name": "getConfigOptions",
+            "return": {
+                "description": "config options",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 579,
+            "description": "Start the throttler at throttle rate specified during instantiation",
+            "itemtype": "method",
+            "name": "throttleWorkRequest",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 597,
+            "description": "Helps modulate the throttle rate on fly",
+            "itemtype": "method",
+            "name": "newThrottleRate",
+            "params": [
+                {
+                    "name": "rate",
+                    "description": "new throttle rate in ms",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 610,
+            "description": "Push work request to queue and inform throttler",
+            "itemtype": "method",
+            "name": "zclWork",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "work request",
+                    "type": "Object"
+                },
+                {
+                    "name": "msgId",
+                    "description": "unique message id to track commands to devices",
+                    "type": "Number"
+                },
+                {
+                    "name": "retries",
+                    "description": "number of retries left",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 643,
+            "description": "IMPORTANT!! Universal parser to any attribute response of any data type.\n\nMore Info: Refer latest Zigbee Cluster Library- Data Types section.",
+            "itemtype": "method",
+            "name": "parseAttrResponse",
+            "params": [
+                {
+                    "name": "response",
+                    "description": "attribute response received from the device",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "parsed response based on the data type",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 703,
+            "description": "IMPORTANT!! Formats outgoing data to attribute data type",
+            "itemtype": "method",
+            "name": "formatWriteAttrData",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "outgoing data need formatting",
+                    "type": "Number"
+                },
+                {
+                    "name": "type",
+                    "description": "data type of outgoing data",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "formattedData data formatted on input data type",
+                "type": "Number"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 745,
+            "description": "Get basic cluster attributes, manufacturing information which lets us identify the device controller and facades",
+            "itemtype": "method",
+            "name": "identifyDiscoveredNode",
+            "params": [
+                {
+                    "name": "nwkAddr",
+                    "description": "device network address",
+                    "type": "Number"
+                },
+                {
+                    "name": "metadata",
+                    "description": "node info of the device",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 851,
+            "description": "Once manufacturing information is extracted from the device",
+            "itemtype": "event",
+            "name": "node identified",
+            "params": [
+                {
+                    "name": "nwkAddr",
+                    "description": "network address of the device",
+                    "type": "Number"
+                },
+                {
+                    "name": "metadata",
+                    "description": "updated metadata of the device",
+                    "type": "Object"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 865,
+            "description": "Push work request to queue and inform throttler",
+            "itemtype": "method",
+            "name": "endDeviceAnnce",
+            "params": [
+                {
+                    "name": "buffer",
+                    "description": "work request",
+                    "type": "Object"
+                },
+                {
+                    "name": "msgId",
+                    "description": "unique message id to track commands to devices",
+                    "type": "Number"
+                },
+                {
+                    "name": "retries",
+                    "description": "number of retries left",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 888,
+            "description": "CAUTION!! This will delete the existing zigbee database",
+            "itemtype": "method",
+            "name": "deleteZigbeeDatabase",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 920,
+            "description": "CAUTION!! This will delete the existing zigbee database and reboot the network",
+            "itemtype": "method",
+            "name": "factoryReset",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 926,
+            "description": "This will delete the existing zigbee database and reboot the network",
+            "itemtype": "event",
+            "name": "factoryReset",
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 934,
+            "description": "CAUTION!! If new network then this will destory the existing network on reboot and start new network on specified pan and channel",
+            "itemtype": "method",
+            "name": "restartModule",
+            "params": [
+                {
+                    "name": "newNwk",
+                    "description": "true=new, false=restore",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "panId",
+                    "description": "new pan id of the network",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "new channel of the network",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 943,
+            "description": "If new network then this will destory the existing network on reboot and start new network on specified pan and channel",
+            "itemtype": "event",
+            "name": "restartModule",
+            "params": [
+                {
+                    "name": "newNwk",
+                    "description": "true=new, false=restore",
+                    "type": "Boolean"
+                },
+                {
+                    "name": "panId",
+                    "description": "new pan id of the network",
+                    "type": "Number"
+                },
+                {
+                    "name": "channel",
+                    "description": "new channel of the network",
+                    "type": "Number"
+                }
+            ],
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 954,
+            "description": "Get non-volatile item value of ZNP stack",
+            "itemtype": "method",
+            "name": "getNVItem",
+            "params": [
+                {
+                    "name": "nvId",
+                    "description": "non-volatile item id",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "Returns the value of the item requested",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 978,
+            "description": "Set any non-volatile item of ZNP stack, check defs for more info",
+            "itemtype": "method",
+            "name": "setNVItem",
+            "params": [
+                {
+                    "name": "nvId",
+                    "description": "non-volatile item id",
+                    "type": "Number"
+                },
+                {
+                    "name": "value",
+                    "description": "new value of the item",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 1003,
+            "description": "Explicit command to send LQI request to particular device",
+            "itemtype": "method",
+            "name": "sendLqiRequest",
+            "params": [
+                {
+                    "name": "nwkAddr",
+                    "description": "specify the network address of the device for which LQI is directed",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "The success handler accepts no parameter. The failure\n handler accepts a single error object.",
+                "type": "Promise"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 1023,
+            "description": "Get latest known network topology",
+            "itemtype": "method",
+            "name": "getNetworkTopology",
+            "return": {
+                "description": "network topology with device types of the onboarded devices",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 1033,
+            "description": "Get all the onboarded nodes metadata",
+            "itemtype": "method",
+            "name": "getNodes",
+            "return": {
+                "description": "metadata of all the devices",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 1043,
+            "description": "Get life status of each node in ZigBee network",
+            "itemtype": "method",
+            "name": "getStatus",
+            "return": {
+                "description": "status life status of all the nodes",
+                "type": "Object"
+            },
+            "class": "ZNPController"
+        },
+        {
+            "file": "src/znpcontroller.js",
+            "line": 1058,
+            "description": "Evaluate operation on input data",
+            "itemtype": "method",
+            "name": "evalOperation",
+            "params": [
+                {
+                    "name": "inputData",
+                    "description": "input data on which operation will be performed",
+                    "type": "Number"
+                },
+                {
+                    "name": "operation",
+                    "description": "operation with handlebars",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "outputData return evaluated operation result upto 2 decimal places",
+                "type": "Number"
+            },
+            "class": "ZNPController"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " lib/defs.js:103"
+        },
+        {
+            "message": "Missing item type",
+            "line": " lib/defs.js:164"
+        }
+    ]
+}

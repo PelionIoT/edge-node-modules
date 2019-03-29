@@ -1,0 +1,16 @@
+{
+    "name": "Facades/TemperatureTrigger",
+    "version": "0.0.1",
+    "commands": {},
+    "state": {
+    },
+    "events": {
+        "temperatureTrigger": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(on|off)$"
+            }
+        } 
+    }
+}

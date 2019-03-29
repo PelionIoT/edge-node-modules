@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Button",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "pressed": {
+            "readOnly": false,
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,57 @@
+{
+    "name": "VirtualDeviceDriverInterface",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+    	"templates": {
+    		"readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+    	},
+    	"create": {
+    		"readOnly": false,
+            "schema": {
+                "type": "string"
+            }
+    	},
+    	"start": {
+    		"readOnly": false,
+            "schema": {
+                "type": "object"
+            }
+    	},
+    	"stop": {
+    		"readOnly": false,
+            "schema": {
+                "type": "string"
+            }
+    	},
+    	"delete": {
+    		"readOnly": false,
+            "schema": {
+                "type": "string"
+            }
+    	},
+    	"deleteAll": {
+    		"readOnly": false,
+            "schema": {
+                "type": null
+            }
+    	},
+    	"progress": {
+    		"readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+    	},
+    	"status": {
+    		"readOnly": true,
+    		"schema": {
+    			"type": "boolean"
+    		}
+    	}
+    },
+    "events": { }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Facades/Register",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "register": {
+            "readOnly": true,
+            "schema": {
+                "type": "number"
+            }
+        }
+    },
+    "events": {
+    }
+}

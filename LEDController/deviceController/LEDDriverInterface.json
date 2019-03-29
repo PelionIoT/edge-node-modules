@@ -1,0 +1,46 @@
+{
+    "name": "LEDDriverInterface",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+    	"led": {
+            "readOnly": false,
+            "schema": {
+                "type": "object",
+                "properties": {
+                	"r": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 255
+                    },
+                    "g": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 255
+                    },
+                    "b": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 255
+                    }
+                }
+            }
+    	},
+    	"piezo": {
+    		"readOnly": false,
+    		"schema": {
+    			"type": "number",
+    			"minimum": 0,
+    			"maximum": 100
+    		}
+    	},
+    	"find": {
+    		"readOnly": false,
+    		"schema": {
+    			"type": null
+    		}
+    	}
+    },
+    "events": { }
+}

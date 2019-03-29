@@ -1,0 +1,9 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/Philips_LWB006",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable",
+        "Core/Interfaces/Metadata"
+    ]
+}

@@ -1,0 +1,5 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/GE_Appliances_ZLL_Light",
+    "version": "0.0.1",
+    "interfaces": [ "Facades/Switchable", "Facades/Dimmable", "Core/Interfaces/Metadata" ]
+}

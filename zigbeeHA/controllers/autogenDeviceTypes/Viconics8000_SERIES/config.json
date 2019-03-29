@@ -1,0 +1,14 @@
+{
+    "name": "Core/Devices/Lighting/AutogenZigbeeHA/Viconics8000_SERIES",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/ThermostatMode",
+        "Facades/SetCoolTemperatureLevel",
+        "Facades/SetHeatTemperatureLevel",
+        "Facades/SetAutoTemperatureLevel",
+        "Core/Interfaces/Configuration",
+        "Facades/ThermostatUserInterface",
+        "Facades/HasTemperature",
+        "Facades/HasMotion"
+    ]
+}

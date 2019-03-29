@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>controllers/supportedDeviceTypes/Viconics_8000_SERIES/controller.js - ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ZigBeeDeviceController.html">ZigBeeDeviceController</a></li>
+                                <li><a href="../classes/ZigbeeDriver.html">ZigbeeDriver</a></li>
+                                <li><a href="../classes/ZNPController.html">ZNPController</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: controllers/supportedDeviceTypes/Viconics_8000_SERIES/controller.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var configuration = require(&#x27;./zigbee.json&#x27;);
+var Logger = require(&#x27;./../../../utils/logger&#x27;);
+
+function applySchema(devjsSchema, data, logger) {
+    var out = null;
+    switch(devjsSchema.type) {
+        case &#x27;boolean&#x27;:
+            return (data == 0);
+            break;
+        case &#x27;string&#x27;:
+            return data.toString();
+            break;
+        case &#x27;number&#x27;:
+            if(data &lt; devjsSchema.minimum) {
+                data = devjsSchema.minimum;
+            } else if (data &gt; devjsSchema.maximum) {
+                data = devjsSchema.maximum;
+            }
+            return data;
+            break;
+        case &#x27;object&#x27;:
+            break;
+        case &#x27;array&#x27;:
+            break;
+        case &#x27;null&#x27;:
+            break;
+        default:
+            logger.warn(&#x27;invalid schema &#x27; + JSON.stringify(devjsSchema));
+            break;
+    }
+    return data;
+}
+
+// NwkAddr: 0xBC17
+// Number of Endpoints: 2
+//         Endpoint: 0x0A
+//         ProfileID: 0x0104
+//         DeviceID: 0x0301
+//         DeviceVersion: 0x00
+//         NumInClusters: 8
+//                 InClusterList[0]: 0x0201 - thermostat
+//                 InClusterList[1]: 0x0204 - thermostat user interface config
+//                 InClusterList[2]: 0x0402 - temperature measurement
+//                 InClusterList[3]: 0x0406 - Occupancy sensing
+//                 InClusterList[4]: 0x0000 - basic
+//                 InClusterList[5]: 0x0003 - identify
+//                 InClusterList[6]: 0x0004 - groups
+//                 InClusterList[7]: 0x0005 - scences
+//         NumOutClusters: 9
+//                 OutClusterList[0]: 0x0201
+//                 OutClusterList[1]: 0x0204
+//                 OutClusterList[2]: 0x0402
+//                 OutClusterList[3]: 0x0406
+//                 OutClusterList[4]: 0x0000
+//                 OutClusterList[5]: 0x0003
+//                 OutClusterList[6]: 0x0004
+//                 OutClusterList[7]: 0x0005
+//                 OutClusterList[8]: 0x0500
+ // Endpoint: 0x0E
+ //        ProfileID: 0x0104
+ //        DeviceID: 0x0000
+ //        DeviceVersion: 0x00
+ //        NumInClusters: 0
+ //        NumOutClusters: 1
+ //                OutClusterList[0]: 0x0019
+
+
+var Viconics_8000_SERIES = {
+    start: function(options) {
+        var self = this;
+        self.logger = new Logger( {moduleName: &#x27;Viconics_8000_SERIES&#x27; + options.nodeId, color: &#x27;blue&#x27;} );
+        self.logger.info(&#x27;starting controller&#x27;);
+
+        this.nodeId = options.nodeId;
+        this.znpController = options.znpController;
+        this.interfaces = options.interfaces;
+        this.endPoint = options.endPoint;
+        this.multiplexer = options.multiplexer;
+        this.attributes = [];
+        this.deviceConfiguration = {};
+
+        this.cluster_classes = [];
+        this.events = [];
+
+        var interfaces = this.interfaces;
+
+        //Instantiate classes
+        configuration.cluster_classes.forEach(function(c) {
+            var module = require(c.path);
+            self.cluster_classes[c.name] = new module(options);
+
+            //map the class to event, reverse indexing
+            self.events[c.id] = {
+                event: &#x27;&#x27;,
+                class: 0,
+                schema: {}
+            }
+
+            //extract the schema info
+            self.events[c.id][&#x27;class&#x27;] = c.name;
+            if(typeof interfaces == &#x27;object&#x27;) {
+                if(typeof c.interface != &#x27;undefined&#x27;) {
+                    if(interfaces[c.interface]) {
+                        //TODO: remove hardcoded version, also find a better way then Object.keys
+                        self.events[c.id][&#x27;event&#x27;] = Object.keys(interfaces[c.interface][&#x27;0.0.1&#x27;].state);
+                        self.events[c.id][&#x27;schema&#x27;] = interfaces[c.interface][&#x27;0.0.1&#x27;].state[self.events[c.id][&#x27;event&#x27;]].schema;
+                        self.logger.info(self.nodeId + &#x27; events: &#x27; + JSON.stringify(self.events[c.id]));
+                    } else {
+                        self.logger.error(self.nodeId + &#x27; No devjs interface found for command class: &#x27; + c.name);
+                    }
+                } else {
+                    //No interface assigned to the class
+                }
+            } else {
+                self.logger.error(self.nodeId + &#x27; devjs interfaces is not an object: &#x27; + JSON.stringify(interfaces));
+            }
+
+             //extract attributes
+            if(typeof c.attributes !== &#x27;undefined&#x27;) {
+                Object.keys(c.attributes).forEach(function(i) {
+                    self.attributes.push({clusterId: c.name, id: c.attributes[i].attrId});
+                    self.deviceConfiguration[c.id + c.attributes[i].attrId] = c.attributes[i];
+                })
+            }
+            // self.commands.pollDeviceConfiguration();
+        });
+
+        //Listen for events
+        this.znpController.on(&#x27;zigbeeHA &#x27; + this.nodeId, function(comclass, value) {
+            if(typeof self.events[comclass] !== &#x27;undefined&#x27;) {
+                self.cluster_classes[self.events[comclass][&#x27;class&#x27;]].report(value);
+                //emit the event for other apps
+                if(self.events[comclass][&#x27;event&#x27;] != &#x27;&#x27;) {
+                    self.logger.info(self.nodeId + &#x27; saw event &#x27; + self.events[comclass][&#x27;event&#x27;].toString().toUpperCase() + &#x27; with value &#x27; + value.value);
+
+                    //apply schema
+                    self.emit(self.events[comclass][&#x27;event&#x27;], applySchema(self.events[comclass][&#x27;schema&#x27;], value.value, self.logger));
+                } else {
+                    //no event is associated to this class
+                }
+            } else {
+                self.logger.warn(self.nodeId + &#x27; saw event from class &#x27; + comclass + &#x27; which is not yet supported&#x27;);
+            }
+        });
+
+        //&quot;reachable&quot; event
+        this.znpController.on(&#x27;reachable &#x27; + this.nodeId, function(value) {
+            if(value){
+                self.logger.info(self.nodeId + &#x27; reachable, came online&#x27;);
+                self.emit(&#x27;reachable&#x27;);
+            }
+            else {
+                self.logger.info(self.nodeId + &#x27; unreachable, went offline&#x27;);
+                self.emit(&#x27;unreachable&#x27;)
+            }
+        });
+    },
+    stop: function() {
+    },
+    state: {
+        thermostatMode: { //WEIRD THERMOSTAT- Probably ZCL Version is very old--- 0 OFF, 1 AUTO, 2 COOL, 3 HEAT
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(0x001c);
+            },
+            set: function(value) {
+                return this.cluster_classes[&quot;thermostat&quot;].setMode(value);
+            }
+        },
+        occupiedCoolTemperatureLevel: {
+            get: function() {
+                //cool - 0x0011, heat - 0x0012 attribute ids
+                //You should not be allowed to set cold level below heat { cool: 90, heat: 88 }
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.cluster_classes[&quot;thermostat&quot;].get(0x0011).then(function(coolRsp) {
+                        self._coolTemperature = coolRsp;
+                        self.emit(&#x27;occupiedCoolTemperatureLevel&#x27;, coolRsp);
+                        resolve(coolRsp);
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get cool setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(self.autoTemperatureTimeout) clearTimeout(self.autoTemperatureTimeout);
+                return self.cluster_classes[&quot;thermostat&quot;].setTemperatureLevel(&#x27;cool&#x27;, value).then(function() {
+                    self.autoTemperatureTimeout = setTimeout(function() {
+                        self.state.autoTemperatureLevel.get().then(function() {
+                            if(value &lt; self._heatTemperature) {
+                                self.logger.info(&#x27;Apply deadband as cool temperature is less than heat&#x27;);
+                                self.state.deadband.get().then(function(db) { //get deadband
+                                    if(db) {
+                                        self.logger.debug(&#x27;Applying deadband &#x27; + db + &#x27; to heat, setting to value &#x27; + (value - db));
+                                        self.state.heatTemperatureLevel.set(value - db);
+                                    }
+                                });
+                            }
+                        });
+                    }, 5000);
+                });
+            }
+        },
+        occupiedHeatTemperatureLevel: {
+            get: function() {
+                //cool - 0x0011, heat - 0x0012 attribute ids
+                //You should not be allowed to set heat level above cold { cool: 90, heat: 88 }
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.cluster_classes[&quot;thermostat&quot;].get(0x0012).then(function(heatRsp) {
+                        self._heatTemperature = heatRsp;
+                        self.emit(&#x27;occupiedHeatTemperatureLevel&#x27;, heatRsp);
+                        resolve(heatRsp);
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get heat setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(self.autoTemperatureTimeout) clearTimeout(self.autoTemperatureTimeout);
+                return self.cluster_classes[&quot;thermostat&quot;].setTemperatureLevel(&#x27;heat&#x27;, value).then(function() {
+                    self.autoTemperatureTimeout = setTimeout(function() {
+                        self.state.autoTemperatureLevel.get().then(function() {
+                            if(value &gt; self._coolTemperature) {
+                                self.logger.info(&#x27;Apply deadband as cool temperature is less than heat&#x27;);
+                                self.state.deadband.get().then(function(db) { //get deadband
+                                    if(db) {
+                                        self.logger.debug(&#x27;Applying deadband &#x27; + db + &#x27; to cool, setting to value &#x27; + (value + db));
+                                        self.state.coolTemperatureLevel.set(value + db);
+                                    }
+                                });
+                            }
+                        });
+                    }, 5000);
+                });
+            }
+        },
+        coolTemperatureLevel: {
+            get: function() {
+                return this.state.occupiedCoolTemperatureLevel.get();
+            },
+            set: function(value) {
+                return this.state.occupiedCoolTemperatureLevel.set(value);
+            }
+        },
+        heatTemperatureLevel: {
+            get: function() {
+                return this.state.occupiedHeatTemperatureLevel.get();
+            },
+            set: function(value) {
+                return this.state.occupiedHeatTemperatureLevel.set(value);
+            }
+        },
+        unoccupiedCoolTemperatureLevel: {
+            get: function() {
+                //You should not be allowed to set cold level below heat { cool: 90, heat: 88 }
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.cluster_classes[&quot;thermostat&quot;].get(0x0013).then(function(coolRsp) {
+                        self._unoccupiedCoolTemperature = coolRsp;
+                        self.emit(&#x27;unoccupiedCoolTemperatureLevel&#x27;, coolRsp);
+                        resolve(coolRsp);
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get unoccupied cool setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(self.unoccupiedAutoTemperatureTimeout) clearTimeout(self.unoccupiedAutoTemperatureTimeout);
+                return self.cluster_classes[&quot;thermostat&quot;].setTemperatureLevel(&#x27;unoccupiedCool&#x27;, value).then(function() {
+                    self.unoccupiedAutoTemperatureTimeout = setTimeout(function() {
+                        self.state.unoccupiedAutoTemperatureLevel.get().then(function() {
+                            if(value &lt; self._unoccupiedHeatTemperature) {
+                                self.logger.info(&#x27;Apply deadband as unoccupied cool temperature is less than unoccupied heat&#x27;);
+                                self.state.deadband.get().then(function(db) { //get deadband
+                                    if(db) {
+                                        self.logger.debug(&#x27;Applying deadband &#x27; + db + &#x27; to unoccupied heat, setting to value &#x27; + (value - db));
+                                        self.state.unoccupiedHeatTemperatureLevel.set(value - db);
+                                    }
+                                });
+                            }
+                        });
+                    }, 5000);
+                });
+            }
+        },
+        unoccupiedHeatTemperatureLevel: {
+            get: function() {
+                //cool - 0x0011, heat - 0x0012 attribute ids
+                //You should not be allowed to set heat level above cold { cool: 90, heat: 88 }
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.cluster_classes[&quot;thermostat&quot;].get(0x0014).then(function(heatRsp) {
+                        self._unoccupiedHeatTemperature = heatRsp;
+                        self.emit(&#x27;unoccupiedHeatTemperatureLevel&#x27;, heatRsp);
+                        resolve(heatRsp);
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get heat setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(self.unoccupiedAutoTemperatureTimeout) clearTimeout(self.unoccupiedAutoTemperatureTimeout);
+                return self.cluster_classes[&quot;thermostat&quot;].setTemperatureLevel(&#x27;unoccupiedHeat&#x27;, value).then(function() {
+                    self.unoccupiedAutoTemperatureTimeout = setTimeout(function() {
+                        self.state.unoccupiedAutoTemperatureLevel.get().then(function() {
+                            if(value &gt; self._coolTemperature) {
+                                self.logger.info(&#x27;Apply deadband as unoccupied cool temperature is less than unoccupied heat&#x27;);
+                                self.state.deadband.get().then(function(db) { //get deadband
+                                    if(db) {
+                                        self.logger.debug(&#x27;Applying deadband &#x27; + db + &#x27; to unoccupied cool, setting to value &#x27; + (value + db));
+                                        self.state.unoccupiedCoolTemperatureLevel.set(value + db);
+                                    }
+                                });
+                            }
+                        });
+                    }, 5000);
+                });
+            }
+        },
+        occupiedAutoTemperatureLevel: {
+            get: function() {
+                //cool - 0x0011, heat - 0x0012 attribute ids
+                //You should not be allowed to set heat level above cold { cool: 90, heat: 88 }
+                //It should be set apart by deadband
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.state.coolTemperatureLevel.get().then(function(coolRsp) {
+                        // self.logger.info(&#x27;Got coolRsp- &#x27; + coolRsp);
+                        self.state.heatTemperatureLevel.get().then(function(heatRsp) {
+                            // self.logger.info(&#x27;Got heatRsp- &#x27; + heatRsp);
+                            resolve({&#x27;occupiedCool&#x27;: coolRsp, &#x27;occupiedHeat&#x27;: heatRsp});
+                        }, function(err) {
+                            self.logger.error(&#x27;Could not get heat setpoint- &#x27; + JSON.stringify(err));
+                            reject(err);
+                        });
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get cool setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(typeof value !== &#x27;object&#x27;) {
+                    return new Error(&#x27;Input value should be of object type, usage- {occupiedCool: 76, occupiedHeat: 74}&#x27;);
+                }
+                if(typeof value.occupiedHeat === &#x27;undefined&#x27; &amp;&amp; typeof value.occupiedCool === &#x27;undefined&#x27;) {
+                    return new Error(&#x27;Unknow object properties, usage- {occupiedCool: 76, occupiedHeat: 74}&#x27;);
+                }
+                if(typeof value.occupiedCool !== &#x27;undefined&#x27;) {
+                    return self.state.coolTemperatureLevel.set(value.occupiedCool);
+                }
+                if(typeof value.occupiedHeat !== &#x27;undefined&#x27;) {
+                    return self.state.heatTemperatureLevel.set(value.occupiedHeat);
+                }
+            }
+        },
+        autoTemperatureLevel: {
+            get: function() {
+                return this.state.occupiedAutoTemperatureLevel.get();
+            },
+            set: function(value) {
+                return this.state.occupiedAutoTemperatureLevel.set(value);
+            }
+        },
+        unoccupiedAutoTemperatureLevel: {
+            get: function() {
+                //You should not be allowed to set heat level above cold { cool: 90, heat: 88 }
+                //It should be set apart by deadband
+                var self = this;
+                return new Promise(function(resolve, reject) {
+                    self.state.unoccupiedCoolTemperatureLevel.get().then(function(coolRsp) {
+                        // self.logger.info(&#x27;Got coolRsp- &#x27; + coolRsp);
+                        self.state.unoccupiedHeatTemperatureLevel.get().then(function(heatRsp) {
+                            // self.logger.info(&#x27;Got heatRsp- &#x27; + heatRsp);
+                            resolve({&#x27;unoccupiedCool&#x27;: coolRsp, &#x27;unoccupiedHeat&#x27;: heatRsp});
+                        }, function(err) {
+                            self.logger.error(&#x27;Could not get unoccupied heat setpoint- &#x27; + JSON.stringify(err));
+                            reject(err);
+                        });
+                    }, function(err) {
+                        self.logger.error(&#x27;Could not get unoccupied cool setpoint- &#x27; + JSON.stringify(err));
+                        reject(err);
+                    });
+                })
+            },
+            set: function(value) {
+                var self = this;
+                if(typeof value !== &#x27;object&#x27;) {
+                    return new Error(&#x27;Input value should be of object type, usage- {unoccupiedCool: 76, unoccupiedHeat: 74}&#x27;);
+                }
+                if(typeof value.unoccupiedHeat === &#x27;undefined&#x27; &amp;&amp; typeof value.unoccupiedCool === &#x27;undefined&#x27;) {
+                    return new Error(&#x27;Unknow object properties, usage- {unoccupiedCool: 76, unoccupiedHeat: 74}&#x27;);
+                }
+                if(typeof value.unoccupiedCool !== &#x27;undefined&#x27;) {
+                    return self.state.unoccupiedCoolTemperatureLevel.set(value.unoccupiedCool);
+                }
+                if(typeof value.unoccupiedHeat !== &#x27;undefined&#x27;) {
+                    return self.state.unoccupiedHeatTemperatureLevel.set(value.unoccupiedHeat);
+                }
+            }
+        },
+        deadband: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(25);
+            },
+            set: function(value) {
+                var self = this;
+                return self.commands.setConfiguration({attrId: 25, clusterClassId: &#x27;thermostat&#x27;, clusterClass: 513, value: value});
+            }
+        },
+        occupancyMode: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(1616);
+            },
+            set: function(value) {
+                var self = this;
+                if(typeof value !== &#x27;string&#x27;) {
+                    return Promise.reject(&#x27;Please pass argument of type string occupied|unoccupied&#x27;);
+                }
+                value = (value === &#x27;unoccupied&#x27;) ? 0x02 : 0x01;
+                return self.commands.setConfiguration({attrId: 1616, clusterClassId: &#x27;thermostat&#x27;, clusterClass: 513, value: value});
+            }
+        },
+        temperature: {
+            get: function() {
+                return this.cluster_classes[&quot;temperature&quot;].get();
+            },
+            set: function(value) {
+                return this.cluster_classes[&quot;temperature&quot;].set(value);
+            }
+        },
+        thermostatUserInterface: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].get();
+            },
+            set: function(value) {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].set(value);
+            }
+        },
+        keypadLockLevel: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].get(0x0001);
+            },
+            set: function(value) {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].set({attrId: 0x0001, value: value});
+            }
+        },
+        temperatureDisplayMode: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].get(0x0000);
+            },
+            set: function(value) {
+                return this.cluster_classes[&quot;thermostatUserInterface&quot;].set({attrId: 0x0000, value: value});
+            }
+        },
+        w1Status: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(2141);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }
+        },
+        w2Status: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(2140);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }
+        },
+        y1Status: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(2138);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }
+        },
+        y2Status: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(2139);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }
+        },
+        gStatus: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(2150);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }
+        },
+        supplyTemperature: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(1898);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }   
+        },
+        returnTemperature: {
+            get: function() {
+                return this.cluster_classes[&quot;thermostat&quot;].get(1901);
+            },
+            set: function(value) {
+                return &#x27;Read only facade&#x27;;
+            }   
+        }
+    },
+    getState: function() {
+        var s = {}
+        var self = this;
+
+        var p1 = new Promise(function(resolve, reject) {
+            self.state.thermostatMode.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;thermostatMode&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get thermostatMode state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p2 = new Promise(function(resolve, reject) {
+            self.state.occupiedCoolTemperatureLevel.get().then(function(value) {
+                if(value != null) {
+                    s[&#x27;occupiedCoolTemperatureLevel&#x27;] = value;
+                }
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get occupiedCoolTemperatureLevel state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p3 = new Promise(function(resolve, reject) {
+            self.state.occupiedHeatTemperatureLevel.get().then(function(value) {
+                if(value != null) {
+                    s[&#x27;occupiedHeatTemperatureLevel&#x27;] = value;
+                }
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get occupiedHeatTemperatureLevel state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        // var p4 = new Promise(function(resolve, reject) {
+        //     self.state.occupiedAutoTemperatureLevel.get().then(function(value) {
+        //         if(value != null)
+        //             s[&#x27;occupiedAutoTemperatureLevel&#x27;] = value;
+        //         resolve();
+        //     }).catch(function(e) {
+        //         self.logger.error(&#x27;Failed to get occupiedAutoTemperatureLevel state &#x27; + e + JSON.stringify(e));
+        //         resolve();
+        //     })
+        // })
+
+        var p5 = new Promise(function(resolve, reject) {
+            self.state.deadband.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;deadband&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get deadband state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p6 = new Promise(function(resolve, reject) {
+            self.state.thermostatFanMode.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;thermostatFanMode&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get thermostatFanMode state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p7 = new Promise(function(resolve, reject) {
+            self.state.unoccupiedCoolTemperatureLevel.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;unoccupiedCoolTemperatureLevel&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get unoccupiedCoolTemperatureLevel state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p8 = new Promise(function(resolve, reject) {
+            self.state.unoccupiedHeatTemperatureLevel.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;unoccupiedHeatTemperatureLevel&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get unoccupiedHeatTemperatureLevel state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p9 = new Promise(function(resolve, reject) {
+            self.state.occupancyMode.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;occupancyMode&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get occupancyMode state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p10 = new Promise(function(resolve, reject) {
+            self.state.keypadLockLevel.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;keypadLockLevel&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get keypadLockLevel state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        var p11 = new Promise(function(resolve, reject) {
+            self.state.temperatureDisplayMode.get().then(function(value) {
+                if(value != null)
+                    s[&#x27;temperatureDisplayMode&#x27;] = value;
+                resolve();
+            }).catch(function(e) {
+                self.logger.error(&#x27;Failed to get temperatureDisplayMode state &#x27; + e + JSON.stringify(e));
+                resolve();
+            })
+        })
+
+        // var p9 = new Promise(function(resolve, reject) {
+        //     self.state.unoccupiedAutoTemperatureLevel.get().then(function(value) {
+        //         if(value != null)
+        //             s[&#x27;unoccupiedAutoTemperatureLevel&#x27;] = value;
+        //         resolve();
+        //     }).catch(function(e) {
+        //         self.logger.error(&#x27;Failed to get unoccupiedAutoTemperatureLevel state &#x27; + e + JSON.stringify(e));
+        //         resolve();
+        //     })
+        // })
+
+        return Promise.all([p1, p2, p3, p5, p6, p7, p8, p9, p10, p11]).then(function() {
+            return s;
+        });
+    },
+    setState: function(value) {
+        var self = this;
+
+        var p = [];
+
+        return new Promise(function(resolve, reject) {
+
+            self.getState().then(function(obj) {
+                Object.keys(value).forEach(function(key) {
+                    if(typeof obj[key] != &#x27;undefined&#x27;) {
+                        if(JSON.stringify(obj[key]) != JSON.stringify(value[key])) {
+                            p.push(self.state[key].set(value[key]));
+                        }
+                    } else {
+                        self.logger.error(&#x27;This should not have happened, got key which is not returned by getstate- &#x27; + key);
+                    }
+                });
+
+                Promise.all(p).then(function() {
+                    resolve();
+                }, function(err) {
+                    reject(err);
+                });
+            });
+        })
+    },
+    commands: {
+        metadata: function() {
+            return JSON.stringify(this.znpController.nodes[this.nodeId]);
+        },
+        getAttribute: function(clusterId, attrId, bypass) {
+            return this.cluster_classes[clusterId].get(attrId, !!bypass);
+        },
+        getAllAttributes: function() {
+            var self = this;
+
+            var i = 0;
+            function getNextAttribute() {
+                if(i &lt; self.attributes.length) {
+                    return self.attributes[i++];
+                } else {
+                    // self.logger.warn(&#x27;Attributes over- &#x27; + self.attributes.length + i);
+                    return null
+                }
+            }
+
+            function next() {
+                var attr = getNextAttribute();
+                self.logger.info(&#x27;Got attr &#x27; + JSON.stringify(attr));
+                if(attr != null) {
+                    self.cluster_classes[attr.clusterId].get(attr.id/1, true).then(function(resp) {
+                        self.logger.info(&#x27;Got attr value- &#x27;+ JSON.stringify(resp));
+                        if(self.deviceConfiguration[resp.clusterClass + resp.attrId].operation.length != 0 &amp;&amp; (typeof resp.value === &#x27;number&#x27;)) {
+                            resp.value = self.znpController.evalOperation(resp.value, self.deviceConfiguration[resp.clusterClass + resp.attrId].operation);
+                        }
+
+                        self.deviceConfiguration[resp.clusterClass + resp.attrId].appData = resp;
+
+                        var obj = {};
+                        obj[(resp.clusterClass + resp.attrId).toString()] = self.deviceConfiguration[resp.clusterClass + resp.attrId];
+                        self.emit(&#x27;configuration&#x27;, JSON.stringify(obj));
+
+                        next();
+                    }, function(err) {
+                        self.logger.warn(&#x27;Failed to get attr &#x27; + JSON.stringify(attr));
+                        next();
+                    })
+                } else {
+                    self.logger.info(&#x27;Poll complete on &#x27; + self.attributes.length + &#x27; configurations&#x27;);
+                    return null
+                }
+            }
+
+            next();
+        },
+        setAllAttributes: function(config) {
+            var self = this;
+
+            return new Promise(function(resolve, reject) {
+                var i = 0;
+                function getNextAttribute() {
+                    if(i &lt; Object.keys(config).length) {
+                        return Object.keys(config)[i++];
+                    } else {
+                        // self.logger.warn(&#x27;Attributes over- &#x27; + self.attributes.length + i);
+                        return null
+                    }
+                }
+
+                function next() {
+                    var id = getNextAttribute();
+                    if(id != null) {
+                        if(typeof config[id].appData !== &#x27;undefined&#x27;) {
+                            self.commands.setConfiguration(config[id].appData).then(function() {
+                                next();
+                            }, function(err) {
+                                return reject(err);
+                            })
+                        } else {
+                            return reject(new Error(&#x27;Could not find appData in attr &#x27; + JSON.stringify(config[id])))
+                        }
+                    } else {
+                        self.logger.info(&#x27;setAllAttributes complete on &#x27; + Object.keys(config).length + &#x27; configurations&#x27;);
+                        return resolve();
+                    }
+                }
+
+                next();
+            })
+        },
+        setAllAttributesToDefault: function(config) {
+            var self = this;
+
+            return new Promise(function(resolve, reject) {
+                var i = 0;
+                function getNextAttribute() {
+                    if(i &lt; Object.keys(config).length) {
+                        return Object.keys(config)[i++];
+                    } else {
+                        // self.logger.warn(&#x27;Attributes over- &#x27; + self.attributes.length + i);
+                        return null
+                    }
+                }
+
+                function next() {
+                    var id = getNextAttribute();
+                    if(id != null) {
+                        if(typeof config[id].appData !== &#x27;undefined&#x27;) {
+                            self.commands.setToDefault(config[id].appData).then(function() {
+                                next();
+                            }, function(err) {
+                                return reject(err);
+                            })
+                        } else {
+                            return reject(new Error(&#x27;Could not find appData in attr &#x27; + JSON.stringify(config[id])))
+                        }
+                    } else {
+                        self.logger.info(&#x27;setAllAttributes complete on &#x27; + Object.keys(config).length + &#x27; configurations&#x27;);
+                        return resolve();
+                    }
+                }
+
+                next();
+            })
+        },
+        /**
+         * Get all device configurations
+         *
+         * Usage: dev$.select(&#x27;id=*&#x27;).call(&#x27;getConfiguration&#x27;);
+         *
+         * @method getConfiguration
+         * @return {Promise} The success handler accepts no parameter. The failure
+         *  handler accepts a single error object.
+         */
+        pollDeviceConfiguration: function() {
+            return this.commands.getAllAttributes();
+        },
+        getConfiguration: function(appData) {
+            var self = this;
+            if(typeof appData === &#x27;undefined&#x27; || typeof appData.selection !== &#x27;undefined&#x27; || typeof appData.resourceSet !== &#x27;undefined&#x27;) {
+                self.logger.info(&#x27;No appData, sending all the config options&#x27;);
+                self.commands.pollDeviceConfiguration();
+                return self.deviceConfiguration;
+            } else {
+                if(typeof appData.attrId === &#x27;undefined&#x27;) {
+                    return Promise.reject(new Error(&#x27;Please specify valid attrId &#x27; + JSON.stringify(appData)));
+                }
+                if(typeof appData.clusterClassId === &#x27;undefined&#x27;) {
+                    return Promise.reject(new Error(&#x27;Please specify valid clusterClassId &#x27; + JSON.stringify(appData)));
+                }
+
+                return new Promise(function(resolve, reject) {
+                    self.cluster_classes[appData.clusterClassId].get(appData.attrId/1, true).then(function(resp) {
+                        self.logger.info(&#x27;Got attr value- &#x27;+ JSON.stringify(resp));
+                        if(self.deviceConfiguration[resp.clusterClass + resp.attrId].operation.length != 0 &amp;&amp; (typeof resp.value === &#x27;number&#x27;)) {
+                            resp.value = self.znpController.evalOperation(resp.value, self.deviceConfiguration[resp.clusterClass + resp.attrId].operation);
+                        }
+
+                        // if(self.deviceConfiguration[resp.clusterClass + resp.attrId].interface) {
+                        //     var state = Object.keys(self.interfaces[self.deviceConfiguration[resp.clusterClass + resp.attrId].interface][&#x27;0.0.1&#x27;].state)[0];
+                        //     self.emit(state, resp.value);
+                        // }
+
+                        self.deviceConfiguration[resp.clusterClass + resp.attrId].appData = resp;
+
+                        var obj = {}
+                        obj[(resp.clusterClass + resp.attrId).toString()] = self.deviceConfiguration[resp.clusterClass + resp.attrId];
+
+                        self.emit(&#x27;configuration&#x27;, JSON.stringify(obj));
+                        resolve(obj);
+                    }, function(err) {
+                        self.logger.error(&#x27;Unable to get attribute &#x27; + JSON.stringify(err));
+                        reject(err);
+                    })
+                })
+            }
+        },
+        setToDefault: function(appData) {
+            var self = this;
+            if(typeof appData === &#x27;object&#x27;) {
+                if(typeof appData[Object.keys(appData)[0]].appData !== &#x27;undefined&#x27;) {
+                    //Batch request
+                    return self.commands.setAllAttributesToDefault(appData);
+                } else {
+                    if(typeof appData.attrId === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid attrId &#x27; + JSON.stringify(appData)));
+                    }
+                    if(typeof appData.clusterClassId === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid clusterClassId &#x27; + JSON.stringify(appData)));
+                    }
+                    if(typeof appData.clusterClass === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid clusterClass &#x27; + JSON.stringify(appData)));
+                    }
+                    var config = self.deviceConfiguration[appData.attrId/1 + appData.clusterClass/1];
+                    if(config.access == &#x27;r&#x27;) {
+                        return Promise.resolve(&#x27;This attribute is read only&#x27;);
+                    } else {
+                        if(typeof config.default !== &#x27;undefined&#x27; || config.default != null || typeof config.default !== &#x27;number&#x27; || config.default != &#x27;&#x27;) {
+
+                            var eVal = config.default.toFixed(2)/1;//May be we dont want to hardcode upto 2 decimal places
+                            if(eVal.toString().match(config.pattern) != null) {
+                                if(typeof config.outgoingOperation !== &#x27;undefined&#x27;)
+                                    eVal = self.znpController.evalOperation(eVal, config.outgoingOperation);
+
+                                return self.znpController.formatWriteAttrData(eVal, config.type).then(function(formattedData) {
+                                    return self.cluster_classes[appData.clusterClassId].setAttr(appData.attrId, config.type, formattedData);
+                                    // .then(function() {
+                                    //     if(config.interface) {
+                                    //         var state = Object.keys(self.interfaces[config.interface][&#x27;0.0.1&#x27;].state)[0];
+                                    //         self.emit(state, config.default.toFixed(2)/1);
+                                    //     }
+                                    // });
+                                }, function(err) {
+                                    return Promise.reject(err);
+                                })
+                            } else {
+                                return Promise.reject(new Error(&#x27;Incorrect default value, please specify value between &#x27; + config.range + &#x27; in unit &#x27; + config.unit));
+                            }
+                        } else {
+                            return Promise.reject(&#x27;Default value is not defined for this attribute&#x27;);
+                        }
+                    }
+                }
+            } else {
+                return Promise.reject(&#x27;Parameter passed should be of object type&#x27;);
+            }
+        },
+        setConfiguration: function(appData) {
+            var self = this;
+            if(typeof appData === &#x27;object&#x27;) {
+                if(typeof appData[Object.keys(appData)[0]].appData !== &#x27;undefined&#x27;) {
+                    //Batch request
+                    return self.commands.setAllAttributes(appData);
+                } else {
+                    if(typeof appData.attrId === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid attrId &#x27; + JSON.stringify(appData)));
+                    }
+                    if(typeof appData.clusterClassId === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid clusterClassId &#x27; + JSON.stringify(appData)));
+                    }
+                    if(typeof appData.clusterClass === &#x27;undefined&#x27;) {
+                        return Promise.reject(new Error(&#x27;Please specify valid clusterClass &#x27; + JSON.stringify(appData)));
+                    }
+                    var config = self.deviceConfiguration[appData.attrId/1 + appData.clusterClass/1];
+                    if(config.access == &#x27;r&#x27;) {
+                        return Promise.resolve(&#x27;This attribute is read only&#x27;);
+                    } else {
+                        if(typeof appData.value == &#x27;undefined&#x27;) {
+                            return Promise.reject(new Error(&#x27;Please specify value key &#x27; + JSON.stringify(appData)));
+                        }
+
+                        var eVal = appData.value.toFixed(2)/1;//May be we dont want to hardcode upto 2 decimal places
+                        if(eVal.toString().match(config.pattern) != null) {
+
+                            if(typeof config.outgoingOperation !== &#x27;undefined&#x27;)
+                                eVal = self.znpController.evalOperation(eVal, config.outgoingOperation);
+
+                            return self.znpController.formatWriteAttrData(eVal, config.type).then(function(formattedData) {
+                                return self.cluster_classes[appData.clusterClassId].setAttr(appData.attrId, config.type, formattedData);
+                            }, function(err) {
+                                return Promise.reject(err);
+                            })
+                        } else {
+                            return Promise.reject(new Error(&#x27;Incorrect input value, please specify value between &#x27; + config.range + &#x27; in unit &#x27; + config.unit));
+                        }
+                    }
+                }
+            } else {
+                return Promise.reject(&#x27;Parameter passed should be of object type&#x27;);
+            }
+        },
+        setAttribute: function(clusterClassId, attrId, type, value) {
+            return this.cluster_classes[clusterClassId].setAttr(attrId, type, value);
+        }
+    }
+};
+
+module.exports = dev$.resource(&quot;Core/Devices/Lighting/ZigbeeHA/Viconics_8000_SERIES&quot;, Viconics_8000_SERIES);
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

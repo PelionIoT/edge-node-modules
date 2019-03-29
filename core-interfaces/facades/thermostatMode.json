@@ -1,0 +1,22 @@
+{
+    "name": "Facades/ThermostatMode",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "thermostatMode": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(heat|cool|off|auto)$"
+            }
+        }
+    },
+    "events": {
+        "thermostatMode": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(heat|cool|off|auto)$"
+            }
+        } 
+    }
+}

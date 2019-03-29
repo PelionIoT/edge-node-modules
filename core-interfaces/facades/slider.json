@@ -1,0 +1,16 @@
+{
+    "name": "Facades/Slider",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "slide": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,19 @@
+{
+    "name": "Facades/Triggerable",
+    "version": "0.0.1",
+    "commands": {
+        "trigger": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        }
+    },
+    "state": {
+        "triggered": {
+            "readOnly": true,
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,9 @@
+{
+    "name": "Core/Devices/Virtual/ContactSensor",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/HasContact",
+        "Facades/HasBattery",
+        "Facades/HasTamper"
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Facades/Regulator",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "regulator": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        }
+    },
+    "events": { }
+}

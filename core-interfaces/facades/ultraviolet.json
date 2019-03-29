@@ -1,0 +1,24 @@
+{
+    "name": "Facades/Ultraviolet",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "ultraviolet": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 65535
+            }
+        }
+    },
+    "events": { 
+        "ultraviolet": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 65535
+            }
+        }
+    }
+}

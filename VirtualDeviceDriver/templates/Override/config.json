@@ -1,0 +1,8 @@
+{
+    "name": "Core/Devices/Virtual/Override",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Override",
+        "Facades/Switchable"
+    ]
+}

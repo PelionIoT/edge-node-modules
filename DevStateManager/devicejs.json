@@ -1,0 +1,31 @@
+{
+    "name": "DevStateManager",
+    "version": "0.0.1",
+    "description": "Maintains the state of the all the registered device controllers",
+    "author": {
+        "name": "Yash",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "colors": "1.1.2",
+        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git#devicejs2.0-compatibility",
+        "jsonminify" : "^0.2.3",
+        "underscore": "1.8.3"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [
+            "./DevStateManagerInterface.json"
+        ],
+        "resourceTypes": [
+            "./DevStateManagerResource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

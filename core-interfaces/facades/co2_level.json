@@ -1,0 +1,15 @@
+{
+    "name": "Facades/CO2_Level",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "level": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

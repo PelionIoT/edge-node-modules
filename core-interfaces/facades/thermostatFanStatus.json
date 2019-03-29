@@ -1,0 +1,16 @@
+{
+    "name": "Facades/ThermostatFanStatus",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "thermostatFanStatus": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(on|off)$"
+            }
+        }
+    },
+    "events": {
+    }
+}

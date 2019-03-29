@@ -1,0 +1,8 @@
+{
+    "name": "Core/Devices/Virtual/SmokeAlarm",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/HasSmokeAlarm",
+        "Facades/HasBattery"
+    ]
+}

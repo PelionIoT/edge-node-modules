@@ -1,0 +1,12 @@
+{
+    "name": "Core/Devices/Virtual/MultiSensor",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/HasMotion",
+        "Facades/HasBattery",
+        "Facades/HasTamper",
+        "Facades/HasLuminance",
+        "Facades/Ultraviolet",
+        "Facades/HasTemperature"
+    ]
+}

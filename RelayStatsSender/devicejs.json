@@ -1,0 +1,33 @@
+{
+    "name": "RelayStatsSender",
+    "version": "0.0.1",
+    "description": "Rule stats sender application",
+    "author": {
+        "name": "WigWag",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+      "request": "2.60.0",
+      "semver": "5.3.0",
+      "devjs-configurator": "git+ssh://git@github.com:WigWagCo/devjs-configurator.git#devicejs2.0-compatibility",
+      "wigwag-authorizer": "git+ssh://git@github.com:WigWagCo/wigwag-authorizer.git"
+    },
+    "devDependencies": {
+    },
+    "devicejs": {
+        "interfaces": [ 
+            "./RelayStatsInterface.json"
+        ],
+        "resourceTypes": [ 
+            "./RelayStatsResource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": {
+        }
+  }
+}

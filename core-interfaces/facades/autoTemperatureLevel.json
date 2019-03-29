@@ -1,0 +1,20 @@
+{
+    "name": "Facades/AutoTemperatureLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "autoTemperatureLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": {
+        "autoTemperatureLevel": {
+            "schema": {
+                "type": "object"
+            }
+        }
+    }
+}

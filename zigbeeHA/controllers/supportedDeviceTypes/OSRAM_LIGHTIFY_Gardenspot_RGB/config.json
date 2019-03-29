@@ -1,0 +1,11 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/OSRAM_LIGHTIFY_Gardenspot_RGB",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable",
+        "Facades/Colorable",
+        "Core/Interfaces/Metadata",
+        "Facades/LastColorCall"
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Facades/HasSmokeAlarm",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "smoke": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 255
+            }
+        } 
+    },
+    "events": {
+        "smoke": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 255
+            }
+        } 
+    }
+}

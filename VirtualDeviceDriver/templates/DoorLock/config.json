@@ -1,0 +1,7 @@
+{
+    "name": "Core/Devices/Virtual/DoorLock",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/HasLock"
+    ]
+}

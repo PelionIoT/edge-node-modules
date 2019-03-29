@@ -1,0 +1,25 @@
+{
+    "name": "Facades/HasMotion",
+    "version": "0.0.1",
+    "commands": {
+        "isOccupied": {
+            "arguments": [ ],
+            "returns": { "type": "boolean" }
+        }
+    },
+    "state": {
+        "motion": {
+            "readOnly": true,
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    },
+    "events": {
+        "motion": {
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    }
+}

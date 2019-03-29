@@ -1,0 +1,22 @@
+{
+    "name": "Facades/OccupancyMode",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "occupancyMode": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(occupied|unoccupied)$"
+            }
+        }
+    },
+    "events": {
+        "occupancyMode": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(occupied|unoccupied)$"
+            }
+        } 
+    }
+}

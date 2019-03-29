@@ -1,0 +1,6 @@
+{
+    "prodPort": "3131",
+    "modelDefinitions": "/api/models",
+    "logRequests": false,
+    "logLevel": 2
+}

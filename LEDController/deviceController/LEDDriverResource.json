@@ -1,0 +1,5 @@
+{
+    "name": "LEDDriver",
+    "version": "0.0.1",
+    "interfaces": [ "LEDDriverInterface" ]
+}

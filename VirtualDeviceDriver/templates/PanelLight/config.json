@@ -1,0 +1,8 @@
+{
+    "name": "Core/Devices/Virtual/PanelLight",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable"
+    ]
+}

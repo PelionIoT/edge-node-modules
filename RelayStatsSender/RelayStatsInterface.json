@@ -1,0 +1,15 @@
+{
+    "name": "RelayStatsInterface",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "diagnostics": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

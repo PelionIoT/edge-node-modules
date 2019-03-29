@@ -1,0 +1,11 @@
+{
+    "name": "Core/Devices/Lighting/AutogenZigbeeHA/Feibit_Inc_co_FB56_ZCW11HG1_2",
+    "version": "0.0.1",
+    "interfaces": [
+        "Core/Interfaces/Metadata",
+        "Facades/Switchable",
+        "Facades/Colorable",
+        "Facades/hasWhiteTemp",
+        "Facades/LastColorCall"
+    ]
+}

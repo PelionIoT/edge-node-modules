@@ -1,0 +1,6 @@
+{
+    "cloud": "wss://cloud.laptop:8443/relay-term",
+    "noValidate": true,
+    "certificate": "/home/jrife/Documents/relay-certs/walt-cloud/WWRL000000.client.cert.pem",
+    "key": "/home/jrife/Documents/relay-certs/walt-cloud/WWRL000000.client.key.pem"
+}

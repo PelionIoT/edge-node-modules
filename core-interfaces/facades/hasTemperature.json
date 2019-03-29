@@ -1,0 +1,24 @@
+{
+    "name": "Facades/HasTemperature",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "temperature": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "temperature": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+     }
+}

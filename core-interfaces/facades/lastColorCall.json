@@ -1,0 +1,15 @@
+{
+    "name": "Facades/LastColorCall",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "lastColorCall": {
+            "readOnly": true,
+            "schema": {
+                "type": "string"
+            }
+        }
+    },
+    "events": {
+    }
+}

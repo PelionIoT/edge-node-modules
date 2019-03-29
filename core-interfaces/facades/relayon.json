@@ -1,0 +1,16 @@
+{
+    "name": "Facades/RelayOn",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "relayon": {
+            "readOnly": true,
+            "schema": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+            }
+        }
+    },
+    "events": { }
+}

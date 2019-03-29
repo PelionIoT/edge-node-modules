@@ -1,0 +1,16 @@
+{
+    "name": "Facades/Flipflop",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "flipflop": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(on|off)$"
+            }
+        }
+    },
+    "events": { }
+}

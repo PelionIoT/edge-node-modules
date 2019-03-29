@@ -1,0 +1,33 @@
+{
+    "name": "Core/Interfaces/Configuration",
+    "version": "0.0.1",
+    "commands": { 
+        "getConfiguration": {
+            "arguments": [ ],
+            "returns": { "type": "object" }
+        },
+        "setConfiguration": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        },
+        "setToDefault": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        }
+    },
+    "state": {
+        "configuration": {
+            "readOnly": false,
+            "schema": {
+                "type": "string"
+            }
+        }
+    },
+    "events": {
+        "configuration": {
+            "schema": {
+                "type": "string"
+            }
+        }
+    }
+}

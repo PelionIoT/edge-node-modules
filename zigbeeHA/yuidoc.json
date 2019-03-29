@@ -1,0 +1,8 @@
+{
+    "name": "ZigBee Home Automation TI Stack's znp-host-framework node implementation",
+    "description": "Establish and manage zigbee mesh network, implements cluster library.",
+    "version": "1.0.0",
+    "options": {
+        "outdir": "./docs/"
+    }
+}

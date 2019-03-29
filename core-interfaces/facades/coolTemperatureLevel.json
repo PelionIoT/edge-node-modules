@@ -1,0 +1,24 @@
+{
+    "name": "Facades/CoolTemperatureLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "coolTemperatureLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "coolTemperatureLevel": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    }
+}

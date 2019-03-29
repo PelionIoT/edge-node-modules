@@ -1,0 +1,28 @@
+{
+    "name": "Core/Interfaces/Pairable",
+    "version": "0.0.1",
+    "commands": { 
+        "addDevice": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        },
+        "removeDevice": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        }
+    },
+    "state": {
+    },
+    "events": { 
+        "pairingProgress": {
+            "schema": {
+                "type": "object"
+            }
+        },
+        "unpairingProgress": {
+            "schema": {
+                "type": "object"
+            }
+        }
+    }
+}

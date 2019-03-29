@@ -1,0 +1,46 @@
+{
+    "name": "Facades/SetTemperatureLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "setTemperatureLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "object", 
+                "properties": {
+                    "mode": {
+                        "type": "string",
+                        "pattern": "^(heat|cool|off)$"
+                    },
+                    "level": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+
+                    }
+                },
+                "required": [ "mode", "level" ]
+            }
+        }
+    },
+    "events": {
+        "setTemperatureLevel": {
+            "schema": {
+                "type": "object", 
+                "properties": {
+                    "mode": {
+                        "type": "string",
+                        "pattern": "^(heat|cool|off)$"
+                    },
+                    "level": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+
+                    }
+                },
+                "required": [ "mode", "level" ]
+            }
+        } 
+    }
+}

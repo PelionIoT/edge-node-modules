@@ -1,0 +1,24 @@
+{
+    "name": "Facades/ThermostatReturnTemperature",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "returnTemperature": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "returnTemperature": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+     }
+}

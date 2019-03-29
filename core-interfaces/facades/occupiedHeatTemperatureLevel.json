@@ -1,0 +1,24 @@
+{
+    "name": "Facades/OccupiedHeatTemperatureLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "occupiedHeatTemperatureLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "occupiedHeatTemperatureLevel": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    }
+}

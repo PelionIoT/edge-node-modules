@@ -1,0 +1,19 @@
+{
+    "name": "ZigbeeHA/DevicePairer",
+    "version": "0.0.1",
+    "commands": { 
+        "addDevice": {
+            "arguments": [ { "type": "string" } ],
+            "returns": { "type": "object" }
+        },
+        "removeDevice": {
+            "arguments": [ { "type": "string" } ],
+            "returns": { "type": "object" }
+        }
+
+    },
+    "state": { },
+    "events": { 
+    	
+    }
+}

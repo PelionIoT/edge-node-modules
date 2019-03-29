@@ -1,0 +1,30 @@
+{
+    "name": "VirtualDeviceDriver",
+    "version": "0.0.1",
+    "description": "Helps simulate different types of device controllers",
+    "author": {
+        "name": "Yash",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "colors": "1.1.2",
+        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git#devicejs2.0-compatibility",
+        "jsonminify" : "^0.2.3"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [
+            "./VirtualDeviceDriverInterface.json"
+        ],
+        "resourceTypes": [
+            "./VirtualDeviceDriverResource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

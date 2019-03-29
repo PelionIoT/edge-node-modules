@@ -1,0 +1,30 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/Viconics_254_10",
+    "version": "0.0.1",
+    "interfaces": [
+    	"Facades/ThermostatMode",
+    	"Facades/HasTemperature",
+        "Facades/OccupiedCoolTemperatureLevel",
+        "Facades/OccupiedHeatTemperatureLevel",
+        "Facades/OccupiedAutoTemperatureLevel",
+        "Facades/UnoccupiedCoolTemperatureLevel",
+        "Facades/UnoccupiedHeatTemperatureLevel",
+        "Facades/UnoccupiedAutoTemperatureLevel",
+        "Facades/ThermostatReturnTemperature",
+        "Facades/ThermostatSupplyTemperature",
+        "Facades/KeypadLockLevel",
+        "Facades/TemperatureDisplayMode",
+        "Facades/ThermostatFanMode",
+        "Facades/OccupancyMode",
+        "Facades/ThermostatDeadband",
+        "Facades/Humidity",
+        "Facades/HasMotion",
+        "Facades/ThermostatW1Status",
+        "Facades/ThermostatW2Status",
+        "Facades/ThermostatY1Status",
+        "Facades/ThermostatY2Status",
+        "Facades/ThermostatGStatus",
+        "Core/Interfaces/Configuration",
+        "Core/Interfaces/Metadata"
+    ]
+}

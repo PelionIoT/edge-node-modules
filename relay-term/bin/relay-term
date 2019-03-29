@@ -1,0 +1,26 @@
+#!/bin/bash
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+    SELF="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+    SOURCE="$(readlink "$SOURCE")"
+    [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+
+SELF="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+
+if [ -z "$NODE_EXEC" ]; then NODE_EXEC="node"; fi
+command -v $NODE_EXEC > /dev/null
+status=$?
+if [ $status -ne 0 ]; then
+    NODE_EXEC="nodejs"
+    echo "No \"node\" exec found. Trying \"$NODE_EXEC\""
+    command -v $NODE_EXEC > /dev/null
+    status=$?
+    if [ $status -ne 0 ]; then
+	echo "Is node.js installed or in path?"
+	exit 1
+    fi
+fi
+
+$NODE_EXEC $SELF/../src/index.js $@

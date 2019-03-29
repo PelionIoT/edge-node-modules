@@ -1,0 +1,14 @@
+{
+    "name": "Core/Interfaces/Unpairable",
+    "version": "0.0.1",
+    "commands": { 
+        "unpair": {
+            "arguments": [ ],
+            "returns": { "type": "null" }
+        }
+    },
+    "state": {
+    },
+    "events": {
+    }
+}

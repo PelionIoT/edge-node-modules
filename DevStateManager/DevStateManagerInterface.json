@@ -1,0 +1,21 @@
+{
+    "name": "DevStateManagerInterface",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "data": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        },
+        "listResources": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

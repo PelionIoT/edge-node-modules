@@ -1,0 +1,7 @@
+{
+    "name": "Core/Devices/Virtual/Ultraviolet",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Ultraviolet"
+    ]
+}

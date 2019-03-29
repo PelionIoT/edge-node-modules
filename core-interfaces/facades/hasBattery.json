@@ -1,0 +1,24 @@
+{
+    "name": "Facades/HasBattery",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "battery": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        }
+    },
+    "events": {
+        "battery": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        } 
+    }
+}

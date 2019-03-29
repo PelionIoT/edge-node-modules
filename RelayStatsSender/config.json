@@ -1,0 +1,28 @@
+{
+    "cloudAddress": "http://localhost:8585",
+    "relayID": "WWRL000000",
+    "ssl": {
+        "key": "/home/jrife/Documents/relay-certs/walt-cloud/WWRL000000.client.key.pem",
+        "cert": "/home/jrife/Documents/relay-certs/walt-cloud/WWRL000000.client.cert.pem",
+        "ca": [
+            "/home/jrife/Documents/certs/ca.cert.pem",
+            "/home/jrife/Documents/certs/intermediate.cert.pem"
+        ] 
+    },
+    "versionsFile": "./exampleVersion.json",
+    "factoryVersionsFile": "./exampleFactoryVersion.json",
+    "userVersionsFile": "./exampleUserVersion.json",
+    "upgradeVersionsFile": "./exampleUpgradeVersion.json",
+    "relayInfo": {
+        "pairingCode": "OQWEALKJAPTASJDKHGOJWABJDNF",
+        "serialNumber": "WWRL000000",
+        "hardwareVersion": "0.1.1",
+        "radioConfig": "02",
+        "ledConfig": "01",
+        "cloudServer": "https://cloud.wigwag.com",
+        "devicejsServer": "https://devicejs-cloud.wigwag.com",
+        "devicedbServer": "https://devicedb-cloud.wigwag.com",
+        "partitionScheme": "8Gb",
+        "ethernetMac": "00a50900000001"
+    }
+}

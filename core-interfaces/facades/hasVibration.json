@@ -1,0 +1,20 @@
+{
+    "name": "Facades/HasVibration",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "vibration": {
+            "readOnly": true,
+            "schema": {
+                "type": null
+            }
+        }
+    },
+    "events": { 
+        "vibration": {
+            "schema": {
+                "type": null
+            }
+        }
+    }
+}

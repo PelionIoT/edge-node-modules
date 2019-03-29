@@ -1,0 +1,35 @@
+{
+    "name": "Facades/Colorable",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "hsl": {
+            "readOnly": false,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "h": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "s": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "l": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 1
+                    },
+                    "extra": {
+                        "type":"object"
+                    }
+                },
+                "required": [ "h", "s", "l" ]
+            }
+        }
+    },
+    "events": { }
+}

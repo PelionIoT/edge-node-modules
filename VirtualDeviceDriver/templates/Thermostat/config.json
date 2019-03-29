@@ -1,0 +1,28 @@
+{
+    "name": "Core/Devices/Virtual/Thermostat",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/ThermostatMode",
+        "Facades/HasTemperature",
+        "Facades/OccupiedCoolTemperatureLevel",
+        "Facades/OccupiedHeatTemperatureLevel",
+        "Facades/OccupiedAutoTemperatureLevel",
+        "Facades/UnoccupiedCoolTemperatureLevel",
+        "Facades/UnoccupiedHeatTemperatureLevel",
+        "Facades/UnoccupiedAutoTemperatureLevel",
+        "Facades/ThermostatReturnTemperature",
+        "Facades/ThermostatSupplyTemperature",
+        "Facades/ThermostatDeadband",
+        "Facades/ThermostatW1Status",
+        "Facades/ThermostatW2Status",
+        "Facades/ThermostatY1Status",
+        "Facades/ThermostatY2Status",
+        "Facades/ThermostatGStatus",
+        "Facades/ThermostatFanStatus",
+        "Facades/ThermostatModeStatus",
+        "Facades/ThermostatFanMode",
+        "Facades/KeypadLockLevel",
+        "Facades/TemperatureDisplayMode",
+        "Facades/OccupancyMode"
+    ]
+}

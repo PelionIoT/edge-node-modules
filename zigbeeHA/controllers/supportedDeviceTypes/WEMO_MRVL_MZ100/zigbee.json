@@ -1,0 +1,24 @@
+{
+    "ManufacturerName": "MRVL",
+    "ModelIdentifier": "MZ100",
+    "controller": "WEMO_MRVL_MZ100",
+    "devjssignature": "",
+    "enabled": true,
+    "cluster_classes": [
+        {
+            "name": "basic",
+            "path": "./../../../cluster_classes/basic",
+            "id": 0
+        },
+        {   
+            "name": "on_off",
+            "path": "./../../../cluster_classes/on_off",
+            "id": 6
+        },
+        {   
+            "name": "level",
+            "path": "./../../../cluster_classes/level",
+            "id": 8
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Facades/Humidity",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "humidity": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        }
+    },
+    "events": {
+        "humidity": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 100
+            }
+        }
+     }
+}

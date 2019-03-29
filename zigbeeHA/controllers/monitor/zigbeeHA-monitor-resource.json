@@ -1,0 +1,5 @@
+{
+    "name": "ZigbeeHA/Monitor",
+    "version": "0.0.1",
+    "interfaces": [ "ZigbeeHA/Monitor" ]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Facades/Fahrenheit",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "fahrenheit": {
+            "readOnly": true,
+            "schema": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 1
+            }
+        }
+    },
+    "events": { }
+}

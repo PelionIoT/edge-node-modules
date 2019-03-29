@@ -1,0 +1,16 @@
+{
+    "name": "Facades/ThermostatModeStatus",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "thermostatModeStatus": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(OFF|STAGE1_HEATING_ON|STAGE2_HEATING_ON|STAGE1_COOLING_ON|STAGE2_COOLING_ON)$"
+            }
+        }
+    },
+    "events": {
+    }
+}

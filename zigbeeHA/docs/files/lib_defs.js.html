@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>lib/defs.js - ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ZigBeeDeviceController.html">ZigBeeDeviceController</a></li>
+                                <li><a href="../classes/ZigbeeDriver.html">ZigbeeDriver</a></li>
+                                <li><a href="../classes/ZNPController.html">ZNPController</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: lib/defs.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var DEFINES = {
+	CLUSTER_CLASS: { 	GENERAL: {}, 
+						CLOSURES: {}, 
+						HVAC: {}, 
+						LIGHTING: {}, 
+						MEASUREMENT_SENSING: {}, 
+						SECURITY_SAFETY: {}, 
+						PROTOCOL_INTERFACE: {} },
+	WORK_CODE: {},
+	SOURCE_ENDPOINT: {},
+	ADDR_MODE: {},
+	DIRECTION: {},
+	STATUS: {},
+	DATA_TYPE: {},
+	NV_ITEM_ID: {},
+	DEVICETYPE: {},
+	PAIRING_STAGE: {},
+	CLUSTER_CLASS_ID: {}
+};
+
+
+DEFINES.PAIRING_STAGE = {};
+DEFINES.PAIRING_STAGE.SEARCHING					= 1;//Controller in pairing mode, searching for zigbee device
+DEFINES.PAIRING_STAGE.FOUND_DEVICE				= 2;//Found a device
+DEFINES.PAIRING_STAGE.DEVICE_PAIRED				= 3;//Device paired successfully
+DEFINES.PAIRING_STAGE.GET_MANUFACTURER_INFO		= 4;//Get more info about the device
+DEFINES.PAIRING_STAGE.INIT_CONTROLLER			= 5;//Start device controller
+DEFINES.PAIRING_STAGE.COMMISSIONING_COMPLETE	= 6;//Commissioning process completed successfully
+DEFINES.PAIRING_STAGE.ALREADY_BOUND				= 7;//Already bound device
+DEFINES.PAIRING_STAGE.FAILED 					= 8;//Commissioning process failed with error
+DEFINES.PAIRING_STAGE.DO_NOT_SUPPORT			= 9;//Do not support this type of device
+DEFINES.PAIRING_STAGE.INCOMPLETE 				= 10;//Could not complete the process
+DEFINES.PAIRING_STAGE.AUTOGEN_CONTROLLER 		= 11;//Creating an autogen controller
+DEFINES.PAIRING_STAGE.PERMIT_FAILED 			= 12;//Permit join failed
+
+DEFINES.CLUSTER_CLASS_ID = {
+	0: &#x27;basic&#x27;,
+	6: &#x27;on_off&#x27;,
+	8: &#x27;level&#x27;,
+	768: &#x27;color_control&#x27;,
+	513: &#x27;thermostat&#x27;,
+	514: &#x27;fan_control&#x27;,
+	516: &#x27;thermostatUserInterface&#x27;,
+	1026: &#x27;temperature&#x27;,
+	1029: &#x27;relative_humidity&#x27;,
+	1030: &#x27;occupancy_sensor&#x27;
+};
+
+
+DEFINES.CLUSTER_CLASS.GENERAL.BASIC										= 0x0000;
+DEFINES.CLUSTER_CLASS.GENERAL.POWER_CONFIGURATION						= 0x0001;
+DEFINES.CLUSTER_CLASS.GENERAL.DEVICE_TEMPERATURE_CONFIGURATION			= 0x0002;
+DEFINES.CLUSTER_CLASS.GENERAL.IDENTIFY									= 0x0003;
+DEFINES.CLUSTER_CLASS.GENERAL.GROUPS									= 0x0004;
+DEFINES.CLUSTER_CLASS.GENERAL.SCENES									= 0x0005;
+DEFINES.CLUSTER_CLASS.GENERAL.ONOFF										= 0x0006;
+DEFINES.CLUSTER_CLASS.GENERAL.ONOFF_SWITCH_CONFIGURATION				= 0x0007;
+DEFINES.CLUSTER_CLASS.GENERAL.LEVEL_CONTROL								= 0x0008;
+DEFINES.CLUSTER_CLASS.GENERAL.ALARMS									= 0x0009;
+DEFINES.CLUSTER_CLASS.GENERAL.TIME										= 0x000A;
+DEFINES.CLUSTER_CLASS.GENERAL.RSSI_LOCATION								= 0x000B;
+
+
+DEFINES.CLUSTER_CLASS.LIGHTING.COLOR_CONTROL							= 0x0300;
+DEFINES.CLUSTER_CLASS.LIGHTING.BALLAST_CONFIGURATION					= 0x0301;
+
+DEFINES.CLUSTER_CLASS.HVAC.PUMP_CONFIGURATION_AND_CONTROL				= 0x0200;
+DEFINES.CLUSTER_CLASS.HVAC.THERMOSTAT									= 0x0201;
+DEFINES.CLUSTER_CLASS.HVAC.FAN_CONTROL									= 0x0202;
+DEFINES.CLUSTER_CLASS.HVAC.DEHUMIDIFICATION_CONTROL						= 0x0203;
+DEFINES.CLUSTER_CLASS.HVAC.THERMOSTAT_USER_INTERFACE_CONFIGURATION		= 0x0204;
+
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.ILLUMINANCE_MEASUREMENT		= 0x0400;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.ILLUMINANCE_LEVEL_SENSING		= 0x0401;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.TEMPERATURE_MEASUREMENT		= 0x0402;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.PRESSURE_MEASUREMENT			= 0x0403;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.FLOW_MEASUREMENT				= 0x0404;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.RELATIVE_HUMIDITY_MEASUREMENT	= 0x0405;
+DEFINES.CLUSTER_CLASS.MEASUREMENT_SENSING.OCCUPANCY_SENSING				= 0x0406;
+
+
+DEFINES.WORK_CODE.ZCL_SEND_COMMAND					= 0x00;
+DEFINES.WORK_CODE.ZCL_READ_ATTR						= 0x01;
+DEFINES.WORK_CODE.ZCL_WRITE_ATTR					= 0x02;
+
+DEFINES.SOURCE_ENDPOINT 							= 0x06;
+
+DEFINES.ADDR_MODE.ADDR_NOT_PRESENT 					= 0;
+DEFINES.ADDR_MODE.ADDR_GROUP 						= 1;
+DEFINES.ADDR_MODE.ADDR_16BIT 						= 2; //only this is supported for now
+DEFINES.ADDR_MODE.ADDR_64BIT 						= 3;
+DEFINES.ADDR_MODE.ADDR_BROADCAST 					= 15;
+
+DEFINES.DIRECTION.ZCL_FRAME_CLIENT_SERVER_DIR		= 0x00;
+DEFINES.DIRECTION.ZCL_FRAME_SERVER_CLIENT_DIR		= 0x01;
+
+DEFINES.DEVICETYPE= {
+	0x00: &quot;COORDINATOR&quot;,
+	0x01: &quot;ROUTER&quot;,
+	0x02: &quot;ENDDEVICE&quot;
+}
+
+/*** Data Types ***/
+//Length of data octets -- len = 0 means remaning payload is data, len = 0xff 
+DEFINES.DATA_TYPE = {
+	0x00: {&quot;type&quot;: &quot;ZCL_DATATYPE_NO_DATA&quot;, &quot;len&quot;: 0},
+	0x08: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA8&quot;, &quot;len&quot;: 1},
+	0x09: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA16&quot;, &quot;len&quot;: 2},
+	0x0a: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA24&quot;, &quot;len&quot;: 3},
+	0x0b: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA32&quot;, &quot;len&quot;: 4},
+	0x0c: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA40&quot;, &quot;len&quot;: 5},
+	0x0d: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA48&quot;, &quot;len&quot;: 6},
+	0x0e: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA56&quot;, &quot;len&quot;: 7},
+	0x0f: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATA64&quot;, &quot;len&quot;: 8},
+	0x10: {&quot;type&quot;: &quot;ZCL_DATATYPE_BOOLEAN&quot;, &quot;len&quot;: 1, &quot;invalidNumber&quot;: 0xFF},
+	0x18: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP8&quot;, &quot;len&quot;: 1},
+	0x19: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP16&quot;, &quot;len&quot;: 2},
+	0x1a: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP24&quot;, &quot;len&quot;: 3},
+	0x1b: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP32&quot;, &quot;len&quot;: 4},
+	0x1c: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP40&quot;, &quot;len&quot;: 5},
+	0x1d: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP48&quot;, &quot;len&quot;: 6},
+	0x1e: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP56&quot;, &quot;len&quot;: 7},
+	0x1f: {&quot;type&quot;: &quot;ZCL_DATATYPE_BITMAP64&quot;, &quot;len&quot;: 8},
+	0x20: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT8&quot;, &quot;len&quot;: 1, &quot;invalidNumber&quot;: 0xFF},
+	0x21: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT16&quot;, &quot;len&quot;: 2, &quot;invalidNumber&quot;: 0xFFFF},
+	0x22: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT24&quot;, &quot;len&quot;: 3, &quot;invalidNumber&quot;: 0xFFFFFF},
+	0x23: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT32&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0xFFFFFFFF},
+	0x24: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT40&quot;, &quot;len&quot;: 5, &quot;invalidNumber&quot;: 0xFFFFFFFFFF},
+	0x25: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT48&quot;, &quot;len&quot;: 6, &quot;invalidNumber&quot;: 0xFFFFFFFFFFFF},
+	0x26: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT56&quot;, &quot;len&quot;: 7, &quot;invalidNumber&quot;: 0xFFFFFFFFFFFFFF},
+	0x27: {&quot;type&quot;: &quot;ZCL_DATATYPE_UINT64&quot;, &quot;len&quot;: 8, &quot;invalidNumber&quot;: 0xFFFFFFFFFFFFFFFF},
+	0x28: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT8&quot;, &quot;len&quot;: 1, &quot;invalidNumber&quot;: 0x80},
+	0x29: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT16&quot;, &quot;len&quot;: 2, &quot;invalidNumber&quot;: 0x8000},
+	0x2a: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT24&quot;, &quot;len&quot;: 3, &quot;invalidNumber&quot;: 0x800000},
+	0x2b: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT32&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0x80000000},
+	0x2c: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT40&quot;, &quot;len&quot;: 5, &quot;invalidNumber&quot;: 0x8000000000},
+	0x2d: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT48&quot;, &quot;len&quot;: 6, &quot;invalidNumber&quot;: 0x800000000000},
+	0x2e: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT56&quot;, &quot;len&quot;: 7, &quot;invalidNumber&quot;: 0x80000000000000},
+	0x2f: {&quot;type&quot;: &quot;ZCL_DATATYPE_INT64&quot;, &quot;len&quot;: 8, &quot;invalidNumber&quot;: 0x8000000000000000},
+	0x30: {&quot;type&quot;: &quot;ZCL_DATATYPE_ENUM8&quot;, &quot;len&quot;: 1, &quot;invalidNumber&quot;: 0xFF},
+	0x31: {&quot;type&quot;: &quot;ZCL_DATATYPE_ENUM16&quot;, &quot;len&quot;: 2, &quot;invalidNumber&quot;: 0xFFFF},
+	0x38: {&quot;type&quot;: &quot;ZCL_DATATYPE_SEMI_PREC&quot;, &quot;len&quot;: 2},
+	0x39: {&quot;type&quot;: &quot;ZCL_DATATYPE_SINGLE_PREC&quot;, &quot;len&quot;: 4},
+	0x3a: {&quot;type&quot;: &quot;ZCL_DATATYPE_DOUBLE_PREC&quot;, &quot;len&quot;: 8},
+	0x41: {&quot;type&quot;: &quot;ZCL_DATATYPE_OCTET_STR&quot;, &quot;len&quot;: &quot;1&quot;, &quot;invalidNumber&quot;: 0xFF},
+	0x42: {&quot;type&quot;: &quot;ZCL_DATATYPE_CHAR_STR&quot;, &quot;len&quot;: &quot;1&quot;, &quot;invalidNumber&quot;: 0xFF},
+	0x43: {&quot;type&quot;: &quot;ZCL_DATATYPE_LONG_OCTET_STR&quot;, &quot;len&quot;: &quot;2&quot;, &quot;invalidNumber&quot;: 0xFFFF},
+	0x44: {&quot;type&quot;: &quot;ZCL_DATATYPE_LONG_CHAR_STR&quot;, &quot;len&quot;: &quot;2&quot;, &quot;invalidNumber&quot;: 0xFFFF},
+	0x48: {&quot;type&quot;: &quot;ZCL_DATATYPE_ARRAY&quot;, &quot;len&quot;: &quot;2+&quot;, &quot;invalidNumber&quot;: 0xFFFF},
+	0x4c: {&quot;type&quot;: &quot;ZCL_DATATYPE_STRUCT&quot;, &quot;len&quot;: &quot;2+&quot;, &quot;invalidNumber&quot;: 0xFFFF},
+	0x50: {&quot;type&quot;: &quot;ZCL_DATATYPE_SET&quot;},
+	0x51: {&quot;type&quot;: &quot;ZCL_DATATYPE_BAG&quot;},
+	0xe0: {&quot;type&quot;: &quot;ZCL_DATATYPE_TOD&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0xFFFFFFFF},
+	0xe1: {&quot;type&quot;: &quot;ZCL_DATATYPE_DATE&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0xFFFFFFFF},
+	0xe2: {&quot;type&quot;: &quot;ZCL_DATATYPE_UTC&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0xFFFFFFFF},
+	0xe8: {&quot;type&quot;: &quot;ZCL_DATATYPE_CLUSTER_ID&quot;, &quot;len&quot;: 2, &quot;invalidNumber&quot;: 0xFFFF},
+	0xe9: {&quot;type&quot;: &quot;ZCL_DATATYPE_ATTR_ID&quot;, &quot;len&quot;: 2, &quot;invalidNumber&quot;: 0xFFFF},
+	0xea: {&quot;type&quot;: &quot;ZCL_DATATYPE_BAC_OID&quot;, &quot;len&quot;: 4, &quot;invalidNumber&quot;: 0xFFFFFFFF},
+	0xf0: {&quot;type&quot;: &quot;ZCL_DATATYPE_IEEE_ADDR&quot;, &quot;len&quot;: 8, &quot;invalidNumber&quot;: 0xFFFFFFFFFFFFFFFF},
+	0xf1: {&quot;type&quot;: &quot;ZCL_DATATYPE_128_BIT_SEC_KEY&quot;, &quot;len&quot;: 16},
+	0xff: {&quot;type&quot;: &quot;ZCL_DATATYPE_UNKNOWN&quot;, &quot;len&quot;: 0}
+}
+
+/*** Error Status Codes ***/
+DEFINES.STATUS = {
+	0x00 : &quot;ZCL_STATUS_SUCCESS&quot;,
+	0x01 : &quot;ZCL_STATUS_FAILURE&quot;,
+	0x7E : &quot;ZCL_STATUS_NOT_AUTHORIZED&quot;,
+	0x80 : &quot;ZCL_STATUS_MALFORMED_COMMAND&quot;,
+	0x81 : &quot;ZCL_STATUS_UNSUP_CLUSTER_COMMAND&quot;,
+	0x82 : &quot;ZCL_STATUS_UNSUP_GENERAL_COMMAND&quot;,
+	0x83 : &quot;ZCL_STATUS_UNSUP_MANU_CLUSTER_COMMAND&quot;,
+	0x84 : &quot;ZCL_STATUS_UNSUP_MANU_GENERAL_COMMAND&quot;,
+	0x85 : &quot;ZCL_STATUS_INVALID_FIELD&quot;,
+	0x86 : &quot;ZCL_STATUS_UNSUPPORTED_ATTRIBUTE&quot;,
+	0x87 : &quot;ZCL_STATUS_INVALID_VALUE&quot;,
+	0x88 : &quot;ZCL_STATUS_READ_ONLY&quot;,
+	0x89 : &quot;ZCL_STATUS_INSUFFICIENT_SPACE&quot;,
+	0x8a : &quot;ZCL_STATUS_DUPLICATE_EXISTS&quot;,
+	0x8b : &quot;ZCL_STATUS_NOT_FOUND&quot;,
+	0x8c : &quot;ZCL_STATUS_UNREPORTABLE_ATTRIBUTE&quot;,
+	0x8d : &quot;ZCL_STATUS_INVALID_DATA_TYPE&quot;,
+	0x8e : &quot;ZCL_STATUS_INVALID_SELECTOR&quot;,
+	0x8f : &quot;ZCL_STATUS_WRITE_ONLY&quot;,
+	0x90 : &quot;ZCL_STATUS_INCONSISTENT_STARTUP_STATE&quot;,
+	0x91 : &quot;ZCL_STATUS_DEFINED_OUT_OF_BAND&quot;,
+	0x92 : &quot;ZCL_STATUS_INCONSISTENT&quot;,
+	0x93 : &quot;ZCL_STATUS_ACTION_DENIED&quot;,
+	0x94 : &quot;ZCL_STATUS_TIMEOUT&quot;,
+	0x95 : &quot;ZCL_STATUS_ABORT&quot;,
+	0x96 : &quot;ZCL_STATUS_INVALID_IMAGE&quot;,
+	0x97 : &quot;ZCL_STATUS_WAIT_FOR_DATA&quot;,
+	0x98 : &quot;ZCL_STATUS_NO_IMAGE_AVAILABLE&quot;,
+	0x99 : &quot;ZCL_STATUS_REQUIRE_MORE_IMAGE&quot;,
+	0xc0 : &quot;ZCL_STATUS_HARDWARE_FAILURE&quot;,
+	0xc1 : &quot;ZCL_STATUS_SOFTWARE_FAILURE&quot;,
+	0xc2 : &quot;ZCL_STATUS_CALIBRATION_ERROR&quot;,
+	0xFF : &quot;ZCL_STATUS_CMD_HAS_RSP&quot;
+}
+
+
+//TI CC2530 ZNP Stack NV Items 
+//Reference- mtSys.h
+// OSAL NV item IDs
+DEFINES.NV_ITEM_ID.EXTADDR                   = 0x0001;
+DEFINES.NV_ITEM_ID.BOOTCOUNTER               = 0x0002;
+DEFINES.NV_ITEM_ID.STARTUP_OPTION            = 0x0003;
+DEFINES.NV_ITEM_ID.START_DELAY               = 0x0004;
+DEFINES.NV_ITEM_ID.NIB                       = 0x0021;
+DEFINES.NV_ITEM_ID.DEVICE_LIST               = 0x0022;
+DEFINES.NV_ITEM_ID.ADDRMGR                   = 0x0023;
+DEFINES.NV_ITEM_ID.POLL_RATE                 = 0x0024;
+DEFINES.NV_ITEM_ID.QUEUED_POLL_RATE          = 0x0025;
+DEFINES.NV_ITEM_ID.RESPONSE_POLL_RATE        = 0x0026;
+DEFINES.NV_ITEM_ID.REJOIN_POLL_RATE          = 0x0027;
+DEFINES.NV_ITEM_ID.DATA_RETRIES              = 0x0028;
+DEFINES.NV_ITEM_ID.POLL_FAILURE_RETRIES      = 0x0029;
+DEFINES.NV_ITEM_ID.STACK_PROFILE             = 0x002A;
+DEFINES.NV_ITEM_ID.INDIRECT_MSG_TIMEOUT      = 0x002B;
+DEFINES.NV_ITEM_ID.ROUTE_EXPIRY_TIME         = 0x002C;
+DEFINES.NV_ITEM_ID.EXTENDED_PAN_ID           = 0x002D;
+DEFINES.NV_ITEM_ID.BCAST_RETRIES             = 0x002E;
+DEFINES.NV_ITEM_ID.PASSIVE_ACK_TIMEOUT       = 0x002F;
+DEFINES.NV_ITEM_ID.BCAST_DELIVERY_TIME       = 0x0030;
+DEFINES.NV_ITEM_ID.NWK_MODE                  = 0x0031;
+DEFINES.NV_ITEM_ID.CONCENTRATOR_ENABLE       = 0x0032;
+DEFINES.NV_ITEM_ID.CONCENTRATOR_DISCOVERY    = 0x0033;
+DEFINES.NV_ITEM_ID.CONCENTRATOR_RADIUS       = 0x0034;
+DEFINES.NV_ITEM_ID.CONCENTRATOR_RC           = 0x0036;
+DEFINES.NV_ITEM_ID.NWK_MGR_MODE              = 0x0037;
+DEFINES.NV_ITEM_ID.SRC_RTG_EXPIRY_TIME       = 0x0038;
+DEFINES.NV_ITEM_ID.ROUTE_DISCOVERY_TIME      = 0x0039;
+DEFINES.NV_ITEM_ID.NWK_ACTIVE_KEY_INFO       = 0x003A;
+DEFINES.NV_ITEM_ID.NWK_ALTERN_KEY_INFO       = 0x003B;
+DEFINES.NV_ITEM_ID.ROUTER_OFF_ASSOC_CLEANUP  = 0x003C;
+DEFINES.NV_ITEM_ID.NWK_LEAVE_REQ_ALLOWED     = 0x003D;
+DEFINES.NV_ITEM_ID.NWK_CHILD_AGE_ENABLE      = 0x003E;
+DEFINES.NV_ITEM_ID.DEVICE_LIST_KA_TIMEOUT    = 0x003F;
+DEFINES.NV_ITEM_ID.BINDING_TABLE             = 0x0041;
+DEFINES.NV_ITEM_ID.GROUP_TABLE               = 0x0042;
+DEFINES.NV_ITEM_ID.APS_FRAME_RETRIES         = 0x0043;
+DEFINES.NV_ITEM_ID.APS_ACK_WAIT_DURATION     = 0x0044;
+DEFINES.NV_ITEM_ID.APS_ACK_WAIT_MULTIPLIER   = 0x0045;
+DEFINES.NV_ITEM_ID.BINDING_TIME              = 0x0046;
+DEFINES.NV_ITEM_ID.APS_USE_EXT_PANID         = 0x0047;
+DEFINES.NV_ITEM_ID.APS_USE_INSECURE_JOIN     = 0x0048;
+DEFINES.NV_ITEM_ID.COMMISSIONED_NWK_ADDR     = 0x0049;
+DEFINES.NV_ITEM_ID.APS_NONMEMBER_RADIUS      = 0x004B;
+DEFINES.NV_ITEM_ID.APS_LINK_KEY_TABLE        = 0x004C;
+DEFINES.NV_ITEM_ID.APS_DUPREJ_TIMEOUT_INC    = 0x004D;
+DEFINES.NV_ITEM_ID.APS_DUPREJ_TIMEOUT_COUNT  = 0x004E;
+DEFINES.NV_ITEM_ID.APS_DUPREJ_TABLE_SIZE     = 0x004F;
+DEFINES.NV_ITEM_ID.SECURITY_LEVEL            = 0x0061;
+DEFINES.NV_ITEM_ID.PRECFGKEY                 = 0x0062;
+DEFINES.NV_ITEM_ID.PRECFGKEYS_ENABLE         = 0x0063;
+DEFINES.NV_ITEM_ID.SECURITY_MODE             = 0x0064;
+DEFINES.NV_ITEM_ID.SECURE_PERMIT_JOIN        = 0x0065;
+DEFINES.NV_ITEM_ID.APS_LINK_KEY_TYPE         = 0x0066;
+DEFINES.NV_ITEM_ID.APS_ALLOW_R19_SECURITY    = 0x0067;
+DEFINES.NV_ITEM_ID.IMPLICIT_CERTIFICATE      = 0x0069;
+DEFINES.NV_ITEM_ID.DEVICE_PRIVATE_KEY        = 0x006A;
+DEFINES.NV_ITEM_ID.CA_PUBLIC_KEY             = 0x006B;
+DEFINES.NV_ITEM_ID.USE_DEFAULT_TCLK          = 0x006D;
+DEFINES.NV_ITEM_ID.TRUSTCENTER_ADDR          = 0x006E;
+DEFINES.NV_ITEM_ID.RNG_COUNTER               = 0x006F;
+DEFINES.NV_ITEM_ID.RANDOM_SEED               = 0x0070;
+DEFINES.NV_ITEM_ID.USERDESC                  = 0x0081;
+DEFINES.NV_ITEM_ID.NWKKEY                    = 0x0082;
+DEFINES.NV_ITEM_ID.PANID                     = 0x0083;
+DEFINES.NV_ITEM_ID.CHANLIST                  = 0x0084;
+DEFINES.NV_ITEM_ID.LEAVE_CTRL                = 0x0085;
+DEFINES.NV_ITEM_ID.SCAN_DURATION             = 0x0086;
+DEFINES.NV_ITEM_ID.LOGICAL_TYPE              = 0x0087;
+DEFINES.NV_ITEM_ID.NWKMGR_MIN_TX             = 0x0088;
+DEFINES.NV_ITEM_ID.NWKMGR_ADDR               = 0x0089;
+DEFINES.NV_ITEM_ID.ZDO_DIRECT_CB             = 0x008F;
+DEFINES.NV_ITEM_ID.SCENE_TABLE               = 0x0091;
+DEFINES.NV_ITEM_ID.MIN_FREE_NWK_ADDR         = 0x0092;
+DEFINES.NV_ITEM_ID.MAX_FREE_NWK_ADDR         = 0x0093;
+DEFINES.NV_ITEM_ID.MIN_FREE_GRP_ID           = 0x0094;
+DEFINES.NV_ITEM_ID.MAX_FREE_GRP_ID           = 0x0095;
+DEFINES.NV_ITEM_ID.MIN_GRP_IDS               = 0x0096;
+DEFINES.NV_ITEM_ID.MAX_GRP_IDS               = 0x0097;
+DEFINES.NV_ITEM_ID.SAPI_ENDPOINT             = 0x00A1;
+DEFINES.NV_ITEM_ID.SAS_SHORT_ADDR            = 0x00B1;
+DEFINES.NV_ITEM_ID.SAS_EXT_PANID             = 0x00B2;
+DEFINES.NV_ITEM_ID.SAS_PANID                 = 0x00B3;
+DEFINES.NV_ITEM_ID.SAS_CHANNEL_MASK          = 0x00B4;
+DEFINES.NV_ITEM_ID.SAS_PROTOCOL_VER          = 0x00B5;
+DEFINES.NV_ITEM_ID.SAS_STACK_PROFILE         = 0x00B6;
+DEFINES.NV_ITEM_ID.SAS_STARTUP_CTRL          = 0x00B7;
+DEFINES.NV_ITEM_ID.SAS_TC_ADDR               = 0x00C1;
+DEFINES.NV_ITEM_ID.SAS_TC_MASTER_KEY         = 0x00C2;
+DEFINES.NV_ITEM_ID.SAS_NWK_KEY               = 0x00C3;
+DEFINES.NV_ITEM_ID.SAS_USE_INSEC_JOIN        = 0x00C4;
+DEFINES.NV_ITEM_ID.SAS_PRECFG_LINK_KEY       = 0x00C5;
+DEFINES.NV_ITEM_ID.SAS_NWK_KEY_SEQ_NUM       = 0x00C6;
+DEFINES.NV_ITEM_ID.SAS_NWK_KEY_TYPE          = 0x00C7;
+DEFINES.NV_ITEM_ID.SAS_NWK_MGR_ADDR          = 0x00C8;
+DEFINES.NV_ITEM_ID.SAS_CURR_TC_MASTER_KEY    = 0x00D1;
+DEFINES.NV_ITEM_ID.SAS_CURR_NWK_KEY          = 0x00D2;
+DEFINES.NV_ITEM_ID.SAS_CURR_PRECFG_LINK_KEY  = 0x00D3;
+DEFINES.NV_ITEM_ID.TCLK_TABLE_START          = 0x0101;
+DEFINES.NV_ITEM_ID.TCLK_TABLE_END            = 0x01FF;
+DEFINES.NV_ITEM_ID.APS_LINK_KEY_DATA_START   = 0x0201;
+DEFINES.NV_ITEM_ID.APS_LINK_KEY_DATA_END     = 0x02FF;
+DEFINES.NV_ITEM_ID.MASTER_KEY_DATA_START     = 0x0301;
+DEFINES.NV_ITEM_ID.MASTER_KEY_DATA_END       = 0x03FF;
+
+module.exports = {
+	DEFINES: DEFINES
+};
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

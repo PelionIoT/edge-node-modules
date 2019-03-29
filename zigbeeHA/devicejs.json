@@ -1,0 +1,40 @@
+{
+    "name": "zigbeeHA",
+    "version": "0.0.1",
+    "description": "zigbee HA module",
+    "author": {
+        "name": "WigWag",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "devjs-configurator": "https://github.com/WigWagCo/devjs-configurator#devicejs2.0-compatibility",
+        "node-znp": "git+ssh://git@github.com:WigWagCo/node-znp.git#master",
+        "jsonminify" : "^0.2.3",
+        "es6-promise": "^3.0.2",
+        "mkdirp": "^0.5.1",
+        "promise": "^7.0.4",
+        "handlebars": "4.0.5",
+        "colors": "1.1.2",
+        "underscore": "*"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [
+            "./ZigbeeHAInterface.json",
+            "./controllers/devicePairer/device-pairer-interface.json",
+            "./controllers/monitor/zigbeeHA-monitor-interface.json"
+        ],
+        "resourceTypes": [
+            "./ZigbeeHAResource.json",
+            "./controllers/devicePairer/device-pairer-resource.json",
+            "./controllers/monitor/zigbeeHA-monitor-resource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

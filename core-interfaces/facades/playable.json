@@ -1,0 +1,32 @@
+{
+    "name": "Facades/Playable",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "paused": {
+            "readOnly": false,
+            "schema": { "type": "boolean" }
+        },
+        "track": {
+            "readOnly": false,
+            "schema": { "type": "string" }
+        },
+        "volume": {
+            "readOnly": false,
+            "schema": { 
+                "type": "number",
+                "maximum": 100,
+                "minimum": 0
+            }
+        },
+        "seek": {
+            "readOnly": true,
+            "schema": { "type": "number" }
+        },
+        "next": {
+            "readOnly": true,
+            "schema": { "type": "boolean" }
+        }
+    },
+    "events": { }
+}

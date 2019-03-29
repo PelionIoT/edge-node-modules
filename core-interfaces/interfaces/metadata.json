@@ -1,0 +1,14 @@
+{
+    "name": "Core/Interfaces/Metadata",
+    "version": "0.0.1",
+    "commands": { 
+        "metadata": {
+            "arguments": [ ],
+            "returns": { "type": "string" }
+        }
+    },
+    "state": {
+    },
+    "events": {
+    }
+}

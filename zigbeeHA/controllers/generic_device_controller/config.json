@@ -1,0 +1,5 @@
+{
+    "name": "Core/Devices/Lighting/AutogenZigbeeHA/",
+    "version": "0.0.1",
+    "interfaces": [ "Core/Interfaces/Metadata" ]
+}

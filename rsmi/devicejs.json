@@ -1,0 +1,32 @@
+{
+    "name": "rsmi",
+    "version": "0.0.1",
+    "description": "Radio Status Monitoring Interface",
+    "author": {
+        "name": "Yash Goyal",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "bonjour": "^3.5.0",
+        "chalk": "^2.1.0",
+        "mkdirp": "^0.5.1",
+        "jsonminify" : "^0.2.3",
+        "es6-promise": "^3.0.2",
+        "node-znp": "git+ssh://git@github.com:WigWagCo/node-znp.git#master",
+        "commander": "2.9.0"
+    },
+    "devDependencies": {},
+    "devicejs": {
+        "interfaces": [ 
+        ],
+        "resourceTypes": [ 
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

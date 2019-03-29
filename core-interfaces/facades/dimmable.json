@@ -1,0 +1,16 @@
+{
+    "name": "Facades/Dimmable",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "brightness": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Core/Interfaces/hasDeviceLabel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "deviceLabel": {
+            "readOnly": true,
+            "schema": {
+                "type": "string"
+            }
+        }
+    },
+    "events": { }
+}

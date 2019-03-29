@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/znpcontroller.js - ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ZigBeeDeviceController.html">ZigBeeDeviceController</a></li>
+                                <li><a href="../classes/ZigbeeDriver.html">ZigbeeDriver</a></li>
+                                <li><a href="../classes/ZNPController.html">ZNPController</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: src/znpcontroller.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var ZNP = require(&#x27;node-znp&#x27;);
+var Multiplexer = require(&#x27;./multiplexer&#x27;).Multiplexer;
+var EventEmitter = require(&#x27;events&#x27;).EventEmitter;
+var Promise = require(&#x27;es6-promise&#x27;).Promise;
+var DEFINES = require(&#x27;./../lib/defs&#x27;).DEFINES;
+var BasicCluster = require(&#x27;./../cluster_classes/basic&#x27;);
+var Logger = require(&#x27;./../utils/logger&#x27;);
+var handleBars = require(&#x27;handlebars&#x27;);
+
+var logger = new Logger( { moduleName: &#x27;ZNPController&#x27;, color: &#x27;magenta&#x27;} );
+
+/*
+ * Default options
+ */
+var _options = {
+	siodev: &quot;/dev/ttyUSB0&quot;,
+	devType: 0x00,
+	newNwk: false,
+	channelMask: 0x800,
+	baudRate: 115200,
+	panIdSelection: &quot;randomInRange&quot;,
+	panId: 65535
+};
+
+var zclWorkStatus = {
+	0x00: &#x27;SUCCESS&#x27;,
+	0x01: &#x27;FAILED&#x27;,
+	0x02: &#x27;INVALID_PARAMETER&#x27;,
+	0x10: &#x27;MEM_FAIL&#x27;,
+	0xCD: &#x27;NO_ROUTE&#x27;,
+	0xB8: &#x27;DUPLICATE&#x27;
+};
+
+var basicClusterAttributeId = {
+	0x0000: &#x27;ZCLVersion&#x27;,
+	0x0001: &#x27;ApplicationVersion&#x27;,
+	0x0002: &#x27;StackVersion&#x27;,
+	0x0003: &#x27;HWVersion&#x27;,
+	0x0004: &#x27;ManufacturerName&#x27;,
+	0x0005: &#x27;ModelIdentifier&#x27;,
+	0x0006: &#x27;DateCode&#x27;,
+	0x0007: &#x27;PowerSource&#x27;
+};
+
+/**
+* ZigBee Network Processor (ZNP) controller
+*
+* @class ZNPController
+* @constructor
+* @param {Object} config options required to setup zigbee mesh network
+*/
+var ZNPController = function(options) {
+	this.configuration = options || {};
+	/**
+	 * Device Type- 0=Coordinator, 1=Router, 2=End device
+	 *
+	 * @property devType
+	 * @type Number
+	 * @default 0
+	 */
+	this.configuration.devType = options.devType || _options.devType;
+
+	/**
+	 * New or restore network- true=New, false=Restore
+	 *
+	 * @property newNwk
+	 * @type Boolen
+	 * @default false
+	 */
+	this.configuration.newNwk = options.newNwk || _options.newNwk;
+
+	/**
+	 * ZigBee Channel
+	 *
+	 * @property devType
+	 * @type Number
+	 * @default 25
+	 */
+	this.configuration.channelMask = options.channelMask || _options.channelMask;
+
+	/**
+	 * Baud Rate
+	 *
+	 * @property baudRate
+	 * @type Number
+	 * @default 115200
+	 */
+	this.configuration.baudRate = options.baudRate || _options.baudRate;
+
+	/**
+	 * PAN ID selection scheme
+	 *
+	 * @property panIdSelection
+	 * @type String
+	 * @default &quot;randomInRange&quot;
+	 */
+	if(typeof options.panIdSelection !== &#x27;undefined&#x27;) {
+		if(options.panIdSelection == &#x27;random&#x27;) {
+			this.configuration.panId = Math.ceil(Math.random() * 65500);
+		} else if (options.panIdSelection == &#x27;fixed&#x27;) {
+			this.configuration.panId = options.panId || _options.panId;
+		} else if (options.panIdSelection == &#x27;randomInRange&#x27;) {
+			this.configuration.panId = Math.ceil(Math.random() * 100);
+		} else {
+			this.configuration.panId = Math.ceil(Math.random() * 65500);
+		}
+	} else {
+		this.configuration.panId = Math.ceil(Math.random() * 65500);
+	}
+	logger.info(&#x27;Starting ZNP controller with panid - &#x27; + this.configuration.panId);
+
+	/**
+	 * Serial I/O port
+	 *
+	 * @property siodev
+	 * @type String
+	 * @default &quot;/dev/ttyUSB0&quot;
+	 */
+	this.siodev = options.siodev || _options.siodev;
+	this.zclWorkResponseQueue = {};
+	this.zclThrottleRequest = [];
+	this.throttleInterval;
+	this._enablePeriodicRefresh = false;
+
+	/**
+	 * Throttle rate
+	 *
+	 * @property throttleRate
+	 * @type Number
+	 * @default 100ms
+	 */
+	this.throttleRate = 100;
+	this.nodes = {};
+	this.state = false;
+	this._seqId = 0;
+	this.topology = {};
+	this.networkRefreshInterval;
+	this.identificationInProgress = false;
+	this.identificationQueue = {};
+};
+
+ZNPController.prototype = Object.create(EventEmitter.prototype);
+
+/**
+ * Start ZNP node module and event listeners
+ *
+ * @method start
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.start = function() {
+	var self = this;
+
+	return new Promise(function(resolve, reject) {
+		self.znp = new ZNP(self.siodev, self.configuration);
+
+		var znp = self.znp = self.znp.znp;
+
+		var neverStartedTimer = setTimeout(function() {
+			logger.error(&#x27;ZNP controller never got network ready event, try restarting...&#x27;);
+			reject(&#x27;Network ready timed out&#x27;);
+		}, 60000);
+
+		znp.onNetworkReady(function() {
+			self.throttleWorkRequest();
+			clearTimeout(neverStartedTimer);
+			resolve();
+		});
+
+		znp.onNetworkFailed(function() {
+			clearTimeout(neverStartedTimer);
+			reject(&#x27;Network failed&#x27;);
+		});
+
+		znp.onNodeDiscovered(function(nodeInfo, IEEEAddr, inClusterList, outClusterList) {
+
+			function identifyNode(nodeId, nodeInfo) {
+			 	logger.info(&#x27;Node discovered &#x27; + nodeInfo.nwkAddr);
+		        if(nodeInfo.profileID == 0xC05E || nodeInfo.profileID == 0x0104) {
+                    self.emit(&#x27;pairingProgressEvent&#x27;, DEFINES.PAIRING_STAGE.GET_MANUFACTURER_INFO);
+		           	self.identifyDiscoveredNode(nodeId, nodeInfo);
+				}
+			}
+
+			if(nodeInfo.nwkAddr != 0) {
+				logger.info(&#x27;Discovered new node &#x27; + nodeInfo.nwkAddr);
+				ddb.local.get(&#x27;zigbeeHA:devices.&#x27; + nodeInfo.nwkAddr).then(function(nodeinfo) {
+
+					if(nodeinfo == null || nodeinfo.siblings.length == 0) {
+						throw new Error(&#x27;Not in the database&#x27;);
+					}
+					var nodeMetadata = JSON.parse(nodeinfo.siblings[0]);
+
+					self.nodes[nodeInfo.nwkAddr] = nodeMetadata;
+					self.nodes[nodeInfo.nwkAddr][&#x27;life&#x27;] = &#x27;alive&#x27;;
+					/**
+					* Fired when a device is online
+					*
+					* @event reachable + nwkAddr
+					* @param {Boolean} value true if device is online, false otherwise
+					*/
+					self.emit(&#x27;reachable &#x27; + nodeInfo.nwkAddr.toString(), true);
+					logger.info(&#x27;Found the device in the database...&#x27; + JSON.stringify(self.nodes[nodeInfo.nwkAddr]));
+					//If pairing not complete then 
+					if(!self.nodes[nodeInfo.nwkAddr].deviceControllerCreated) {
+						logger.info(&#x27;Device controller was not created on &#x27; + nodeInfo.nwkAddr.toString() + &#x27; so trying again!&#x27;);
+						identifyNode(nodeInfo.nwkAddr, self.nodes[nodeInfo.nwkAddr]);
+					}
+				}).then(function() {
+				}, function(error) {
+					logger.info(&#x27;New node &#x27; + nodeInfo.nwkAddr.toString(16) + &#x27; NOT found in the database, adding it...&#x27;);
+					try {
+						if(typeof self.nodes[nodeInfo.nwkAddr] === &#x27;undefined&#x27; || self.nodes[nodeInfo.nwkAddr].endpoint === nodeInfo.endpoint) {
+							self.nodes[nodeInfo.nwkAddr] = nodeInfo;
+							self.nodes[nodeInfo.nwkAddr][&#x27;IEEEAddr&#x27;] = IEEEAddr;
+							var inclusterTemp = new Buffer(inClusterList);
+							var outclusterTemp = new Buffer(outClusterList);
+
+							if(typeof self.nodes[nodeInfo.nwkAddr][&#x27;inClusterList&#x27;] === &#x27;undefined&#x27;) {
+								self.nodes[nodeInfo.nwkAddr][&#x27;inClusterList&#x27;] = [];
+							}
+							for(var i = 0; i &lt; nodeInfo.numInClusters; i++) {
+								self.nodes[nodeInfo.nwkAddr][&#x27;inClusterList&#x27;].push(inclusterTemp.readUInt16LE(i*2));
+							}
+
+
+							if(typeof self.nodes[nodeInfo.nwkAddr][&#x27;outClusterList&#x27;] === &#x27;undefined&#x27;) {
+								self.nodes[nodeInfo.nwkAddr][&#x27;outClusterList&#x27;] = [];
+							}
+							for(var i = 0; i &lt; nodeInfo.numOutClusters; i++) {
+								self.nodes[nodeInfo.nwkAddr][&#x27;outClusterList&#x27;].push(outclusterTemp.readUInt16LE(i*2));
+							}
+							/**
+							* When new device is discovered, notify other resources
+							*
+							* @event pairingProgressEvent
+							* @param {Number} progressId onboarding progress percentage
+							*/
+							self.emit(&#x27;pairingProgressEvent&#x27;, DEFINES.PAIRING_STAGE.FOUND_DEVICE);
+
+							/**
+							* Notify manager to inspect the metadata and start controller
+							*
+							* @event node discovered
+							* @param {Number} nwkAddr network address of the device
+							* @param {Object} metadata node info of the device
+							*/
+							identifyNode(nodeInfo.nwkAddr, self.nodes[nodeInfo.nwkAddr]);
+							// var nodeInfo = self.nodes[nodeInfo.nwkAddr];
+						 // 	logger.info(&#x27;Node discovered &#x27; + nodeInfo.nwkAddr);
+					  //       if(nodeInfo.profileID == 0xC05E || nodeInfo.profileID == 0x0104) {
+			    //                 self.emit(&#x27;pairingProgressEvent&#x27;, DEFINES.PAIRING_STAGE.GET_MANUFACTURER_INFO);
+					  //          	self.identifyDiscoveredNode(nodeId, nodeInfo);
+							// }
+							// self.emit(&#x27;node discovered&#x27;, nodeInfo.nwkAddr);
+						} else {
+							logger.warn(&#x27;New node, new endpoint discovered. Not yet implemented.&#x27;);
+						}
+						self.nodes[nodeInfo.nwkAddr][&#x27;life&#x27;] = &#x27;alive&#x27;;
+						self.emit(&#x27;reachable &#x27; + nodeInfo.nwkAddr.toString(), true);
+					} catch (e) {
+						logger.error(&quot;onNodeDiscovered Error: &quot; + JSON.stringify(e));
+					}
+
+				});
+			}
+		});
+
+		znp.onCmdResponse(function(status, seqId) {
+			logger.debug(&#x27;Command response status- &#x27;+ status + &#x27; for command sequence &#x27;+ seqId);
+			if(typeof self.zclWorkResponseQueue[parseInt(seqId)] != &#x27;undefined&#x27;) {
+				self.zclWorkResponseQueue[seqId][&#x27;status&#x27;] = status;
+
+				/**
+				* Fired when receive command response from the device
+				*
+				*	MT_RPC_SUCCESS = 0,         success
+				*	MT_RPC_ERR_SUBSYSTEM = 1,   invalid subsystem
+				*	MT_RPC_ERR_COMMAND_ID = 2,  invalid command ID
+				*	MT_RPC_ERR_PARAMETER = 3,   invalid parameter
+				*	MT_RPC_ERR_LENGTH = 4       invalid length
+				*
+				* @event message + nwkAddr
+				* @param {Object} response command response
+				*/
+				self.emit(&#x27;message &#x27; + self.zclWorkResponseQueue[seqId][&#x27;dstAddr&#x27;], self.zclWorkResponseQueue[seqId]);
+				delete self.zclWorkResponseQueue[seqId];
+
+				//delete the previous work responses
+				Object.keys(self.zclWorkResponseQueue).forEach(function(seqNo) {
+					if(seqNo &lt;= seqId) {
+						if(typeof self.zclWorkResponseQueue[seqNo] !== &#x27;undefined&#x27;) {
+							if(typeof self.zclWorkResponseQueue[seqNo][&#x27;status&#x27;] == &#x27;undefined&#x27;) {
+								logger.debug(&#x27;deleting work response for seqid- &#x27;+ seqNo);
+								delete self.zclWorkResponseQueue[seqNo];
+							}
+						}
+					}
+				});
+			} else {
+				logger.error(&#x27;Got nontracking seqnumber response: &#x27; + seqId);
+			}
+		});
+
+		znp.onAttrResponse(function(info, payload, seqId) {
+			logger.trace(&#x27;Got Attribute response from &#x27;+ JSON.stringify(info));
+			logger.trace(&#x27;onAttrResponse with payload: &#x27; + JSON.stringify(payload));
+
+			info[&#x27;payload&#x27;] = self.parseAttrResponse(payload);
+
+			/**
+			* Fired when receive attribute response from the device
+			*
+			* @event attrResponse + nwkAddr
+			* @param {Object} response attribute response
+			*/
+			self.emit(&#x27;attrResponse &#x27; + info.srcAddr.toString(), info);
+		});
+
+		znp.onNetworkTopology(function(nodeTopology) {
+			var nodeAddr = nodeTopology.readUInt16LE(0);
+			if(typeof self.topology[nodeAddr] === &#x27;undefined&#x27;) {
+				self.topology[nodeAddr] = {};
+			}
+
+			self.topology[nodeAddr].type = DEFINES.DEVICETYPE[nodeTopology.readUInt8(2)];
+			self.topology[nodeAddr].childCount = nodeTopology.readUInt8(3);
+			if(self.topology[nodeAddr].childCount &gt; 0) {
+				if(typeof self.topology[nodeAddr].children === &#x27;undefined&#x27;) {
+					self.topology[nodeAddr].children = {};
+				}
+				for(var i = 1; i &lt;= self.topology[nodeAddr].childCount; i++) {
+					var childAddr = nodeTopology.readUInt16LE(i*4);
+					self.topology[nodeAddr].children[childAddr] = {};
+					self.topology[nodeAddr].children[childAddr].type = DEFINES.DEVICETYPE[nodeTopology.readUInt8((i*4) + 2)];
+					self.topology[nodeAddr].children[childAddr].lqi = nodeTopology.readUInt8((i*4) + 3);
+
+					if(typeof self.nodes[childAddr] !== &#x27;undefined&#x27;) {
+						self.nodes[childAddr].macAddr = nodeTopology.readUIntLE((i*4) + 4, 8).toString(16);
+						// logger.info(&#x27;Got mac address &#x27; + self.nodes[childAddr].macAddr);
+					}
+				}
+			}
+			logger.debug(&#x27;node update- &#x27; + nodeAddr + &#x27; Network topology- &#x27; + JSON.stringify(self.topology));
+			if(typeof self.nodes[nodeAddr] !== &#x27;undefined&#x27;) {
+				logger.info(&#x27;node- &#x27; + nodeAddr + &#x27; is alive&#x27;);
+				self.nodes[nodeAddr].life = &#x27;alive&#x27;;
+				self.topology[nodeAddr].status = self.nodes[nodeAddr].life;
+				self.topology[nodeAddr].name = self.nodes[nodeAddr].resourceID;
+				self.emit(&#x27;reachable &#x27; + nodeAddr.toString(), true);
+			}
+		});
+
+		znp.onDeviceJoinedNetwork(function(buf) {
+			logger.trace(&#x27;New device joined network - &#x27; + JSON.stringify(buf));
+			if(typeof buf.srcAddr !== &#x27;undefined&#x27;) {
+				if(typeof self.nodes[buf.srcAddr] !== &#x27;undefined&#x27;) {
+					logger.info(&#x27;New device joined network - &#x27; + buf.srcAddr);
+					self.nodes[buf.srcAddr].life = &#x27;alive&#x27;;
+					self.emit(&#x27;reachable &#x27; + buf.srcAddr.toString(), true);
+				} else {
+					logger.warn(&#x27;Discovered device which is not in the database - &#x27; + JSON.stringify(buf));
+				}
+			}
+		});
+	});
+};
+
+function startPermitDisconnectTimer(self, duration) {
+	var permitTimer = setTimeout(function() {
+		logger.info(&#x27;Turning off permit join&#x27;);
+		self.addDevice(0); // 0 - turn off the permit mode
+		clearTimeout(permitTimer);
+	}, duration * 1000);
+}
+
+/**
+ * Send LQI request to all the known devices and accordingly report their reachability on response
+ *
+ * @method requestNetworkTopology
+ */
+ZNPController.prototype.requestNetworkTopology = function() {
+	var self = this;
+	if(this._enablePeriodicRefresh) {
+		var lqiRequstTimer;
+		var nodesNum = Object.keys(self.nodes).length;
+		var topologyThrottleTimer = setInterval(function() {
+			if(nodesNum &gt; 0) {
+				var addr = Object.keys(self.nodes)[nodesNum - 1];
+				//To avoid false &#x27;dead&#x27; readings, only declare dead after 3 consecutive rejects
+				if(self.nodes[addr].life === &#x27;alive&#x27;) {
+					self.nodes[addr].lifeLine = 3;
+				}
+				self.nodes[addr].life = &#x27;may be dead&#x27;;
+				self.sendLqiRequest(addr).then(function() {
+					logger.debug(&#x27;LQI Request succesful for addr &#x27; + dstAddr);
+				}, function(err) {
+					logger.error(&#x27;Periodic lqi request failed destination &#x27; + addr + &#x27; lifeline left &#x27; + self.nodes[addr].lifeLine);
+					// clearTimeout(lqiRequstTimer);
+					// if(self.nodes[addr].life == &#x27;may be dead&#x27;) {
+						// self.nodes[addr].life = &#x27;alive&#x27;;
+						// self.emit(&#x27;reachable &#x27; + addr.toString(), true);
+					// }
+				});
+				nodesNum--;
+			} else {
+				clearInterval(topologyThrottleTimer);
+			}
+		}, 150);
+
+		lqiRequstTimer = setTimeout(function() {
+			Object.keys(self.nodes).forEach(function(addr) {
+				if(self.nodes[addr].life === &#x27;may be dead&#x27;) {
+					if(self.nodes[addr].lifeLine-- &lt;= 0) {
+						self.nodes[addr].lifeLine = 0;
+						self.nodes[addr].life = &#x27;dead&#x27;;
+						self.emit(&#x27;reachable &#x27; + addr.toString(), false);
+						logger.info(&#x27;Node &#x27; + addr + &#x27; is dead&#x27;);
+					}
+				}
+			});
+		}, 8000);
+	}
+};
+
+/**
+ * Start periodic network all-link estimation
+ *
+ * @method startPeriodicNetworkRefresh
+ * @param {Number} duration 0 indicate no network refresh (all-link estimation), otherwise minimum 30 seconds
+ */
+ZNPController.prototype.startPeriodicNetworkRefresh = function(duration) {
+	var self = this;
+	self._enablePeriodicRefresh = true;
+	clearInterval(self.networkRefreshInterval);
+	self.networkRefreshInterval = setInterval(function() {
+		logger.info(&#x27;Periodic network refresh, sending link quality request&#x27;);
+		self.requestNetworkTopology();
+	}, duration)
+}
+
+/**
+ * Stop periodic network all-link estimation
+ *
+ * @method stopNetworkRefresh
+ */
+ZNPController.prototype.stopNetworkRefresh = function() {
+	this._enablePeriodicRefresh = false;
+	clearInterval(this.networkRefreshInterval);
+}
+
+/**
+ * Enable permit join (commissioning) for specified duration
+ *
+ * @method addDevice
+ * @param {Number} duration commissioning duration
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.addDevice = function(duration) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.addDevice(duration, function() {
+			logger.info(&#x27;Permit join successful, opening device for duration &#x27;+ duration);
+			if(duration &gt; 0) {
+            	self.emit(&#x27;pairingProgressEvent&#x27;, DEFINES.PAIRING_STAGE.SEARCHING);
+				startPermitDisconnectTimer(self, duration);
+			}
+			resolve();
+		}, function() {
+            self.emit(&#x27;pairingProgressEvent&#x27;, DEFINES.PAIRING_STAGE.PERMIT_FAILED);//progress negative means failed, abort and try again
+			logger.error(&#x27;Permit join call failed&#x27;);
+			reject();
+		});
+	});
+};
+
+/**
+ * Call this after start, this instantiate serial communication interface
+ *
+ * @method connect
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.connect = function() {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.connect(self.siodev, function(buf) {
+			if(buf == true) {
+				resolve();
+			} else {
+				reject();
+			}
+		});
+	});
+};
+
+/**
+ * Disconnect serial communication interface
+ *
+ * @method disconnect
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.disconnect = function() {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.disconnect(function() {
+            self.setState(false);
+			logger.info(&#x27;ZNP Disconnected successfully&#x27;);
+		}, function() {
+			logger.error(&#x27;ZNP Unable to disconnect&#x27;);
+		});
+	});
+};
+
+/**
+ * Generate random pan id
+ *
+ * @method generateNewPanId
+ * @return {Number} random number ranging 0-65500
+ */
+ZNPController.prototype.generateNewPanId = function() {
+	return Math.ceil(Math.random() * 65500);
+}
+
+/**
+ * Set log level
+ *
+ * @method logLevel
+ * @return {Number} level info- 2, debug- 3, trace- 4, error- 0, warn- 1
+ */
+ZNPController.prototype.logLevel = function(level) {
+	if(typeof level === &#x27;number&#x27; &amp;&amp; level &gt;= 0) {
+		global.GLOBAL.ZigbeeLogLevel = level;
+	}
+}
+
+/**
+ * Represents the running state of the znp controller
+ *
+ * @method setState
+ * @param {Boolean} state true=setup successful, false=otherwise
+ */
+ZNPController.prototype.setState = function(s) {
+	this.state = s;
+}
+
+/**
+ * Get current state of the znp controller
+ *
+ * @method getState
+ * @return {Boolean} true=setup successful, false=otherwise
+ */
+ZNPController.prototype.getState = function() {
+	return this.state;
+}
+
+/**
+ * Used by multiplexer module to tag the commands from different device controllers
+ *
+ * @method getNextSeqId
+ * @return {Number} sequential number, range 0-255
+ */
+ZNPController.prototype.getNextSeqId = function() {
+	return (this._seqId++ &amp; 0xFF);
+}
+
+/**
+ * Return the config options with which zigbee network is setup
+ *
+ * @method getConfigOptions
+ * @return {Object} config options
+ */
+ZNPController.prototype.getConfigOptions = function() {
+	return this.configuration;
+}
+
+/**
+ * Start the throttler at throttle rate specified during instantiation
+ *
+ * @method throttleWorkRequest
+ */
+ZNPController.prototype.throttleWorkRequest = function() {
+	var self = this;
+	self.throttleInterval = setInterval(function() {
+		var buf = self.zclThrottleRequest.shift();
+		if(buf) {
+			self.znp.doZCLWork(buf, buf.cmdFormat, function (status) {
+				// logger.info(&#x27;Got zcl work status- &#x27;+ zclWorkStatus[status] + &#x27; for node &#x27;+ JSON.stringify(buf[&#x27;dstAddr&#x27;]));
+				buf.promise.resolve(status);
+			});
+		}
+	}, self.throttleRate);
+}
+
+/**
+ * Helps modulate the throttle rate on fly
+ *
+ * @method newThrottleRate
+ * @param {Number} rate new throttle rate in ms
+ */
+ZNPController.prototype.newThrottleRate = function(rate) {
+	clearInterval(this.throttleInterval);
+	this.throttleRate = rate;
+	logger.info(&#x27;Using throttleRate- &#x27;+ this.throttleRate);
+	this.throttleWorkRequest();
+}
+
+/**
+ * Push work request to queue and inform throttler
+ *
+ * @method zclWork
+ * @param {Object} buffer work request
+ * @param {Number} msgId unique message id to track commands to devices
+ * @param {Number} retries number of retries left
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.zclWork = function(buffer, msgId, retries) {
+	var self = this;
+	var seqNo = buffer[&#x27;seqNumber&#x27;];
+	return new Promise(function(resolve, reject) {
+		logger.debug(&#x27;Sending buffer &#x27; + JSON.stringify(buffer) + &#x27; with seqno &#x27;+ seqNo);
+
+		if(typeof self.zclWorkResponseQueue[seqNo] == &#x27;undefined&#x27;) {
+			self.zclWorkResponseQueue[seqNo] = {};
+		}
+
+		self.zclWorkResponseQueue[seqNo] = {
+			&#x27;msgId&#x27;: msgId,
+			&#x27;dstAddr&#x27;: buffer[&#x27;dstAddr&#x27;],
+			&#x27;retries&#x27;: retries
+		}
+
+		logger.debug(&#x27;Adding to work request queue &#x27;+  JSON.stringify(self.zclWorkResponseQueue[seqNo]));
+
+		buffer[&#x27;promise&#x27;] = {resolve: resolve, reject: reject};
+		self.zclThrottleRequest.push(buffer);
+	});
+};
+
+/**
+ * IMPORTANT!! Universal parser to any attribute response of any data type.
+ *
+ * More Info: Refer latest Zigbee Cluster Library- Data Types section.
+ *
+ * @method parseAttrResponse
+ * @param {Object} response attribute response received from the device
+ * @return {Object} parsed response based on the data type
+ */
+ZNPController.prototype.parseAttrResponse = function(data) {
+	var response = new Buffer(data);
+	var buf = {};
+	try {
+		buf[&#x27;attrId&#x27;] = response.readUInt16LE(0);
+		buf[&#x27;status&#x27;] = response.readUInt8(2);
+		buf[&#x27;statusCode&#x27;] = DEFINES.STATUS[buf[&#x27;status&#x27;]];
+		if(buf[&#x27;status&#x27;] == 0x00) { //success
+			buf[&#x27;dataType&#x27;] = response.readUInt8(3);
+			if(typeof DEFINES.DATA_TYPE[buf[&#x27;dataType&#x27;]] !== &#x27;undefined&#x27;) {
+				//Datatype handler
+				var dt = DEFINES.DATA_TYPE[buf[&#x27;dataType&#x27;]];
+				buf[&#x27;type&#x27;] = dt.type;
+				if(typeof dt.len !== &#x27;undefined&#x27;) {
+					if(typeof dt.len === &#x27;number&#x27;) {
+						buf[&#x27;value&#x27;] = response.readIntLE(4, dt.len);
+					} else if(typeof dt.len === &#x27;string&#x27;) {
+						if(dt.len == &#x27;1&#x27;) {
+							var len = response.readUInt8(4);
+							buf[&#x27;value&#x27;] = response.slice(5).toString(&#x27;ascii&#x27;).trim();
+						} else if(dt.len == &#x27;2&#x27;) {
+							var len = response.readUInt16LE(4);
+							buf[&#x27;value&#x27;] = response.slice(6).toString(&#x27;ascii&#x27;).trim();
+						} else if(dt.len == &#x27;2+&#x27;) {
+							buf[&#x27;value&#x27;] = response.slice(4);
+						} else {
+							buf[&#x27;error&#x27;] = &#x27;UNHANDLED LENGTH VALUE- &#x27; + dt.len;
+						}
+					} else {
+						buf[&#x27;error&#x27;] = &#x27;UNHANDLED LENGTH TYPE- &#x27; + (typeof dt.len);
+					}
+				} else {
+					//length not defined
+					buf[&#x27;value&#x27;] = response.slice(4);
+				}
+				if(typeof dt.invalidNumber !== &#x27;undefined&#x27;) {
+					if(buf[&#x27;value&#x27;] == dt.invalidNumber) {
+						buf[&#x27;error&#x27;] = &#x27;INVALID NUMBER&#x27;;
+					}
+				}
+			} else {
+				buf[&#x27;error&#x27;] = &#x27;UNKNOWN DATA TYPE&#x27;;
+			}
+		}
+	} catch(e) {
+		logger.error(&#x27;parseAttrResponse failed with error- &#x27; + JSON.stringify(e));
+		buf[&#x27;error&#x27;] = e;
+	}
+	return buf;
+}
+
+/**
+ * IMPORTANT!! Formats outgoing data to attribute data type
+ *
+ * @method formatWriteAttrData
+ * @param {Number} data outgoing data need formatting
+ * @param {String} type data type of outgoing data
+ * @return {Number} formattedData data formatted on input data type
+ */
+ZNPController.prototype.formatWriteAttrData = function(data, type) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		try {
+			var dataType = DEFINES.DATA_TYPE[self.getDataType(type)];
+			if(typeof dataType.len == &#x27;number&#x27;) {
+				var buf = new Buffer(dataType.len);
+				if(dataType.type.indexOf(&#x27;UINT&#x27;) &gt; -1) { //unsigned integer
+					buf.writeUIntLE(data, 0, dataType.len);
+				} else { //signed integer
+					buf.writeIntLE(data, 0, dataType.len);
+				}
+				resolve(buf);
+			} else {
+				// logger.error(&#x27;Not yet supported string len data type&#x27;);
+				reject(new Error(&#x27;Not yet supported string len data type&#x27;))
+			}
+		} catch(e) {
+			logger.error(&#x27;formatWriteAttrData failed with error- &#x27; + JSON.stringify(e));
+			reject(e);
+		}
+	});
+}
+
+
+ZNPController.prototype.getDataType = function(type) {
+	for(var i = 0; i &lt; Object.keys(DEFINES.DATA_TYPE).length; i++) {
+		if(DEFINES.DATA_TYPE[Object.keys(DEFINES.DATA_TYPE)[i]].type == type) {
+			return Object.keys(DEFINES.DATA_TYPE)[i]/1;
+		}
+	}
+}
+
+
+/**
+ * Get basic cluster attributes, manufacturing information which lets us identify the device controller and facades
+ *
+ * @method identifyDiscoveredNode
+ * @param {Number} nwkAddr device network address
+ * @param {Object} metadata node info of the device
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.identifyDiscoveredNode = function(nodeId, nodeInfo) {
+    // query BASIC Cluster to get device information (signature)
+    logger.info(&#x27;Lets identify node &#x27;+ nodeInfo.nwkAddr.toString(16));
+    var self = this;
+    var attrId = 0;
+    var basicCluster;
+    var infoTimer;
+
+    if(self.identificationInProgress) {
+    	logger.warn(&#x27;Identification already in progress, deferring discovery for nodeId &#x27; + nodeId);
+    	self.identificationQueue[nodeId] = nodeInfo;
+    	return;
+    }
+
+    return new Promise(function(resolve, reject) {
+		startPermitDisconnectTimer(self, 1);
+
+		var multiplexer = new Multiplexer(self, nodeId);
+		multiplexer.start().then(function() {
+			return basicCluster = new BasicCluster({znpController: self, nodeId: nodeInfo.nwkAddr, endPoint: nodeInfo.endpoint, multiplexer: multiplexer});
+		}).then(function() {
+			basicCluster.removeAllListeners(&#x27;newNodeAttrResponse &#x27; + nodeId);
+			basicCluster.on(&#x27;newNodeAttrResponse &#x27; + nodeId, function(info) {
+				if(typeof self.nodes[info.srcAddr] != &#x27;undefined&#x27;) {
+					var respBuf = info.payload;
+					if(info.clusterId == DEFINES.CLUSTER_CLASS.GENERAL.BASIC) {
+						// logger.info(&quot;*********** ATTRIBUTE RESPONSE &quot; + JSON.stringify(respBuf) + &quot; **************&quot;);
+						if(respBuf[&#x27;status&#x27;] == 0x00) {
+							if(typeof basicClusterAttributeId[respBuf[&#x27;attrId&#x27;]] !== &#x27;undefined&#x27;)  {
+								if(typeof respBuf[&#x27;value&#x27;] !== &#x27;undefined&#x27;) {
+									self.nodes[info.srcAddr][basicClusterAttributeId[respBuf[&#x27;attrId&#x27;]]] = respBuf[&#x27;value&#x27;];
+									logger.info(&#x27;Response attribute &#x27; + basicClusterAttributeId[respBuf[&#x27;attrId&#x27;]] + &#x27; value- &#x27; + respBuf[&#x27;value&#x27;]);
+								} else {
+									logger.error(&#x27;Got attribute response but something went wrong- &#x27; + JSON.stringify(respBuf));
+								}
+							} else {
+								logger.warn(&#x27;Unhandled attribute &#x27;+ JSON.stringify(respBuf));
+							}
+						} else {
+							logger.warn(&#x27;Device do not support this attribute- &#x27; + JSON.stringify(respBuf));
+						}
+						callNextAttribute();
+					} else {
+						//based on the cluster Id report the data to its cluster class
+						logger.info(&#x27;Got data from cluster other than basic- &#x27;+ JSON.stringify(info));
+					}
+				} else {
+					logger.error(&#x27;In onAttrResponse, this should not have happened, critical error- &#x27;+ JSON.stringify(info));
+				}
+			});
+		}).then(function() {
+			self.identificationInProgress = true;
+			callNextAttribute();
+			clearTimeout(self.identificationInProgressTimer);
+			self.identificationInProgressTimer = setTimeout(function() {
+				self.identificationInProgress = false;
+			}, 30000);
+		});
+
+		function startStopWatch(id) {
+			infoTimer = setTimeout(function() {
+		  		//Above is not required because we are implementing generic controller
+				logger.warn(&#x27;Timed out, getting device attribute info for attribute- &#x27;+ id + &#x27; Continuing anyways...&#x27;);
+	    		callNextAttribute();
+			}, 5000);
+		}
+
+		function callNextAttribute() {
+			clearTimeout(infoTimer);
+	    	if(attrId &lt;= 7) {
+	    		logger.info(&#x27;Requesting attribute &#x27;+ attrId + &#x27; from node &#x27;+ nodeInfo.nwkAddr.toString(16));
+				basicCluster.get(attrId++).then(function() {
+					startStopWatch(attrId - 1);
+				}, function(err) {
+					self.identificationInProgress = false;
+					clearTimeout(self.identificationInProgressTimer);
+					if(Object.keys(self.identificationQueue).length &gt; 0) {
+						var nId = Object.keys(self.identificationQueue)[0];
+						logger.warn(&#x27;Continuing identification for device in queue &#x27; + nId);
+						self.identifyDiscoveredNode(nId, self.identificationQueue[nId]);
+						delete self.identificationQueue[nId];
+					}
+					logger.error(&#x27;Failure, basic cluster get failed at attribute- &#x27; + (attrId - 1) + &#x27; error- &#x27;+ JSON.stringify(err));
+				});
+	    	} else {
+	    		logger.info(&#x27;Node identification complete&#x27;);
+				delete basicCluster;
+				delete multiplexer;
+				self.identificationInProgress = false;
+				clearTimeout(self.identificationInProgressTimer);
+				if(Object.keys(self.identificationQueue).length &gt; 0) {
+					var nId = Object.keys(self.identificationQueue)[0];
+					logger.warn(&#x27;Continuing identification for device in queue &#x27; + nId);
+					self.identifyDiscoveredNode(nId, self.identificationQueue[nId]);
+					delete self.identificationQueue[nId];
+				}
+
+				/**
+				* Once manufacturing information is extracted from the device
+				*
+				* @event node identified
+				* @param {Number} nwkAddr network address of the device
+				* @param {Object} metadata updated metadata of the device
+				*/
+		    	self.emit(&#x27;node identified&#x27;, nodeInfo.nwkAddr, self.nodes[nodeInfo.nwkAddr]);
+		    	resolve();
+	    	}
+		}
+    });
+}
+
+/**
+ * Push work request to queue and inform throttler
+ *
+ * @method endDeviceAnnce
+ * @param {Object} buffer work request
+ * @param {Number} msgId unique message id to track commands to devices
+ * @param {Number} retries number of retries left
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.endDeviceAnnce = function(nodeInfo) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.endDeviceAnnce({srcAddr: nodeInfo.srcAddr, nwkAddr: nodeInfo.nwkAddr}, function() {
+			logger.info(&#x27;endDeviceAnnce successful&#x27;);
+			resolve();
+		}, function() {
+			logger.error(&#x27;endDeviceAnnce call failed&#x27;);
+			reject();
+		});
+	});
+}
+
+/**
+ * CAUTION!! This will delete the existing zigbee database
+ *
+ * @method deleteZigbeeDatabase
+ */
+ZNPController.prototype.deleteZigbeeDatabase = function() {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+    	Object.keys(self.nodes).forEach(function(id) {
+    		ddb.local.delete(&#x27;zigbeeHA:devices.&#x27; + id).then(function() {
+	            logger.info(&#x27;Deleted zigbee device &#x27; + id);
+	            delete self.nodes[id];
+	        }, function(e) {
+	            logger.error(&#x27;Could not delete device- &#x27; + JSON.stringify(e));
+	        });
+    	})
+
+        //Just precautionary, if not found in the database but registerd with devicejs
+        dev$.select(&#x27;id=*&#x27;).listResources().then(function(resources) {
+            Object.keys(resources).forEach(function(id) {
+                if(resources[id].type.indexOf(&#x27;Zigbee&#x27;) &gt; 0) {
+                    dev$.forgetResource(id).then(function() {
+                        logger.info(&#x27;Deleted resource- &#x27; + id + &#x27; succesfully&#x27;);
+                    });
+                }
+            });
+            self.topology = {};
+            resolve(&#x27;Zigbee database cleared successfully!&#x27;);
+        });
+    });
+}
+
+/**
+ * CAUTION!! This will delete the existing zigbee database and reboot the network
+ *
+ * @method factoryReset
+ */
+ZNPController.prototype.factoryReset = function() {
+	/**
+	* This will delete the existing zigbee database and reboot the network
+	*
+	* @event factoryReset
+	*/
+	this.emit(&#x27;factoryReset&#x27;);
+}
+
+/**
+ * CAUTION!! If new network then this will destory the existing network on reboot and start new network on specified pan and channel
+ *
+ * @method restartModule
+ * @param {Boolean} newNwk true=new, false=restore
+ * @param {Number} panId new pan id of the network
+ * @param {Number} channel new channel of the network
+ */
+ZNPController.prototype.restartModule = function(newNwk, panId, channel) {
+	/**
+	* If new network then this will destory the existing network on reboot and start new network on specified pan and channel
+	*
+	* @event restartModule
+	* @param {Boolean} newNwk true=new, false=restore
+	* @param {Number} panId new pan id of the network
+	* @param {Number} channel new channel of the network
+	*/
+	this.emit(&#x27;restartModule&#x27;, newNwk, panId, channel);
+}
+
+/**
+ * Get non-volatile item value of ZNP stack
+ *
+ * @method getNVItem
+ * @param {Number} nvId non-volatile item id
+ * @return {Object} Returns the value of the item requested
+ */
+ZNPController.prototype.getNVItem = function(id) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.getNVItem(id, function(info, data) {
+			logger.info(&#x27;NV item request successful, info &#x27; + JSON.stringify(info) + &#x27; data- &#x27; + JSON.stringify(data));
+			if(info.status == 0x00) {
+				resolve(data);
+			} else {
+				reject(&#x27;Failed with error status &#x27; + info.status);
+			}
+		}, function(err) {
+			logger.error(&#x27;NV Item get failed- &#x27;+ JSON.stringify(err));
+			reject(JSON.stringify(err));
+		});
+	});
+}
+
+/**
+ * Set any non-volatile item of ZNP stack, check defs for more info
+ *
+ * @method setNVItem
+ * @param {Number} nvId non-volatile item id
+ * @param {Number} value new value of the item
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.setNVItem = function(id, value) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		if(typeof value !== &#x27;object&#x27;) {
+			return reject(new Error(&#x27;value should be of type object&#x27;));
+		}
+		self.znp.setNVItem(id, value.length, value, function() {
+			logger.info(&#x27;NV item set successful- &#x27;+ id + &#x27; value &#x27; + value);
+			resolve();
+		}, function(err) {
+			logger.error(&#x27;Could not set NV Item - &#x27;+ id + &#x27; error- &#x27; + JSON.stringify(err));
+			reject(JSON.stringify(err));
+		});
+	});
+}
+
+/**
+ * Explicit command to send LQI request to particular device
+ *
+ * @method sendLqiRequest
+ * @param {Number} nwkAddr specify the network address of the device for which LQI is directed
+ * @return {Promise} The success handler accepts no parameter. The failure
+ *  handler accepts a single error object.
+ */
+ZNPController.prototype.sendLqiRequest = function(dstAddr) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.znp.sendLqiRequest(dstAddr || 0x0000, function() {
+			resolve();
+		}, function(err) {
+			logger.error(&#x27;LQI Request failed &#x27;+ JSON.stringify(err));
+			reject(JSON.stringify(err));
+		});
+	});
+}
+
+/**
+ * Get latest known network topology
+ *
+ * @method getNetworkTopology
+ * @return {Object} network topology with device types of the onboarded devices
+ */
+ZNPController.prototype.getNetworkTopology = function() {
+	return this.topology;
+}
+
+/**
+ * Get all the onboarded nodes metadata
+ *
+ * @method getNodes
+ * @return {Object} metadata of all the devices
+ */
+ZNPController.prototype.getNodes = function() {
+	return this.nodes;
+}
+
+/**
+ * Get life status of each node in ZigBee network
+ *
+ * @method getStatus
+ * @return {Object} status life status of all the nodes
+ */
+ZNPController.prototype.getStatus = function() {
+	var ret = {};
+	var self = this;
+	Object.keys(self.nodes).forEach(function(addr) {
+		ret[addr] = {life: self.nodes[addr].life, name: self.nodes[addr].resourceID};
+	});
+	return ret;
+}
+
+/**
+ * Evaluate operation on input data
+ *
+ * @method evalOperation
+ * @param {Number} inputData input data on which operation will be performed
+ * @param {String} operation operation with handlebars
+ * @return {Number} outputData return evaluated operation result upto 2 decimal places
+ */
+ZNPController.prototype.evalOperation = function(inputData, operation) {
+	logger.debug(&#x27;Got evalOperation on inputData- &#x27; + inputData + &#x27; operation &#x27; + JSON.stringify(operation));
+	var template = handleBars.compile(JSON.stringify(operation));
+    var info = {};
+    info.value = inputData;
+    var outputData = eval(JSON.parse(template(info)));
+    return (typeof outputData === &#x27;string&#x27;) ? outputData : outputData.toFixed(2)/1;
+}
+
+module.exports = {
+	ZNPController: ZNPController
+};
+
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

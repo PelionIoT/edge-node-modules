@@ -1,0 +1,30 @@
+{
+    "name": "Core/Interfaces/isLANDevice",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "IPv4Net": {
+            "readOnly": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address" : {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "IPv6Net": {
+            "readOnly": true,
+            "schema": {
+                "type": "object",
+                "properties": {
+                    "address" : {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "events": { }
+}

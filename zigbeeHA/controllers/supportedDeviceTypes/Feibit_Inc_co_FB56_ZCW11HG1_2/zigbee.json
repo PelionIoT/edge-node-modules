@@ -1,0 +1,24 @@
+{
+    "ManufacturerName": "Feibit_Inc_co.",
+    "ModelIdentifier": "FB56_ZCW11HG1_2",
+    "controller": "Feibit_Inc_co_FB56_ZCW11HG1_2",
+    "devjssignature": "RmVpYml0X0luY19jby5GQjU2X1pDVzExSEcxXzI&#x3D;",
+    "enabled": true,
+    "cluster_classes": [
+        {
+            "name": "basic",
+            "path": "./../../../cluster_classes/basic",
+            "id": 0
+        },
+        {
+            "name": "on_off",
+            "path": "./../../../cluster_classes/on_off",
+            "id": 6
+        },
+        {
+            "name": "color_control",
+            "path": "./../../../cluster_classes/color_control",
+            "id": 768
+        }
+    ]
+}

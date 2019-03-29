@@ -1,0 +1,25 @@
+{
+    "name": "Facades/ThermostatUserInterface",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "thermostatUserInterface": {
+            "readOnly": false,
+            "schema": {
+                "type": "object", 
+                "properties": {
+                    "attrId": {
+                        "type": "number"
+                    },
+                    "value": {
+                        "type": "number",
+                        "minimum": 0,
+                        "maximum": 100
+                    }
+                },
+                "required": [ "attrId", "value" ]
+            }
+        }
+    },
+    "events": {}
+}

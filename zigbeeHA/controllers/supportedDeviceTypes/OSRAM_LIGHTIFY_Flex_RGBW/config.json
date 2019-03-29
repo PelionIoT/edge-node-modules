@@ -1,0 +1,12 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/OSRAM_LIGHTIFY_Flex_RGBW",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable",
+        "Facades/Colorable",
+        "Facades/hasWhiteTemp",
+        "Core/Interfaces/Metadata",
+        "Facades/LastColorCall"
+    ]
+}

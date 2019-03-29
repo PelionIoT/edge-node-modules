@@ -1,0 +1,15 @@
+{
+    "name": "Facades/HasPassCode",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "passCode": {
+            "readOnly": false,
+            "schema": {
+                "type": "array"
+            }
+        }
+    },
+    "events": {
+    }
+}

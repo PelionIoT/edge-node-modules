@@ -1,0 +1,36 @@
+{
+	"rmap": {
+		"IEEE802154": {
+			"0": {
+				"devjs-module": "wigwag-devices",
+				"mount": "M1",
+				"enabled": true
+			},
+			"1": {
+				"devjs-module": "zigbeeHA",
+				"mount": "M3",
+				"enabled": true
+			},
+			"2": {
+				"devjs-module": "wigwag-devices",
+				"mount": "M5",
+				"enabled": false
+			}
+		},
+		"ZWAVE": {
+			"0": {
+				"devjs-module": "zwave",
+				"mount": "M2",
+				"enabled": true
+			}
+		},
+		"BLUETOOTH": {
+			"0": {
+				"devjs-module": "ble",
+				"mount": "M4",
+				"enabled": false
+			}
+		}
+	},
+	"relayconf_path": "/home/yashgoyal/workspace/wwrelay-utils/I2C/template.config.json"
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Facades/MediaStream",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "stream": {
+            "readOnly": true,
+            "schema": {
+                "type": "string"
+            }
+        }
+    },
+    "events": {
+    }
+}

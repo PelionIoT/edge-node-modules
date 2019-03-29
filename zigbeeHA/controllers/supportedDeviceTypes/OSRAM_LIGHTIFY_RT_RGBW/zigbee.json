@@ -1,0 +1,29 @@
+{
+    "ManufacturerName": "OSRAM",
+    "ModelIdentifier": "LIGHTIFY RT RGBW",
+    "controller": "OSRAM_LIGHTIFY_RT_RGBW",
+    "devjssignature": "",
+    "enabled": true,
+    "cluster_classes": [
+        {
+            "name": "basic",
+            "path": "./../../../cluster_classes/basic",
+            "id": 0
+        },
+        {   
+            "name": "on_off",
+            "path": "./../../../cluster_classes/on_off",
+            "id": 6
+        },
+        {   
+            "name": "level",
+            "path": "./../../../cluster_classes/level",
+            "id": 8
+        },
+        {   
+            "name": "color_control",
+            "path": "./../../../cluster_classes/color_control",
+            "id": 768
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "name": "Facades/HasLuminance",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "luminance": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 65535
+            }
+        }
+    },
+    "events": { 
+        "luminance": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 65535
+            }
+        }
+    }
+}

@@ -1,0 +1,23 @@
+{
+    "name": "Facades/ThermostatW2Status",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "w2Status": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    },
+    "events": {
+        "w2Status": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "logLevel": 2,
+    "pollingResolution": 500,
+    "defaultPollingRate": 51000,
+    "maxPollingCycles": 65535,
+    "pollingSchemes": {
+        "fast": {
+            "interval": 21500,
+            "interfaces": [
+                "Facades/MediaStream",
+                "Facades/HasTemperature",
+                "Facades/ThermostatGStatus",
+                "Facades/ThermostatSupplyTemperature",
+                "Facades/ThermostatReturnTemperature",
+                "Facades/ThermostatW1Status",
+                "Facades/ThermostatW2Status",
+                "Facades/ThermostatY1Status",
+                "Facades/ThermostatY2Status"
+            ]  
+        },
+        "medium": {
+            "interval": 293500,
+            "interfaces": [
+                "Facades/ThermostatMode",
+                "Facades/OccupiedCoolTemperatureLevel",
+                "Facades/OccupiedHeatTemperatureLevel",
+                "Facades/UnoccupiedCoolTemperatureLevel",
+                "Facades/UnoccupiedHeatTemperatureLevel",
+                "Facades/ThermostatFanMode",
+                "Facades/ThermostatOccupiedFanMode",
+                "Facades/ThermostatUnoccupiedFanMode",
+                "Facades/OccupancyMode"
+            ]
+        },
+        "slow": {
+            "interval": 900000,
+            "interfaces": [
+            ]
+        },
+        "never": {
+            "interval": 0,
+            "interfaces": [
+                "Facades/KeypadLockLevel",
+                "Facades/TemperatureDisplayMode",
+                "Facades/ThermostatDeadband",
+                "Facades/Humidity",
+                "Facades/HasMotion",
+                "Facades/UnoccupiedAutoTemperatureLevel",
+                "Facades/OccupiedAutoTemperatureLevel"
+            ]
+
+        }
+    }
+}

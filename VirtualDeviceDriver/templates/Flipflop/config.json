@@ -1,0 +1,7 @@
+{
+    "name": "Core/Devices/Virtual/Flipflop",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Flipflop"
+    ]
+}

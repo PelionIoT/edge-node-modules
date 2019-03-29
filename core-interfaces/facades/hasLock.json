@@ -1,0 +1,22 @@
+{
+    "name": "Facades/HasLock",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "lock": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(lock|unlock)$"
+            }
+        }
+    },
+    "events": {
+        "lock": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(lock|unlock)$"
+            }
+        }
+    }
+}

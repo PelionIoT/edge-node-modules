@@ -1,0 +1,16 @@
+{
+    "name": "Facades/hasWhiteTemp",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "K": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 1000,
+                "maximum": 10000
+            }
+        }
+    },
+    "events": { }
+}

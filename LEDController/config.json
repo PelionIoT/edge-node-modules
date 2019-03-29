@@ -1,0 +1,6 @@
+{
+    "ledBrightness": 128,
+    "heartbeatBrightness": 64,
+    "ledColorProfile": "RGB",
+    "ledDriverSocketPath": "/tmp/ledDriver"
+}

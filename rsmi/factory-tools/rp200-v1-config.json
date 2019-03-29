@@ -1,0 +1,38 @@
+{
+    "M1": {
+        "devJSService": "wigwag-devices",
+        "radioModule": "WIGWAG-CC2530-V1",
+        "options": {
+            "module": "6lbr",
+            "version": "2.2",
+            "siodev": "/dev/ttyS6",
+            "baudrate": 115200,
+            "programmer": "bin/cc2530prog-arm",
+            "firmware": "bin/cc2530-92-slip-radioread-v2_2.hex",
+            "testprog": "bin/slipcomms-arm",
+            "gpios": {
+                "reset": 104,
+                "data": 103,
+                "clock": 102
+            }
+        }
+    },
+    "M2": {
+        "devJSService": "wigwag-devices",
+        "radioModule": "WIGWAG-CC2530-V1",
+        "options": {
+            "module": "6lbr",
+            "version": "2.2",
+            "siodev": "/dev/ttyS1",
+            "baudrate": 115200,
+            "programmer": "bin/cc2530prog-arm",
+            "firmware": "bin/cc2530-92-slip-radioread-v2_2.hex",
+            "testprog": "bin/slipcomms-arm",
+            "gpios": {
+                "reset": 119,
+                "data": 118,
+                "clock": 105
+            }
+        }
+    }
+}

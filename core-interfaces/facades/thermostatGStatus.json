@@ -1,0 +1,23 @@
+{
+    "name": "Facades/ThermostatGStatus",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "gStatus": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    },
+    "events": {
+        "gStatus": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    }
+}

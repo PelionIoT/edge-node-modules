@@ -1,0 +1,48 @@
+{
+    "name": "onsite-enterprise-server",
+    "version": "0.0.1",
+    "description": "Enterprise API Proxy Server for onsite command and control",
+    "author": {
+        "name": "Yash",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "body-parser": "^1.18.2",
+        "chalk": "^2.1.0",
+        "colors": "^1.1.2",
+        "commander": "^2.13.0",
+        "express": "^4.16.3",
+        "express-device": "^0.4.2",
+        "formidable": "^1.1.1",
+        "http": "0.0.0",
+        "json-formatter-js": "^2.2.0",
+        "jsonminify": "^0.4.1",
+        "jsonwebtoken": "^7.4.3",
+        "md5": "^2.2.1",
+        "mkdirp": "^0.5.1",
+        "node-array": "0.0.7",
+        "random-number": "0.0.9",
+        "readline-sync": "^1.4.7",
+        "request": "^2.81.0",
+        "sleep": "^5.1.1",
+        "uuid": "^3.2.1",
+        "ws": "^3.2.0",
+        "yamljs": "^0.3.0"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [
+            "./onsiteEnterpriseInterface.json"
+        ],
+        "resourceTypes": [
+            "./onsiteEnterpriseResource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

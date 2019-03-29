@@ -1,0 +1,5 @@
+{
+    "name": "VirtualDeviceDriver",
+    "version": "0.0.1",
+    "interfaces": [ "VirtualDeviceDriverInterface" ]
+}

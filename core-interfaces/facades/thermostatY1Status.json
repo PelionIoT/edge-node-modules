@@ -1,0 +1,23 @@
+{
+    "name": "Facades/ThermostatY1Status",
+    "version": "0.0.1",
+    "commands": {
+    },
+    "state": {
+        "y1Status": {
+            "readOnly": true,
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    },
+    "events": {
+        "y1Status": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(open|closed)$"
+            }
+        }
+    }
+}

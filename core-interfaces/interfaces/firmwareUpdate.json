@@ -1,0 +1,18 @@
+{
+    "name": "Core/Interfaces/FirmwareUpdate",
+    "version": "0.0.1",
+    "commands": { 
+        "program": {
+            "arguments": [ ],
+            "returns": { "type": "string" }
+        },
+        "programStatus": {
+            "arguments": [ ],
+            "returns": { "type": "number" }
+        } 
+    },
+    "state": {
+    },
+    "events": {
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "name": "Facades/ThermostatUnoccupiedFanMode",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "thermostatUnoccupiedFanMode": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(off|low|medium|high|on|auto|smart)$"
+            }
+        }
+    },
+    "events": {
+        "thermostatUnoccupiedFanMode": {
+            "schema": {
+                "type": "string",
+                "pattern": "^(off|low|medium|high|on|auto|smart)$"
+            }
+        } 
+    }
+}

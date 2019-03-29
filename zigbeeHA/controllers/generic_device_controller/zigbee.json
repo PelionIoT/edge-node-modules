@@ -1,0 +1,9 @@
+{
+    "ManufacturerName": "{{ManufacturerName}}",
+    "ModelIdentifier": "{{ModelIdentifier}}",
+    "controller": "{{controller}}",
+    "devjssignature": "{{signature}}",
+    "enabled": true,
+    "cluster_classes": [
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "name": "Facades/TemperatureDisplayMode",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "temperatureDisplayMode": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(celsius|fahrenheit)$"
+            }
+        }
+    },
+    "events": { 
+    }
+}

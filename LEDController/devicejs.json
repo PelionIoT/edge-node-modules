@@ -1,0 +1,31 @@
+{
+    "name": "LEDController",
+    "version": "0.0.2",
+    "description": "Controls the relay LED state",
+    "author": {
+        "name": "WigWag",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git",
+        "unix-dgram": "^2.0.1"
+    },
+    "devDependencies": {
+    },
+    "devicejs": {
+        "interfaces": [ 
+            "./deviceController/LEDDriverInterface.json"
+        ],
+        "resourceTypes": [ 
+            "./deviceController/LEDDriverResource.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": {
+        }
+  }
+}

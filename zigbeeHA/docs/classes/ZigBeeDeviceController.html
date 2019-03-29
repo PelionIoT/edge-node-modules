@@ -1,0 +1,3293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ZigBeeDeviceController - ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ZigBeeDeviceController.html">ZigBeeDeviceController</a></li>
+                                <li><a href="../classes/ZigbeeDriver.html">ZigbeeDriver</a></li>
+                                <li><a href="../classes/ZNPController.html">ZNPController</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>ZigBeeDeviceController Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/controllers_generic_device_controller_controller.js.html#l34"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:34</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="box intro">
+    <p>ZigBee device controller</p>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_brightness get">brightness get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_brightness set">brightness set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_deadband get">deadband get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_deadband set">deadband set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getAllAttributes">getAllAttributes</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getAttribute">getAttribute</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getConfiguration">getConfiguration</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getState">getState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_gStatus get">gStatus get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_hsl get">hsl get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_hsl set">hsl set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_humidity get">humidity get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_isOccupied">isOccupied</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_K get">K get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_K set">K set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_keypadLockLevel get">keypadLockLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_keypadLockLevel set">keypadLockLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_metadata">metadata</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_motion get">motion get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupancyMode get">occupancyMode get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupancyMode set">occupancyMode set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedAutoTemperatureLevel get">occupiedAutoTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedAutoTemperatureLevel set">occupiedAutoTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedCoolTemperatureLevel get">occupiedCoolTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedCoolTemperatureLevel set">occupiedCoolTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedHeatTemperatureLevel get">occupiedHeatTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_occupiedHeatTemperatureLevel set">occupiedHeatTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_off">off</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_on">on</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_power get">power get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_power set">power set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_returnTemperature get">returnTemperature get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setState">setState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_supplyTemperature get">supplyTemperature get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_temperature get">temperature get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_temperature set">temperature set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_temperatureDisplayMode get">temperatureDisplayMode get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_temperatureDisplayMode set">temperatureDisplayMode set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatFanMode get">thermostatFanMode get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatFanMode set">thermostatFanMode set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatMode get">thermostatMode get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatMode set">thermostatMode set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatUserInterface get">thermostatUserInterface get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_thermostatUserInterface set">thermostatUserInterface set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedAutoTemperatureLevel get">unoccupiedAutoTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedAutoTemperatureLevel set">unoccupiedAutoTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedCoolTemperatureLevel get">unoccupiedCoolTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedCoolTemperatureLevel set">unoccupiedCoolTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedHeatTemperatureLevel get">unoccupiedHeatTemperatureLevel get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_unoccupiedHeatTemperatureLevel set">unoccupiedHeatTemperatureLevel set</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_w1Status get">w1Status get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_w2Status get">w2Status get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_y1Status get">y1Status get</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_y2Status get">y2Status get</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_reachable">reachable</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_unreachable">unreachable</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_brightness get" class="method item">
+    <h3 class="name"><code>brightness get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l172"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:172</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get brightness state of the device</p>
+<p>Usage: dev$.select('id=*').get('brightness');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return value between 0-1</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_brightness set" class="method item">
+    <h3 class="name"><code>brightness set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l183"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:183</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set brightness state of the device</p>
+<p>Usage: dev$.select('id=*').set('brightness', 0.3);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>takes in value between 0-1</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_deadband get" class="method item">
+    <h3 class="name"><code>deadband get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l628"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:628</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get Deadband returns the minimum difference between the heat setpoint and cool setpoint</p>
+<p>Usage: dev$.select('id=*').get('deadband');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_deadband set" class="method item">
+    <h3 class="name"><code>deadband set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l639"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:639</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set Deadband, a minimum difference between the heat setpoint and cool setpoint</p>
+<p>Usage: dev$.select('id=*').set('deadband', 2); //2 Fahrenheit difference</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getAllAttributes" class="method item">
+    <h3 class="name"><code>getAllAttributes</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1255"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1255</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get all attributes values of thermostat cluster</p>
+<p>Usage: dev$.select('id=*').call('getAllAttributes');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getAttribute" class="method item">
+    <h3 class="name"><code>getAttribute</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>attrId</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1242"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1242</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get attribute value of thermostat cluster</p>
+<p>Usage: dev$.select('id=*').call('getAttribute', 0x001c);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">attrId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>2 byte number, refer ZCL document to know the attribute Ids</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getConfiguration" class="method item">
+    <h3 class="name"><code>getConfiguration</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1376"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1376</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get all device configurations</p>
+<p>Usage: dev$.select('id=*').call('getConfiguration');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getState" class="method item">
+    <h3 class="name"><code>getState</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l961"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:961</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get state of a device</p>
+<p>Usage: dev$.select('id=*').get();</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>return object with all the writable state properties</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_gStatus get" class="method item">
+    <h3 class="name"><code>gStatus get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l913"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:913</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get fan relay status</p>
+<p>Usage: dev$.select('id=*').get('gStatus');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return open or closed</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_hsl get" class="method item">
+    <h3 class="name"><code>hsl get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l226"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:226</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get hsl state of the device</p>
+<p>Usage: dev$.select('id=*').get('hsl');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>return an object with h, s, l values</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_hsl set" class="method item">
+    <h3 class="name"><code>hsl set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l237"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:237</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set hsl state of the device</p>
+<p>Usage: dev$.select('id=*').set('hsl', {h:0.2, s:1, l:0.5});</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>takes in an object with h, s, l keys</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_humidity get" class="method item">
+    <h3 class="name"><code>humidity get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l817"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:817</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get humidity of the device</p>
+<p>Usage: dev$.select('id=*').get('humidity');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return 16 bit value multiply 100 gives relative humidiy</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_isOccupied" class="method item">
+    <h3 class="name"><code>isOccupied</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1220"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1220</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get the state of motion sensor</p>
+<p>Usage: dev$.select('id=*').call('isOccupied');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>@return  return 0=unoccupied, 1=occupied</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_K get" class="method item">
+    <h3 class="name"><code>K get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l198"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:198</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get color temperature state of the device</p>
+<p>Usage: dev$.select('id=*').get('K');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return color temperature between 2000-8000</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_K set" class="method item">
+    <h3 class="name"><code>K set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l209"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:209</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set color temperature of the device</p>
+<p>Usage: dev$.select('id=*').set('K', 3000);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes value between 2000-8000</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_keypadLockLevel get" class="method item">
+    <h3 class="name"><code>keypadLockLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l739"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:739</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get keypadLockLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('keypadLockLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return keypad lock level ranging 0 (No lock) to 2 (High level)</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_keypadLockLevel set" class="method item">
+    <h3 class="name"><code>keypadLockLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l750"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:750</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set keypadLockLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('keypadLockLevel', {attrId: 0x0001, value: 0x02});</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>attrid: 0x0001 (keypadLockLevel), value: 0 or 1 or 2;</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_metadata" class="method item">
+    <h3 class="name"><code>metadata</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1231"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1231</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get metadata/information about the device</p>
+<p>Usage: dev$.select('id=*').call('metadata');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>@return  return object with device information</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_motion get" class="method item">
+    <h3 class="name"><code>motion get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l833"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:833</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get motion of the device</p>
+<p>Usage: dev$.select('id=*').get('motion');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return 0=unoccupied, 1=occupied</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupancyMode get" class="method item">
+    <h3 class="name"><code>occupancyMode get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l655"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:655</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get occupancyMode returns the occupancy mode of the thermostat</p>
+<p>Usage: dev$.select('id=*').get('occupancyMode');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return occupancy mode either occupied or unoccupied</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupancyMode set" class="method item">
+    <h3 class="name"><code>occupancyMode set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l666"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:666</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set occupancyMode, set the occupancy mode of the thermostat</p>
+<p>Usage: dev$.select('id=*').set('occupancyMode', 'occupied');</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>takes occupied or unoccupied string</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedAutoTemperatureLevel get" class="method item">
+    <h3 class="name"><code>occupiedAutoTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l509"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:509</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get occupiedAutoTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('occupiedAutoTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedAutoTemperatureLevel set" class="method item">
+    <h3 class="name"><code>occupiedAutoTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l538"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:538</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set occupiedAutoTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('occupiedAutoTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedCoolTemperatureLevel get" class="method item">
+    <h3 class="name"><code>occupiedCoolTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l278"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:278</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get occupiedCoolTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('occupiedCoolTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedCoolTemperatureLevel set" class="method item">
+    <h3 class="name"><code>occupiedCoolTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l301"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:301</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set occupiedCoolTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('occupiedCoolTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedHeatTemperatureLevel get" class="method item">
+    <h3 class="name"><code>occupiedHeatTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l332"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:332</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get occupiedHeatTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('occupiedHeatTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_occupiedHeatTemperatureLevel set" class="method item">
+    <h3 class="name"><code>occupiedHeatTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l355"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:355</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set occupiedHeatTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('occupiedHeatTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_off" class="method item">
+    <h3 class="name"><code>off</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1208"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1208</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set power state to 'off' of a device</p>
+<p>Usage: dev$.select('id=*').call('off');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_on" class="method item">
+    <h3 class="name"><code>on</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1196"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1196</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set power state to 'on' of a device</p>
+<p>Usage: dev$.select('id=*').call('on');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_power get" class="method item">
+    <h3 class="name"><code>power get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l146"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:146</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get power state of the device</p>
+<p>Usage: dev$.select('id=*').get('power');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return power state 'off' or 'on'</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_power set" class="method item">
+    <h3 class="name"><code>power set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l157"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:157</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set power state of the device</p>
+<p>Usage: dev$.select('id=*').set('power', 'on');</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>power state 'on' or 'off'</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_returnTemperature get" class="method item">
+    <h3 class="name"><code>returnTemperature get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l945"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:945</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get return temperature, which is the temperature farthest to the unit</p>
+<p>Usage: dev$.select('id=*').get('returnTemperature');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature in Fahrenheit</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setState" class="method item">
+    <h3 class="name"><code>setState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>getStateObject</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l1155"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:1155</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set state of a device</p>
+<p>Preferred way to use this method is by calling get on device controller
+and then modifying those state properties and setting the state using this method</p>
+<p>Usage: dev$.select('id=*').set({power: 'on', brightness: 0.5, K: 5000});</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">getStateObject</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>State properties object returned when called get on device controller</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_supplyTemperature get" class="method item">
+    <h3 class="name"><code>supplyTemperature get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l929"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:929</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get supply temperature, which is the temperature closest to the unit</p>
+<p>Usage: dev$.select('id=*').get('supplyTemperature');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature in Fahrenheit</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_temperature get" class="method item">
+    <h3 class="name"><code>temperature get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l686"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:686</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get temperature of the device</p>
+<p>Usage: dev$.select('id=*').get('temperature');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_temperature set" class="method item">
+    <h3 class="name"><code>temperature set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l697"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:697</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set temperature of the device</p>
+<p>Usage: dev$.select('id=*').set('temperature', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_temperatureDisplayMode get" class="method item">
+    <h3 class="name"><code>temperatureDisplayMode get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l765"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:765</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get temperatureDisplayMode of the device</p>
+<p>Usage: dev$.select('id=*').get('temperatureDisplayMode');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature display mode values- 0=celcius, 1=fahrenheit</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_temperatureDisplayMode set" class="method item">
+    <h3 class="name"><code>temperatureDisplayMode set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l776"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:776</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set temperatureDisplayMode of the device</p>
+<p>Usage: dev$.select('id=*').set('temperatureDisplayMode', {attrId: 0x0000, value: 'fahrenheit'});</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>attrid: 0x0000 (temperatureDisplayMode), value: celsius or fahrenheit;</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatFanMode get" class="method item">
+    <h3 class="name"><code>thermostatFanMode get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l791"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:791</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get thermostatFanMode of the device</p>
+<p>Usage: dev$.select('id=*').get('thermostatFanMode');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return fan modes-- off, low, medium, high, on, auto, smart</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatFanMode set" class="method item">
+    <h3 class="name"><code>thermostatFanMode set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l802"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:802</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set thermostatFanMode of the device</p>
+<p>Usage: dev$.select('id=*').set('thermostatFanMode', 'auto');</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>takes in values-- off, low, medium, high, on, auto, smart</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatMode get" class="method item">
+    <h3 class="name"><code>thermostatMode get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l252"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:252</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get thermostatMode of the device</p>
+<p>Usage: dev$.select('id=*').get('thermostatMode');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return thermostatMode off, auto, cool or heat</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatMode set" class="method item">
+    <h3 class="name"><code>thermostatMode set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l263"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:263</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set thermostatMode of the device</p>
+<p>Usage: dev$.select('id=*').set('thermostatMode', 'cool');</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>thermostat mode- cool, heat, auto, off</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatUserInterface get" class="method item">
+    <h3 class="name"><code>thermostatUserInterface get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l712"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:712</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get thermostatUserInterface of the device</p>
+<p>Usage: dev$.select('id=*').get('thermostatUserInterface');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperatureDisplayMode attribute 0x0000 value-- 0=celcius, 1=fahrenheit</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_thermostatUserInterface set" class="method item">
+    <h3 class="name"><code>thermostatUserInterface set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l723"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:723</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set thermostatUserInterface of the device</p>
+<p>Usage: dev$.select('id=*').set('thermostatUserInterface', {attrId: 0x0001, value: 0x02});</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>attrid: 0x0000 (temperatureDisplayMode), value: 0 (celcius), 1 (fahrenheit);
+attrid: 0x0001 (keypadLockout), value: 0: noLockout, 1: level1Lockout, 2: level2Lockout, 3: level3Lockout, 4: level4Lockout, 5: level5Lockout</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedAutoTemperatureLevel get" class="method item">
+    <h3 class="name"><code>unoccupiedAutoTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l573"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:573</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get unoccupiedAutoTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('unoccupiedAutoTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedAutoTemperatureLevel set" class="method item">
+    <h3 class="name"><code>unoccupiedAutoTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l601"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:601</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set unoccupiedAutoTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('unoccupiedAutoTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedCoolTemperatureLevel get" class="method item">
+    <h3 class="name"><code>unoccupiedCoolTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l402"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:402</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get unoccupiedCoolTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('unoccupiedCoolTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedCoolTemperatureLevel set" class="method item">
+    <h3 class="name"><code>unoccupiedCoolTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l424"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:424</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set unoccupiedCoolTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('unoccupiedCoolTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedHeatTemperatureLevel get" class="method item">
+    <h3 class="name"><code>unoccupiedHeatTemperatureLevel get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l455"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:455</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get unoccupiedHeatTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').get('unoccupiedHeatTemperatureLevel');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>return temperature level in fahrenheit upto 2 decimal place</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_unoccupiedHeatTemperatureLevel set" class="method item">
+    <h3 class="name"><code>unoccupiedHeatTemperatureLevel set</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l478"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:478</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set unoccupiedHeatTemperatureLevel of the device</p>
+<p>Usage: dev$.select('id=*').set('unoccupiedHeatTemperatureLevel', 76);</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>takes temperature level in fahrenheit</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_w1Status get" class="method item">
+    <h3 class="name"><code>w1Status get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l849"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:849</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get Stage 1 heat relay status</p>
+<p>Usage: dev$.select('id=*').get('w1Status');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return open or closed</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_w2Status get" class="method item">
+    <h3 class="name"><code>w2Status get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l865"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:865</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get Stage 2 heat relay status</p>
+<p>Usage: dev$.select('id=*').get('w2Status');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return open or closed</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_y1Status get" class="method item">
+    <h3 class="name"><code>y1Status get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l881"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:881</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get Stage 1 compressor relay status</p>
+<p>Usage: dev$.select('id=*').get('y1Status');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return open or closed</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_y2Status get" class="method item">
+    <h3 class="name"><code>y2Status get</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_generic_device_controller_controller.js.html#l897"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:897</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get Stage 2 compressor relay status</p>
+<p>Usage: dev$.select('id=*').get('y2Status');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">String</span>:
+                    <p>return open or closed</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
+
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_reachable" class="events item">
+                        <h3 class="name"><code>reachable</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/controllers_generic_device_controller_controller.js.html#l123"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:123</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when a device is online</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_unreachable" class="events item">
+                        <h3 class="name"><code>unreachable</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/controllers_generic_device_controller_controller.js.html#l133"><code>controllers&#x2F;generic_device_controller&#x2F;controller.js:133</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when a device is offline</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

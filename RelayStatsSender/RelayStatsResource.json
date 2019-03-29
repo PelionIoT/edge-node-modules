@@ -1,0 +1,5 @@
+{
+    "name": "RelayStats",
+    "version": "0.0.1",
+    "interfaces": [ "RelayStatsInterface" ]
+}

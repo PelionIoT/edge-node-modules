@@ -1,0 +1,11 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/OSRAM_LIGHTIFY_RT_Tunable_White",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable",
+        "Facades/hasWhiteTemp",
+        "Core/Interfaces/Metadata",
+        "Facades/LastColorCall"
+    ]
+}

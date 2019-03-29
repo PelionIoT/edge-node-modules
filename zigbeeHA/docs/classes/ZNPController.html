@@ -1,0 +1,2705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>ZNPController - ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="ZigBee Home Automation TI Stack&#x27;s znp-host-framework node implementation" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 1.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/ZigBeeDeviceController.html">ZigBeeDeviceController</a></li>
+                                <li><a href="../classes/ZigbeeDriver.html">ZigbeeDriver</a></li>
+                                <li><a href="../classes/ZNPController.html">ZNPController</a></li>
+                            </ul>
+                
+                
+                            <ul id="api-modules" class="apis modules">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>ZNPController Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/src_znpcontroller.js.html#l45"><code>src&#x2F;znpcontroller.js:45</code></a>
+        </div>
+
+
+</div>
+
+
+<div class="box intro">
+    <p>ZigBee Network Processor (ZNP) controller</p>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+<div id="method_ZNPController" class="method item">
+    <h3 class="name"><code>ZNPController</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>config</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l45"><code>src&#x2F;znpcontroller.js:45</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">config</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>options required to setup zigbee mesh network</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+            <li class="api-class-tab events"><a href="#events">Events</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_addDevice">addDevice</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_connect">connect</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_deleteZigbeeDatabase">deleteZigbeeDatabase</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_disconnect">disconnect</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_endDeviceAnnce">endDeviceAnnce</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_evalOperation">evalOperation</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_factoryReset">factoryReset</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_formatWriteAttrData">formatWriteAttrData</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_generateNewPanId">generateNewPanId</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getConfigOptions">getConfigOptions</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getConfiguration">getConfiguration</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getConfiguration">getConfiguration</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNetworkTopology">getNetworkTopology</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNextSeqId">getNextSeqId</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNodes">getNodes</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getNVItem">getNVItem</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getState">getState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_getStatus">getStatus</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_identifyDiscoveredNode">identifyDiscoveredNode</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_logLevel">logLevel</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_newThrottleRate">newThrottleRate</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_parseAttrResponse">parseAttrResponse</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_requestNetworkTopology">requestNetworkTopology</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_restartModule">restartModule</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_sendLqiRequest">sendLqiRequest</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setNVItem">setNVItem</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_setState">setState</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_start">start</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_startPeriodicNetworkRefresh">startPeriodicNetworkRefresh</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_stopNetworkRefresh">stopNetworkRefresh</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_throttleWorkRequest">throttleWorkRequest</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_zclWork">zclWork</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property">
+                                <a href="#property_baudRate">baudRate</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_devType">devType</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_devType">devType</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_newNwk">newNwk</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_panIdSelection">panIdSelection</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_siodev">siodev</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_throttleRate">throttleRate</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+                <div class="index-section events">
+                    <h3>Events</h3>
+
+                    <ul class="index-list events">
+                            <li class="index-item event">
+                                <a href="#event_attrResponse + nwkAddr">attrResponse + nwkAddr</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_factoryReset">factoryReset</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_message + nwkAddr">message + nwkAddr</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_node discovered">node discovered</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_node identified">node identified</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_pairingProgressEvent">pairingProgressEvent</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_reachable + nwkAddr">reachable + nwkAddr</a>
+
+                            </li>
+                            <li class="index-item event">
+                                <a href="#event_restartModule">restartModule</a>
+
+                            </li>
+                    </ul>
+                </div>
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_addDevice" class="method item">
+    <h3 class="name"><code>addDevice</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>duration</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l452"><code>src&#x2F;znpcontroller.js:452</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Enable permit join (commissioning) for specified duration</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">duration</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>commissioning duration</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_connect" class="method item">
+    <h3 class="name"><code>connect</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l478"><code>src&#x2F;znpcontroller.js:478</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Call this after start, this instantiate serial communication interface</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_deleteZigbeeDatabase" class="method item">
+    <h3 class="name"><code>deleteZigbeeDatabase</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l888"><code>src&#x2F;znpcontroller.js:888</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>CAUTION!! This will delete the existing zigbee database</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_disconnect" class="method item">
+    <h3 class="name"><code>disconnect</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l498"><code>src&#x2F;znpcontroller.js:498</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Disconnect serial communication interface</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_endDeviceAnnce" class="method item">
+    <h3 class="name"><code>endDeviceAnnce</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>buffer</code>
+                </li>
+                <li class="arg">
+                        <code>msgId</code>
+                </li>
+                <li class="arg">
+                        <code>retries</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l865"><code>src&#x2F;znpcontroller.js:865</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Push work request to queue and inform throttler</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">buffer</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>work request</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">msgId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>unique message id to track commands to devices</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">retries</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>number of retries left</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_evalOperation" class="method item">
+    <h3 class="name"><code>evalOperation</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>inputData</code>
+                </li>
+                <li class="arg">
+                        <code>operation</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l1058"><code>src&#x2F;znpcontroller.js:1058</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Evaluate operation on input data</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">inputData</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>input data on which operation will be performed</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">operation</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>operation with handlebars</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>outputData return evaluated operation result upto 2 decimal places</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_factoryReset" class="method item">
+    <h3 class="name"><code>factoryReset</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l920"><code>src&#x2F;znpcontroller.js:920</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>CAUTION!! This will delete the existing zigbee database and reboot the network</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_formatWriteAttrData" class="method item">
+    <h3 class="name"><code>formatWriteAttrData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>data</code>
+                </li>
+                <li class="arg">
+                        <code>type</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l703"><code>src&#x2F;znpcontroller.js:703</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>IMPORTANT!! Formats outgoing data to attribute data type</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>outgoing data need formatting</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">type</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>data type of outgoing data</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>formattedData data formatted on input data type</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_generateNewPanId" class="method item">
+    <h3 class="name"><code>generateNewPanId</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l517"><code>src&#x2F;znpcontroller.js:517</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Generate random pan id</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>random number ranging 0-65500</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getConfigOptions" class="method item">
+    <h3 class="name"><code>getConfigOptions</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l569"><code>src&#x2F;znpcontroller.js:569</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Return the config options with which zigbee network is setup</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>config options</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getConfiguration" class="method item">
+    <h3 class="name"><code>getConfiguration</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_supportedDeviceTypes_Viconics_8000_SERIES_controller.js.html#l809"><code>controllers&#x2F;supportedDeviceTypes&#x2F;Viconics_8000_SERIES&#x2F;controller.js:809</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get all device configurations</p>
+<p>Usage: dev$.select('id=*').call('getConfiguration');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getConfiguration" class="method item">
+    <h3 class="name"><code>getConfiguration</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/controllers_supportedDeviceTypes_Viconics_254_10_controller.js.html#l829"><code>controllers&#x2F;supportedDeviceTypes&#x2F;Viconics_254_10&#x2F;controller.js:829</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get all device configurations</p>
+<p>Usage: dev$.select('id=*').call('getConfiguration');</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNetworkTopology" class="method item">
+    <h3 class="name"><code>getNetworkTopology</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l1023"><code>src&#x2F;znpcontroller.js:1023</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get latest known network topology</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>network topology with device types of the onboarded devices</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNextSeqId" class="method item">
+    <h3 class="name"><code>getNextSeqId</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l559"><code>src&#x2F;znpcontroller.js:559</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Used by multiplexer module to tag the commands from different device controllers</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>sequential number, range 0-255</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNodes" class="method item">
+    <h3 class="name"><code>getNodes</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l1033"><code>src&#x2F;znpcontroller.js:1033</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get all the onboarded nodes metadata</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>metadata of all the devices</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getNVItem" class="method item">
+    <h3 class="name"><code>getNVItem</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nvId</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l954"><code>src&#x2F;znpcontroller.js:954</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get non-volatile item value of ZNP stack</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nvId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>non-volatile item id</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>Returns the value of the item requested</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getState" class="method item">
+    <h3 class="name"><code>getState</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Boolean</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l549"><code>src&#x2F;znpcontroller.js:549</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get current state of the znp controller</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Boolean</span>:
+                    <p>true=setup successful, false=otherwise</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_getStatus" class="method item">
+    <h3 class="name"><code>getStatus</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l1043"><code>src&#x2F;znpcontroller.js:1043</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get life status of each node in ZigBee network</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>status life status of all the nodes</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_identifyDiscoveredNode" class="method item">
+    <h3 class="name"><code>identifyDiscoveredNode</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nwkAddr</code>
+                </li>
+                <li class="arg">
+                        <code>metadata</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l745"><code>src&#x2F;znpcontroller.js:745</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Get basic cluster attributes, manufacturing information which lets us identify the device controller and facades</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nwkAddr</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>device network address</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">metadata</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>node info of the device</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_logLevel" class="method item">
+    <h3 class="name"><code>logLevel</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l527"><code>src&#x2F;znpcontroller.js:527</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set log level</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p>level info- 2, debug- 3, trace- 4, error- 0, warn- 1</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_newThrottleRate" class="method item">
+    <h3 class="name"><code>newThrottleRate</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>rate</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l597"><code>src&#x2F;znpcontroller.js:597</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Helps modulate the throttle rate on fly</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">rate</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>new throttle rate in ms</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_parseAttrResponse" class="method item">
+    <h3 class="name"><code>parseAttrResponse</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>response</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l643"><code>src&#x2F;znpcontroller.js:643</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>IMPORTANT!! Universal parser to any attribute response of any data type.</p>
+<p>More Info: Refer latest Zigbee Cluster Library- Data Types section.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">response</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>attribute response received from the device</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>parsed response based on the data type</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_requestNetworkTopology" class="method item">
+    <h3 class="name"><code>requestNetworkTopology</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l377"><code>src&#x2F;znpcontroller.js:377</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Send LQI request to all the known devices and accordingly report their reachability on response</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_restartModule" class="method item">
+    <h3 class="name"><code>restartModule</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>newNwk</code>
+                </li>
+                <li class="arg">
+                        <code>panId</code>
+                </li>
+                <li class="arg">
+                        <code>channel</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l934"><code>src&#x2F;znpcontroller.js:934</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>CAUTION!! If new network then this will destory the existing network on reboot and start new network on specified pan and channel</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">newNwk</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>true=new, false=restore</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">panId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>new pan id of the network</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">channel</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>new channel of the network</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_sendLqiRequest" class="method item">
+    <h3 class="name"><code>sendLqiRequest</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nwkAddr</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l1003"><code>src&#x2F;znpcontroller.js:1003</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Explicit command to send LQI request to particular device</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nwkAddr</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>specify the network address of the device for which LQI is directed</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setNVItem" class="method item">
+    <h3 class="name"><code>setNVItem</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>nvId</code>
+                </li>
+                <li class="arg">
+                        <code>value</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l978"><code>src&#x2F;znpcontroller.js:978</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Set any non-volatile item of ZNP stack, check defs for more info</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">nvId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>non-volatile item id</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">value</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>new value of the item</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_setState" class="method item">
+    <h3 class="name"><code>setState</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>state</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l539"><code>src&#x2F;znpcontroller.js:539</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Represents the running state of the znp controller</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">state</code>
+                        <span class="type">Boolean</span>
+
+
+                    <div class="param-description">
+                        <p>true=setup successful, false=otherwise</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_start" class="method item">
+    <h3 class="name"><code>start</code></h3>
+
+        <span class="paren">()</span>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l144"><code>src&#x2F;znpcontroller.js:144</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Start ZNP node module and event listeners</p>
+
+    </div>
+
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_startPeriodicNetworkRefresh" class="method item">
+    <h3 class="name"><code>startPeriodicNetworkRefresh</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>duration</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l426"><code>src&#x2F;znpcontroller.js:426</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Start periodic network all-link estimation</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">duration</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>0 indicate no network refresh (all-link estimation), otherwise minimum 30 seconds</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_stopNetworkRefresh" class="method item">
+    <h3 class="name"><code>stopNetworkRefresh</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l442"><code>src&#x2F;znpcontroller.js:442</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Stop periodic network all-link estimation</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_throttleWorkRequest" class="method item">
+    <h3 class="name"><code>throttleWorkRequest</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l579"><code>src&#x2F;znpcontroller.js:579</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Start the throttler at throttle rate specified during instantiation</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_zclWork" class="method item">
+    <h3 class="name"><code>zclWork</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>buffer</code>
+                </li>
+                <li class="arg">
+                        <code>msgId</code>
+                </li>
+                <li class="arg">
+                        <code>retries</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Promise</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l610"><code>src&#x2F;znpcontroller.js:610</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Push work request to queue and inform throttler</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">buffer</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>work request</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">msgId</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>unique message id to track commands to devices</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">retries</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>number of retries left</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Promise</span>:
+                    <p>The success handler accepts no parameter. The failure
+handler accepts a single error object.</p>
+
+            </div>
+        </div>
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+<div id="property_baudRate" class="property item">
+    <h3 class="name"><code>baudRate</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l81"><code>src&#x2F;znpcontroller.js:81</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Baud Rate</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 115200</p>
+
+
+</div>
+<div id="property_devType" class="property item">
+    <h3 class="name"><code>devType</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l54"><code>src&#x2F;znpcontroller.js:54</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Device Type- 0=Coordinator, 1=Router, 2=End device</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 0</p>
+
+
+</div>
+<div id="property_devType" class="property item">
+    <h3 class="name"><code>devType</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l72"><code>src&#x2F;znpcontroller.js:72</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>ZigBee Channel</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 25</p>
+
+
+</div>
+<div id="property_newNwk" class="property item">
+    <h3 class="name"><code>newNwk</code></h3>
+    <span class="type">Boolen</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l63"><code>src&#x2F;znpcontroller.js:63</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>New or restore network- true=New, false=Restore</p>
+
+    </div>
+
+        <p><strong>Default:</strong> false</p>
+
+
+</div>
+<div id="property_panIdSelection" class="property item">
+    <h3 class="name"><code>panIdSelection</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l90"><code>src&#x2F;znpcontroller.js:90</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>PAN ID selection scheme</p>
+
+    </div>
+
+        <p><strong>Default:</strong> &quot;randomInRange&quot;</p>
+
+
+</div>
+<div id="property_siodev" class="property item">
+    <h3 class="name"><code>siodev</code></h3>
+    <span class="type">String</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l112"><code>src&#x2F;znpcontroller.js:112</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Serial I/O port</p>
+
+    </div>
+
+        <p><strong>Default:</strong> &quot;/dev/ttyUSB0&quot;</p>
+
+
+</div>
+<div id="property_throttleRate" class="property item">
+    <h3 class="name"><code>throttleRate</code></h3>
+    <span class="type">Number</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/src_znpcontroller.js.html#l125"><code>src&#x2F;znpcontroller.js:125</code></a>
+        </p>
+
+
+    </div>
+
+    <div class="description">
+        <p>Throttle rate</p>
+
+    </div>
+
+        <p><strong>Default:</strong> 100ms</p>
+
+
+</div>
+            </div>
+
+
+            <div id="events" class="api-class-tabpanel">
+                <h2 class="off-left">Events</h2>
+
+                    <div id="event_attrResponse + nwkAddr" class="events item">
+                        <h3 class="name"><code>attrResponse + nwkAddr</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l311"><code>src&#x2F;znpcontroller.js:311</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when receive attribute response from the device</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">response</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>attribute response</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_factoryReset" class="events item">
+                        <h3 class="name"><code>factoryReset</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l926"><code>src&#x2F;znpcontroller.js:926</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>This will delete the existing zigbee database and reboot the network</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="event_message + nwkAddr" class="events item">
+                        <h3 class="name"><code>message + nwkAddr</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l274"><code>src&#x2F;znpcontroller.js:274</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when receive command response from the device</p>
+                    <pre class="code prettyprint"><code>MT_RPC_SUCCESS = 0,         success
+                    MT_RPC_ERR_SUBSYSTEM = 1,   invalid subsystem
+                    MT_RPC_ERR_COMMAND_ID = 2,  invalid command ID
+                    MT_RPC_ERR_PARAMETER = 3,   invalid parameter
+                    MT_RPC_ERR_LENGTH = 4       invalid length</code></pre>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">response</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>command response</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_node discovered" class="events item">
+                        <h3 class="name"><code>node discovered</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l241"><code>src&#x2F;znpcontroller.js:241</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Notify manager to inspect the metadata and start controller</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">nwkAddr</code>
+                                            <span class="type">Number</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>network address of the device</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">metadata</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>node info of the device</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_node identified" class="events item">
+                        <h3 class="name"><code>node identified</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l851"><code>src&#x2F;znpcontroller.js:851</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Once manufacturing information is extracted from the device</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">nwkAddr</code>
+                                            <span class="type">Number</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>network address of the device</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">metadata</code>
+                                            <span class="type">Object</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>updated metadata of the device</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_pairingProgressEvent" class="events item">
+                        <h3 class="name"><code>pairingProgressEvent</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l233"><code>src&#x2F;znpcontroller.js:233</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>When new device is discovered, notify other resources</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">progressId</code>
+                                            <span class="type">Number</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>onboarding progress percentage</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_reachable + nwkAddr" class="events item">
+                        <h3 class="name"><code>reachable + nwkAddr</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l196"><code>src&#x2F;znpcontroller.js:196</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Fired when a device is online</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">value</code>
+                                            <span class="type">Boolean</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>true if device is online, false otherwise</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="event_restartModule" class="events item">
+                        <h3 class="name"><code>restartModule</code></h3>
+                        <span class="type"></span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_znpcontroller.js.html#l943"><code>src&#x2F;znpcontroller.js:943</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If new network then this will destory the existing network on reboot and start new network on specified pan and channel</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Event Payload:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">newNwk</code>
+                                            <span class="type">Boolean</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>true=new, false=restore</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">panId</code>
+                                            <span class="type">Number</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>new pan id of the network</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">channel</code>
+                                            <span class="type">Number</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>new channel of the network</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

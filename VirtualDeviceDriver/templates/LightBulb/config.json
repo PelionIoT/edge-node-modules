@@ -1,0 +1,11 @@
+{
+    "name": "Core/Devices/Virtual/LightBulb",
+    "version": "0.0.1",
+    "interfaces": [
+        "Facades/Switchable",
+        "Facades/Dimmable",
+        "Facades/Colorable",
+        "Facades/hasWhiteTemp",
+        "Facades/LastColorCall"
+    ]
+}

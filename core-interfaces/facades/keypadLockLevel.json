@@ -1,0 +1,17 @@
+{
+    "name": "Facades/KeypadLockLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "keypadLockLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 2
+            }
+        }
+    },
+    "events": {
+    }
+}

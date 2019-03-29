@@ -1,0 +1,24 @@
+{
+    "name": "Facades/UnoccupiedCoolTemperatureLevel",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "unoccupiedCoolTemperatureLevel": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "unoccupiedCoolTemperatureLevel": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    }
+}

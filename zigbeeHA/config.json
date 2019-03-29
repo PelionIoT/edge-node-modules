@@ -1,0 +1,14 @@
+{
+    "siodev": "/dev/ttyUSB0",
+    "devType": 0,
+    "newNwk": false,
+    "channelMask": 11,
+    "baudrate": 115200,
+    "log_level": 2,
+    "networkRefreshDuration": 0,
+    "panIdSelection": "randomInRange",
+    "panId": 16,
+    "platform": "",
+    "emulation": "true",
+    "logLevel": 5 //Available- info- 2, debug- 3, trace- 4, error- 0, warn- 1
+}

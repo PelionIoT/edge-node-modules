@@ -1,0 +1,5 @@
+{
+    "deviceControllersDirectory": "templates",
+    "hideTemplates": [ "VideoCamera" ],
+    "logLevel": 2
+}

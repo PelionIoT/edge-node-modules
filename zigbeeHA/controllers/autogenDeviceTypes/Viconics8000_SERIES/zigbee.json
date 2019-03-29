@@ -1,0 +1,572 @@
+{
+    "ManufacturerName": "Viconics",
+    "ModelIdentifier": "8000 SERIES",
+    "controller": "Viconics8000_SERIES",
+    "devjssignature": "Vmljb25pY3M4MDAwIFNFUklFUw&#x3D;&#x3D;",
+    "enabled": true,
+    "cluster_classes": [
+        {
+            "name": "thermostat",
+            "path": "./../../../cluster_classes/thermostat",
+            "id": 513,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "read",
+                    "default": "",
+                    "name": "localTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Local Temperature",
+                    "description": "LocalTemperature represents the temperature, as measured locally or remotely (over the network). The maximum resolution this format allows is 0.01 oC. A LocalTemperature of 0x8000 indicates that the temperature measurement is invalid.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "read",
+                    "default": "",
+                    "name": "outdoorTemperature",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Outdoor Temperature",
+                    "description": "OutdoorTemperature represents the outdoor temperature, as measured locally or remotely (over the network).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2": {
+                    "attrId": 2,
+                    "access": "read",
+                    "default": "",
+                    "name": "occupancy",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "",
+                    "title": "Occupancy",
+                    "description": "Occupancy specifies whether the heated/cooled space is occupied or not, as measured locally or remotely (over the network). If bit 0 = 1, the space is occupied, else it is unoccupied.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "pattern": "^([0-1])$"
+                },
+                "3": {
+                    "attrId": 3,
+                    "access": "read",
+                    "default": "",
+                    "name": "absMinHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Min Heat Setpoint Limit",
+                    "description": "The MinHeatSetpointLimit attribute specifies the absolute minimum level that the heating setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "4": {
+                    "attrId": 4,
+                    "access": "read",
+                    "default": "",
+                    "name": "absMaxHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Max Heat Setpoint Limit",
+                    "description": "The MaxHeatSetpointLimit attribute specifies the absolute maximum level that the heating setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "5": {
+                    "attrId": 5,
+                    "access": "read",
+                    "default": "",
+                    "name": "absMinCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Min Cool Setpoint Limit",
+                    "description": "The MinCoolSetpointLimit attribute specifies the absolute minimum level that the cooling setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "6": {
+                    "attrId": 6,
+                    "access": "read",
+                    "default": "",
+                    "name": "absMaxCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Absolute Max Cool Setpoint Limit",
+                    "description": "The MaxCoolSetpointLimit attribute specifies the absolute maximum level that the cooling setpoint may be set to. This is a limitation imposed by the manufacturer.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "7": {
+                    "attrId": 7,
+                    "access": "read",
+                    "default": "",
+                    "name": "pICoolingDemand",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "percentage",
+                    "title": "PI Cooling Demand",
+                    "description": "The PICoolingDemand attribute is 8 bits in length and specifies the level of cooling demanded by the PI (proportional integral) control loop in use by the thermostat (if any), in percent. This value is 0 when the thermostat is in “off” or “heating” mode. This attribute is reported regularly and may be used to control a heating device.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        100
+                    ],
+                    "pattern": "^([0-9][0-9]{0,1}|100)$"
+                },
+                "8": {
+                    "attrId": 8,
+                    "access": "read",
+                    "default": "",
+                    "name": "pIHeatingDemand",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "percentage",
+                    "title": "PI Heating Demand",
+                    "description": "The PIHeatingDemand attribute is 8 bits in length and specifies the level of heating demanded by the PI loop in percent. This value is 0 when the thermostat is in “off” or “cooling” mode. This attribute is reported regularly and may be used to control a cooling device.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        100
+                    ],
+                    "pattern": "^([0-9][0-9]{0,1}|100)$"
+                },
+                "16": {
+                    "attrId": 16,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "localTemperatureCalibration",
+                    "type": "ZCL_DATATYPE_INT8",
+                    "unit": "Fahrenheit",
+                    "title": "Local Temperature Calibration",
+                    "description": "The LocalTemperatureCalibration attribute specifies the offset that can be added/ subtracted to the actual displayed room temperature, in steps of 0.1°C. The range of this offset is –2.5 °C to +2.5 °C).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "17": {
+                    "attrId": 17,
+                    "access": "read/write",
+                    "default": 78.8,
+                    "name": "occupiedCoolingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Occupied Cooling Setpoint",
+                    "description": "The OccupiedCoolingSetpoint attribute is 16 bits in length and specifies the cooling mode setpoint when the room is occupied. It shall be set to a value in the range defined by the MinCoolSetpointLimit and MaxCoolSetpointLimit attributes. The OccupiedHeatingSetpoint attribute shall always be below the value specified in the OccupiedCoolingSetpoint by at least SetpointDeadband. If an attempt is made to set it such that this condition is violated, a default response command with the status code INVALID_VALUE shall be returned. This shall apply to all attempts to set values of attributes which violate similar conditions. If it is unknown if the room is occupied or not, this attribute shall be used as the cooling mode setpoint.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "18": {
+                    "attrId": 18,
+                    "access": "read/write",
+                    "default": 68,
+                    "name": "occupiedHeatingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Occupied Heating Setpoint",
+                    "description": "The OccupiedHeatingSetpoint attribute is 16 bits in length and specifies the heating mode setpoint when the room is occupied. It shall be set to a value in the range defined by the MinHeatSetpointLimit and MaxHeatSetpointLimit attributes. The OccupiedCoolingSetpoint attribute shall always be above the value specified in the OccupiedHeatingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall be used as the cooling mode setpoint.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "19": {
+                    "attrId": 19,
+                    "access": "read/write",
+                    "default": 78.8,
+                    "name": "unoccupiedCoolingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Unoccupied Cooling Setpoint",
+                    "description": "The UnoccupiedCoolingSetpoint attribute is 16 bits in length and specifies the cooling mode setpoint when the room is unoccupied. It shall be set to a value inthe range defined by the MinCoolSetpointLimit and MaxCoolSetpointLimit attributes. The UnoccupiedHeatingSetpoint attribute shall always be below the value specified in the UnoccupiedCoolingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall not be used.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "20": {
+                    "attrId": 20,
+                    "access": "read/write",
+                    "default": 68,
+                    "name": "unoccupiedHeatingSetpoint",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Unoccupied Heating Setpoint",
+                    "description": "The UnoccupiedHeatingSetpoint attribute is 16 bits in length and specifies the heating mode setpoint when the room is unoccupied. It shall be set to a value in the range defined by the MinHeatSetpointLimit and MaxHeatSetpointLimit attributes. The UnoccupiedCoolingSetpoint attribute shall always be below the value specified in the UnoccupiedHeatingSetpoint by at least SetpointDeadband. If it is unknown if the room is occupied or not, this attribute shall not be used.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "21": {
+                    "attrId": 21,
+                    "access": "read/write",
+                    "default": 44.6,
+                    "name": "minHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Min Heat Setpoint Limit",
+                    "description": "The MinHeatSetpointLimit attribute specifies the minimum level that the heating setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "22": {
+                    "attrId": 22,
+                    "access": "read/write",
+                    "default": 86,
+                    "name": "maxHeatSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Max Heat Setpoint Limit",
+                    "description": "The MaxHeatSetpointLimit attribute specifies the maximum level that the heating setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "23": {
+                    "attrId": 23,
+                    "access": "read/write",
+                    "default": 44.6,
+                    "name": "minCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Min Cool Setpoint Limit",
+                    "description": "The MinCoolSetpointLimit attribute specifies the minimum level that the cooling setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "24": {
+                    "attrId": 24,
+                    "access": "read/write",
+                    "default": 86,
+                    "name": "maxCoolSetpointLimit",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Max Cool Setpoint Limit",
+                    "description": "The MaxCoolSetpointLimit attribute specifies the maximum level that the cooling setpoint may be set to.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "25": {
+                    "attrId": 25,
+                    "access": "read/write",
+                    "default": 25,
+                    "name": "minSetpointDeadBand",
+                    "type": "ZCL_DATATYPE_INT8",
+                    "unit": "Fahrenheit",
+                    "title": "Min Setpoint DeadBand",
+                    "description": "The MinSetpointDeadBand attribute specifies the minimum difference between the Heat Setpoint and the Cool SetPoint, in steps of 0.1°C.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "26": {
+                    "attrId": 26,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "remoteSensing",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "",
+                    "title": "Remote Sensing",
+                    "description": "The RemoteSensing attribute is an 8-bit bitmap that specifies whether the local temperature, outdoor temperature and occupancy are being sensed by internal sensors or remote networked sensors.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        8
+                    ],
+                    "pattern": "^([0-8])$"
+                },
+                "27": {
+                    "attrId": 27,
+                    "access": "read/write",
+                    "default": 4,
+                    "name": "controlSequenceOf",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "Control Sequence Of Operation",
+                    "description": "The ControlSequenceOfOperation attribute specifies the overall operating environment of the thermostat, and thus the possible system modes that the thermostat can operate in.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        5
+                    ],
+                    "pattern": "^([0-5])$"
+                },
+                "28": {
+                    "attrId": 28,
+                    "access": "read/write",
+                    "default": 1,
+                    "name": "systemMode",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "System Mode",
+                    "description": "The SystemMode attribute specifies the current operating mode of the thermostat.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        7
+                    ],
+                    "pattern": "^([0-7])$"
+                },
+                "29": {
+                    "attrId": 29,
+                    "access": "read",
+                    "default": 0,
+                    "name": "alarmMask",
+                    "type": "ZCL_DATATYPE_BITMAP8",
+                    "unit": "",
+                    "title": "Alarm Mask",
+                    "description": "The AlarmMask attribute specifies whether each of the alarms listed is enabled. When the bit number corresponding to the alarm code is set to 1, the alarm is enabled, else it is disabled. Bits not corresponding to a code in the table are reserved.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        8
+                    ],
+                    "pattern": "^([0-8])$"
+                }
+            }
+        },
+        {
+            "name": "thermostatUserInterface",
+            "path": "./../../../cluster_classes/thermostatUserInterface",
+            "id": 516,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "temperatureDisplayMode",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "Temperature Display Mode",
+                    "description": "The TemperatureDisplayMode attribute specifies the units of the temperature displayed on the thermostat screen. 0- Celcius, 1- Fahrenheit",
+                    "operation": "",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "pattern": "^([0-1])$"
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "keypadLockout",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "Keypad Lockout",
+                    "description": "The KeypadLockout attribute specifies the level of functionality that is available to the user via the keypad. 0- No Lockout, 1- Level 1 Lockout, 2- Level 2 Lockout, 3- Level 3 Lockout, 4- Level 4 Lockout, 5- Level5 Lockout (least functionality available to user).",
+                    "operation": "",
+                    "range": [
+                        0,
+                        5
+                    ],
+                    "pattern": "^([0-5])$"
+                }
+            }
+        },
+        {
+            "name": "temperature",
+            "path": "./../../../cluster_classes/temperature",
+            "id": 1026,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "read",
+                    "default": "",
+                    "name": "measuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Measured Value",
+                    "description": "MeasuredValue represents the temperature in degrees Celsius. A MeasuredValue of 0x8000 indicates that the temperature measurement is invalid. MeasuredValue is updated continuously as new measurements are made.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "read",
+                    "default": "",
+                    "name": "minMeasuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Min Measured Value",
+                    "description": "The MinMeasuredValue attribute indicates the minimum value of MeasuredValue that is capable of being measured. A MinMeasuredValue of 0x8000 indicates that the minimum value is unknown.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "2": {
+                    "attrId": 2,
+                    "access": "read",
+                    "default": "",
+                    "name": "maxMeasuredValue",
+                    "type": "ZCL_DATATYPE_INT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Max Measured Value",
+                    "description": "The MaxMeasuredValue attribute indicates the maximum value of MeasuredValue that is capable of being measured. MaxMeasuredValue shall be greater than MinMeasuredValue. MinMeasuredValue and MaxMeasuredValue define the range of the sensor. A MaxMeasuredValue of 0x8000 indicates that the maximum value is unknown.",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": "",
+                    "pattern": ""
+                },
+                "3": {
+                    "attrId": 3,
+                    "access": "read",
+                    "default": "",
+                    "name": "tolerance",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "Fahrenheit",
+                    "title": "Temperature Tolerance",
+                    "description": "The Tolerance attribute indicates the magnitude of the possible error that is associated with MeasuredValue . The true value is located in the range (MeasuredValue – Tolerance) to (MeasuredValue + Tolerance).",
+                    "operation": "({{value}}*9/500) + 32",
+                    "range": [
+                        0,
+                        2048
+                    ],
+                    "pattern": "^([0-9][0-9]{0,2}|[0-1][0-9]{0,3}|2[0][0-4][0-8])$"
+                }
+            }
+        },
+        {
+            "name": "occupancy_sensor",
+            "path": "./../../../cluster_classes/occupancy_sensor",
+            "id": 1030,
+            "attributes": {
+                "0": {
+                    "attrId": 0,
+                    "access": "read",
+                    "default": "",
+                    "name": "occupancy",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "Occupancy",
+                    "description": "The Occupancy attribute is a bitmap. Bit 0 specifies the sensed occupancy as follows: 1 = occupied, 0 = unoccupied. All other bits are reserved.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        1
+                    ],
+                    "pattern": "^([0-1])$"
+                },
+                "1": {
+                    "attrId": 1,
+                    "access": "read",
+                    "default": "",
+                    "name": "occupancySensorType",
+                    "type": "ZCL_DATATYPE_ENUM8",
+                    "unit": "",
+                    "title": "Occupancy Sensor Type",
+                    "description": "The OccupancySensorType attribute specifies the type of the occupancy sensor. 0- PIR, 1- Ultrasonic, 2- PIR and Ultrasonic",
+                    "operation": "",
+                    "range": [
+                        0,
+                        254
+                    ],
+                    "pattern": "^([0-1][0-9]{0,2}|2[0-5][0-4])$"
+                },
+                "16": {
+                    "attrId": 16,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "PIROccupiedToUnoccupiedDelay",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "seconds",
+                    "title": "PIR Occupied To Unoccupied Delay",
+                    "description": "The PIROccupiedToUnoccupiedDelay attribute is 16 bits in length and specifies the time delay, in seconds, before the PIR sensor changes to its unoccupied state after the last detection of movement in the sensed area.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        65534
+                    ],
+                    "pattern": "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-4])$"
+                },
+                "17": {
+                    "attrId": 17,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "PIRUnoccupiedToOccupiedDelay",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "seconds",
+                    "title": "PIR Unoccupied To Occupied Delay",
+                    "description": "The PIRUnoccupiedToOccupiedDelay attribute is 16 bits in length and specifies the time delay, in seconds, before the PIR sensor changes to its occupied state after the detection of movement in the sensed area. This attribute is mandatory if the PIRUnoccupiedToOccupiedThreshold attribute is implemented.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        65534
+                    ],
+                    "pattern": "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-4])$"
+                },
+                "18": {
+                    "attrId": 18,
+                    "access": "read/write",
+                    "default": 1,
+                    "name": "PIRUnoccupiedToOccupiedThreshold",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "",
+                    "title": "PIR Unoccupied To Occupied Threshold",
+                    "description": "The PIRUnoccupiedToOccupiedThreshold attribute is 8 bits in length and specifies the number of movement detection events that must occur in the period PIRUnoccupiedToOccupiedDelay, before the PIR sensor changes to its occupied state. This attribute is mandatory if the PIRUnoccupiedToOccupiedDelay attribute is implemented.",
+                    "operation": "",
+                    "range": [
+                        1,
+                        254
+                    ],
+                    "pattern": "^([1][0-9]{0,2}|2[0-5][0-4])$"
+                },
+                "32": {
+                    "attrId": 32,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "UltrasonicOccupiedToUnoccupiedDelay",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "seconds",
+                    "title": "Ultrasonic Occupied To Unoccupied Delay",
+                    "description": "The UltrasonicOccupiedToUnoccupiedDelay attribute is 16 bits in length and specifies the time delay, in seconds, before the Ultrasonic sensor changes to its unoccupied state after the last detection of movement in the sensed area.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        65534
+                    ],
+                    "pattern": "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-4])$"
+                },
+                "33": {
+                    "attrId": 33,
+                    "access": "read/write",
+                    "default": 0,
+                    "name": "UltrasonicUnoccupiedToOccupiedDelay",
+                    "type": "ZCL_DATATYPE_UINT16",
+                    "unit": "seconds",
+                    "title": "Ultrasonic Unoccupied To Occupied Delay",
+                    "description": "The UltrasonicUnoccupiedToOccupiedDelay attribute is 16 bits in length and specifies the time delay, in seconds, before the Ultrasonic sensor changes to its occupied state after the detection of movement in the sensed area. This attribute is mandatory if the UltrasonicUnoccupiedToOccupiedThreshold attribute is implemented.",
+                    "operation": "",
+                    "range": [
+                        0,
+                        65534
+                    ],
+                    "pattern": "^([0-9]{1,4}|[1-5][0-9]{4}|6[0-4][0-9]{3}|65[0-4][0-9]{2}|655[0-2][0-9]|6553[0-4])$"
+                },
+                "34": {
+                    "attrId": 34,
+                    "access": "read/write",
+                    "default": 1,
+                    "name": "UltrasonicUnoccupiedToOccupiedThreshold",
+                    "type": "ZCL_DATATYPE_UINT8",
+                    "unit": "",
+                    "title": "Ultrasonic Unoccupied To Occupied Threshold",
+                    "description": "The UltrasonicUnoccupiedToOccupiedThreshold attribute is 8 bits in length and specifies the number of movement detection events that must occur in the period UltrasonicUnoccupiedToOccupiedDelay, before the Ultrasonic sensor changes to its occupied state. This attribute is mandatory if the UltrasonicUnoccupiedToOccupiedDelay attribute is implemented.",
+                    "operation": "",
+                    "range": [
+                        1,
+                        254
+                    ],
+                    "pattern": "^([1][0-9]{0,2}|2[0-5][0-4])$"
+                }
+            }
+        }
+    ]
+}

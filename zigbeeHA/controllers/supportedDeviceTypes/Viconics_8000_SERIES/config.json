@@ -1,0 +1,27 @@
+{
+    "name": "Core/Devices/Lighting/ZigbeeHA/Viconics_8000_SERIES",
+    "version": "0.0.1",
+    "interfaces": [
+    	"Facades/ThermostatMode",
+    	"Facades/HasTemperature",
+        "Facades/OccupiedCoolTemperatureLevel",
+        "Facades/OccupiedHeatTemperatureLevel",
+        "Facades/OccupiedAutoTemperatureLevel",
+        "Facades/UnoccupiedCoolTemperatureLevel",
+        "Facades/UnoccupiedHeatTemperatureLevel",
+        "Facades/UnoccupiedAutoTemperatureLevel",
+        "Facades/ThermostatReturnTemperature",
+        "Facades/ThermostatSupplyTemperature",
+        "Facades/ThermostatDeadband",
+        "Facades/ThermostatW1Status",
+        "Facades/ThermostatW2Status",
+        "Facades/ThermostatY1Status",
+        "Facades/ThermostatY2Status",
+        "Facades/ThermostatGStatus",
+        "Facades/OccupancyMode",
+        "Facades/KeypadLockLevel",
+        "Facades/TemperatureDisplayMode",
+        "Core/Interfaces/Configuration",
+        "Core/Interfaces/Metadata"
+    ]
+}

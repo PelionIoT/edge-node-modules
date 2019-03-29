@@ -1,0 +1,16 @@
+{
+    "name": "Facades/HumidityTrigger",
+    "version": "0.0.1",
+    "commands": {},
+    "state": {
+    },
+    "events": {
+        "humidityTrigger": {
+            "readOnly": false,
+            "schema": {
+                "type": "string",
+                "pattern": "^(on|off)$"
+            }
+        } 
+    }
+}

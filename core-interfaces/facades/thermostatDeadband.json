@@ -1,0 +1,24 @@
+{
+    "name": "Facades/ThermostatDeadband",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "deadband": {
+            "readOnly": false,
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    },
+    "events": {
+        "deadband": {
+            "schema": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 200
+            }
+        }
+    }
+}
