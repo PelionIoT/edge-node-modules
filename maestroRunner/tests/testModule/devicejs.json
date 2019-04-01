@@ -1,0 +1,26 @@
+{
+    "name": "maestro-runner-testmodule",
+    "version": "0.0.1",
+    "description": "A test module for maestroRunner deviceJS launcher",
+    "author": {
+        "name": "WigWag",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": { 
+        "devjs-configurator": "http://github.com/WigWagCo/devjs-configurator#devicejs2.0-compatibility#maestroRunner"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [ ],
+        "resourceTypes": [ 
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { 
+        }
+    }
+}

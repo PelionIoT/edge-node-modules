@@ -1,0 +1,22 @@
+{ "modules" : [
+  {
+
+MISTAKE
+
+    "path": "${thisdir}/../AppServer",  // this is comment
+    "config": "{\"authentication\": {\r\n\t\t\"enabled\": true,\r\n\t\t\"cloudAPISecret\": \"28e9e4d19e797028e600eadaf3fdc3db\",\r\n\t\t\"redirectURL\": \"\/wigwag-ui\/s\/login\/\",\r\n\t\t\"cloudRedirectURL\": \"https:\/\/devcloud.wigwag.io\/s\/login\"\r\n\t},\r\n\t\"port\": 4443,\r\n\t\"ssl\": {\r\n\t\t\"key\": \"\/home\/ed\/work\/devicejs-core-modules\/Runner\/.ssl\/client.key.pem\",\r\n\t\t\"cert\": \"\/home\/ed\/work\/devicejs-core-modules\/Runner\/.ssl\/client.cert.pem\",\r\n\t\t\"ca\": [\r\n\t\t\t\"\/home\/ed\/work\/devicejs-core-modules\/Runner\/.ssl\/ca.cert.pem\",\r\n\t\t\t\"\/home\/ed\/work\/devicejs-core-modules\/Runner\/.ssl\/intermediate.cert.pem\"\r\n\t\t]\r\n\t},\r\n\t\"relayID\": \"WWRL000006\"\r\n}"
+  },
+  {
+    "path": "${thisdir}/../APIProxy",
+    "config": "{\"cloudAPISecret\": \"28e9e4d19e797028e600eadaf3fdc3db\",\r\n\"apiKey\": \"hello\",\r\n\"apiSecret\": \"asdfdsfa\"}"
+  },
+  {
+    "path": "${thisdir}/../../wigwag-core-modules/WigWagMobileUI",
+    "config": null
+  },
+  {
+    "path": "${thisdir}/../../wigwag-core-modules/WWRelayWebUI",
+    "config": "here/${specialsauce}"
+  }
+] }
+

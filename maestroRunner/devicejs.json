@@ -1,0 +1,27 @@
+{
+  "name": "devicejs-runner",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ed Hemphill <npm@wigwag.com> (http://www.wigwag.com/)",
+  "license": "ISC",
+  "engines": {
+    "node": ">=0.12"
+  },
+  "dependencies": {
+    "jsonminify": "*",
+    "underscore": "*",
+    "userid": "0.2.0",
+    "optimist": "^0.6.1",
+    "es6-promise": "*",
+    "sprintf-js": "^1.0.3",
+    "moment": "~2.10.6",
+    "unix-dgram": "^2.0.0",
+    "grease-log-client": "https://github.com/WigWagCo/grease-log-client",
+    "netkit": "https://github.com/WigWagCo/node-netkit.git",
+    "devjs-configurator": "https://github.com/WigWagCo/devjs-configurator.git"
+  }
+}
