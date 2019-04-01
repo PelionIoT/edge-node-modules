@@ -12,6 +12,8 @@
     "repository": {},
     "private": true,
     "dependencies": {
+        "inquirer": "6.2.2",
+        "uuid": "^3.2.1",
         "bonjour": "^3.5.0",
         "chalk": "^2.1.0",
         "mkdirp": "^0.5.1",
