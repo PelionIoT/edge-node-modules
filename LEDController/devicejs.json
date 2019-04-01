@@ -12,7 +12,7 @@
     "repository": {},
     "private": true,
     "dependencies": {
-        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git",
+        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git#master",
         "unix-dgram": "^2.0.1"
     },
     "devDependencies": {

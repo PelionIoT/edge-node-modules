@@ -22,6 +22,6 @@
     "unix-dgram": "^2.0.0",
     "grease-log-client": "https://github.com/WigWagCo/grease-log-client",
     "netkit": "https://github.com/WigWagCo/node-netkit.git",
-    "devjs-configurator": "https://github.com/WigWagCo/devjs-configurator.git"
+    "devjs-configurator": "https://github.com/WigWagCo/devjs-configurator.git#master"
   }
 }
