@@ -15,7 +15,7 @@
       "request": "2.60.0",
       "semver": "5.3.0",
       "devjs-configurator": "git+ssh://git@github.com:armPelionEdge/devjs-configurator.git#master",
-      "wigwag-authorizer": "git+ssh://git@github.com:armPelionEdge/wigwag-authorizer.git"
+      "edge-authorizer": "git+ssh://git@github.com:armPelionEdge/edge-authorizer.git"
     },
     "devDependencies": {
     },
