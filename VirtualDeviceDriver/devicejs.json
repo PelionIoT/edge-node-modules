@@ -13,7 +13,7 @@
     "private": true,
     "dependencies": {
         "colors": "1.1.2",
-        "devjs-configurator":"https://github.com/WigWagCo/devjs-configurator.git#master",
+        "devjs-configurator":"https://github.com/armPelionEdge/devjs-configurator.git#master",
         "jsonminify" : "^0.2.3"
     },
     "devDependencies": { },
