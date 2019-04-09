@@ -21,7 +21,6 @@
     "moment": "~2.10.6",
     "unix-dgram": "^2.0.0",
     "grease-log-client": "https://github.com/armPelionEdge/grease-log-client",
-    "netkit": "https://github.com/armPelionEdge/node-netkit.git",
     "devjs-configurator": "https://github.com/armPelionEdge/devjs-configurator.git#master"
   }
 }
