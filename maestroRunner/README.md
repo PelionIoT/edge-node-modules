@@ -3,7 +3,7 @@
 ### Description
 
 This module is responsible for starting one or more deviceJS modules in a single process, 
-typically from the [maestro](https://github.com/WigWagCo/maestro) systems management daemon.
+typically from the [maestro](https://github.com/armPelionEdge/maestro) systems management daemon.
 
 ### How it works
 

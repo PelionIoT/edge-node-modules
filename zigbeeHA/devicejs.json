@@ -12,8 +12,8 @@
     "repository": {},
     "private": true,
     "dependencies": {
-        "devjs-configurator": "https://github.com/WigWagCo/devjs-configurator#master",
-        "node-znp": "git+ssh://git@github.com:WigWagCo/node-znp.git#master",
+        "devjs-configurator": "https://github.com/armPelionEdge/devjs-configurator#master",
+        "node-znp": "git+ssh://git@github.com:armPelionEdge/node-znp.git#master",
         "jsonminify" : "^0.2.3",
         "es6-promise": "^3.0.2",
         "mkdirp": "^0.5.1",

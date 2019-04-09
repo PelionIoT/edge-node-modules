@@ -12,7 +12,7 @@
     "repository": {},
     "private": true,
     "dependencies": { 
-        "devjs-configurator": "http://github.com/WigWagCo/devjs-configurator#devicejs2.0-compatibility#maestroRunner"
+        "devjs-configurator": "http://github.com/armPelionEdge/devjs-configurator#devicejs2.0-compatibility#maestroRunner"
     },
     "devDependencies": { },
     "devicejs": {

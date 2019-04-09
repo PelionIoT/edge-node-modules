@@ -19,7 +19,7 @@
         "mkdirp": "^0.5.1",
         "jsonminify" : "^0.2.3",
         "es6-promise": "^3.0.2",
-        "node-znp": "git+ssh://git@github.com:WigWagCo/node-znp.git#master",
+        "node-znp": "git+ssh://git@github.com:armPelionEdge/node-znp.git#master",
         "commander": "2.9.0"
     },
     "devDependencies": {},
