@@ -24,7 +24,6 @@ const execSync = require('child_process').execSync;
 const semver = require('semver')
 const request = require('request')
 const os = require('os');
-const WigWagAuthorizer = require('wigwag-authorizer');
 
 /*
 process command- bash to json parse 
@@ -111,32 +110,6 @@ function getCommandData(id, command) {
     });
 }
 
-function sendRelayStats(ipV4Address, softwareVersion, cloudAddress, relayIdentityToken) {
-    return new Promise(function(resolve, reject) {
-        request.post(url.resolve(cloudAddress, '/api/relays/stats'), {
-            headers: {
-                Authorization: relayIdentityToken
-            },
-            body: {
-                ipAddress: ipV4Address,
-                softwareVersion: softwareVersion
-            },
-            json: true
-        }, function(error, response, responseBody) {
-            if(error) {
-                reject(error)
-            }
-            else {
-                if(response.statusCode != 200) {
-                    reject()
-                }
-                else {
-                    resolve()
-                }
-            }
-        })
-    })
-}
 
 function getIPV4Address() {
     // var ipStack = dev$.select('id="IPStack"');
@@ -546,36 +519,6 @@ var RelayStatsProvider = {
         factorySoftwareVersion: function(filePath) {
             if(typeof filePath.resourceSet !== 'undefined') filePath = null;
             return getSoftwareVersion(filePath || this._options.factoryVersionsFile);
-        },
-        sendRelayStats: function() {
-            let self = this;
-            let p = [];
-
-            let wigwagAuthorizer = new WigWagAuthorizer({
-                relayID: self._options.relayID,
-                relayPrivateKey: fs.readFileSync(self._options.ssl.key),
-                relayPublicKey: fs.readFileSync(self._options.ssl.cert),
-                ddb: ddb
-            });
-
-            return new Promise(function(resolve, reject) {
-                p.push(getSoftwareVersion(self._options.versionsFile));
-                p.push(getIPV4Address());
-
-                Promise.all(p).then(function(resp) {
-                    let softwareVersion = resp[0];
-                    let ipV4Address = resp[1];
-
-                    log.info('RelayStatsSender sending', { ipAddress: ipV4Address, softwareVersion: softwareVersion });
-                    sendRelayStats(ipV4Address, softwareVersion, self._options.cloudAddress, wigwagAuthorizer.generateRelayIdentityToken()).then(function() {
-                        resolve();
-                    }, function(err) {
-                        reject(err);
-                    });
-                }, function(err) {
-                    reject(err);
-                });
-            });
         },
         info: function() {
             let self = this;

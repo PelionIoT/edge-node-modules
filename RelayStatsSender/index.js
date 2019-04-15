@@ -20,7 +20,6 @@ const url = require('url')
 const fs = require('fs')
 const path = require('path')
 const configurator = require('devjs-configurator')
-const WigWagAuthorizer = require('edge-authorizer')
 const request = require('request')
 const semver = require('semver')
 const RelayStatsProvider = require('./relayStatsProvider');
@@ -188,34 +187,6 @@ function getSoftwareVersion(versionsFile) {
     })
 }
 
-function sendRelayStats(ipV4Address, softwareVersion, cloudAddress, relayIdentityToken) {
-    return new Promise(function(resolve, reject) {
-        var req_url = url.resolve(cloudAddress, '/api/relays/stats');
-        request.post(req_url, {
-            headers: {
-                Authorization: relayIdentityToken
-            },
-            body: {
-                ipAddress: ipV4Address,
-                softwareVersion: softwareVersion
-            },
-            json: true
-        }, function(error, response, responseBody) {
-            if(error) {
-                reject(error)
-            }
-            else {
-                if(response.statusCode != 200) {
-                    reject(req_url + ' ' + response.statusCode + ' ' + response.statusMessage)
-                }
-                else {
-                    resolve()
-                }
-            }
-        })
-    })
-}
-
 let ipV4Address
 let softwareVersion
 let config
@@ -258,14 +229,7 @@ configurator.configure('RelayStatsSender', __dirname, './config.json').then(func
 
     log.info('RelayStatsSender sending', { ipAddress: ipV4Address, softwareVersion: softwareVersion })
 
-    let wigwagAuthorizer = new WigWagAuthorizer({
-        relayID: config.relayID,
-        relayPrivateKey: fs.readFileSync(config.ssl.key),
-        relayPublicKey: fs.readFileSync(config.ssl.cert),
-        ddb: ddb
-    })
-
-    return sendRelayStats(ipV4Address, softwareVersion, config.cloudAddress, wigwagAuthorizer.generateRelayIdentityToken())
+    return
 }).then(function() {
     log.info('RelayStatsSender successful')
 }, function(error) {
