@@ -89,6 +89,12 @@
                 "description": "USB on core board",
                 "siodev": "/dev/serial/by-path/platform-1c14400.usb-usb-0:1:1.0-port0"
             }
+        },
+        "rpi3bplus": {
+            "P1": {
+                "description": "USB on core board",
+                "siodev": "/dev/ttyUSB0"
+            }
         }
     },
     "modules": {
@@ -140,6 +146,13 @@
                 "programmer": "bin/cc2530prog-arm",
                 "firmware": "bin/cc2530-92-znp-radioread-v1_1.hex",
                 "testprog": "bin/zigbeeHA-test.js"
+            },
+            "smartrf05-cc2530em": {
+                "ICs": [
+                    "cc2530em"
+                ],
+                "applications": "802.15.4",
+                "baudrate": 115200
             }
         },
         "ww-zwave": {
@@ -205,7 +218,13 @@
             "00": {}
         },
         "rpi3bplus": {
-            "00": {}
+            "00": {},
+            "01": {
+                "zigbeeHA": [
+                    "P1",
+                    "smartrf05-cc2530em"
+                ]
+            }
         },
         "0.1.1": {
             "00": {},

@@ -728,7 +728,7 @@ ZNPController.prototype.throttleWorkRequest = function() {
 				}
 			}
 		} else {
-			logger.warn('ZCL work in progress, try again in next cycle...');
+			logger.debug('ZCL work in progress, try again in next cycle...');
 			self._waitingTXCount++;
 			if(self._waitingTXCount > 10) {
 				logger.error('ZCL work did not finish so resolving the waiting seqNumber ' + self._waitingSeqNumber);
