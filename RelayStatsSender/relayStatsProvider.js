@@ -637,6 +637,8 @@ var RelayStatsProvider = {
                 p.push(self.commands.cpu());
                 p.push(self.commands.execute("awk '/MemAvailable/ {print $2}' /proc/meminfo"));
                 p.push(self.commands.processes());
+                p.push(self.commands.df('overlay/upgrade'));
+                p.push(self.commands.df('boot'));
                 Promise.all(p).then(function(result) {
                     var ret = {};
                     try {
@@ -650,9 +652,8 @@ var RelayStatsProvider = {
                         ret["CPU"] = result[6];
                         ret["Memory Available"] = (Math.round(parseInt(JSON.parse(result[7]).toString().replace(/\n/g, "")) * 10000 / memtotal) / 100) + '%'; 
                         ret["Processes"] = result[8];
-                        // ret["Upgrade Disk"] = result[7];
-                        // ret["Boot Disk"] = result[8];
-                        // console.log(ret);
+                        ret["Upgrade Disk"] = result[9];
+                        ret["Boot Disk"] = result[10];
                         resolve(ret);
                     } catch(e) {
                         reject(e);
@@ -668,7 +669,6 @@ var RelayStatsProvider = {
                     let inefficient = list.query({
                         mem: '>2'
                     });
-                    // console.log(inefficient);
                     resolve(inefficient);
                 });
             });
