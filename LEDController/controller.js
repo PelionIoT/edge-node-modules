@@ -24,6 +24,11 @@ const request = require('request');
 
 var options = {};
 
+function acquireNewIPLease() {
+    console.warn("Lost network connection. Requesting for new IP lease!");
+    fs.writeFileSync("/var/run/acquireNewLease", "yes", "utf8");
+}
+
 function getIPV4Address() {
     var ifaces = os.networkInterfaces();
     var addr;
@@ -562,6 +567,15 @@ LEDController.prototype.start = function() {
                         let lanState = states[0]
                         let tunnelState = states[1]
                         let edgeState = states[2]
+
+                        // Request new IP lease in following scenarios
+                        // 1. lanState = up and tunnelState != connected
+                        // 2. lanState = down
+
+                        if( (lanState == "up" && tunnelState != "connected") || 
+                            (lanState == "down") ) {
+                            acquireNewIPLease();
+                        }
 
                         self._states.LAN = states[0];
                         self._states.Tunnel = states[1];
