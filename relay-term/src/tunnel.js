@@ -169,6 +169,26 @@ class Tunnel extends EventEmitter {
             this._establishConnection()
         }
 
+        let pongTimeout
+        let pingTimeout
+
+        let waitForPongTimeout = () => {
+            pongTimeout = setTimeout(() => {
+                console.log('Relay term connection timed out (No pong received after %d milliseconds). Forcing socket close...', DefaultTimeoutPeriod)
+                this._socket.terminate()
+            }, DefaultTimeoutPeriod)
+        }
+
+        let scheduleNextPing = () => {
+            pingTimeout = setTimeout(() => {
+                if(this._socket && this._socket.readyState === ws.OPEN) {
+                    console.log('Relay term sending ping to server. Expecting pong within %d milliseconds', DefaultTimeoutPeriod)
+                    this._socket.ping()
+                    waitForPongTimeout()
+                }
+            }, DefaultPingPeriod)
+        }
+
         setTimeout(() => {
             console.log('Connecting to cloud at ' + this.cloudURL)
             this._socket = new ws(this.cloudURL, {
@@ -179,6 +199,8 @@ class Tunnel extends EventEmitter {
 
             this._socket.on('close', (code, reason) => {
                 console.log('Relay term tunnel connection disconnected: ', code, reason)
+                clearTimeout(pingTimeout)
+                clearTimeout(pongTimeout)
                 reconnect()
                 this.emit('close')
             }).on('error', (error) => {
@@ -221,7 +243,13 @@ class Tunnel extends EventEmitter {
             }).on('open', () => {
                 console.log('Connected to cloud at ' + this.cloudURL)
                 this.reconnectWait = 0
+                scheduleNextPing()
                 this.emit('open')
+            }).on('pong', (data) => {
+                console.log('Relay term received pong from server. Resetting pong timeout and scheduling next ping in %d milliseconds', DefaultPingPeriod)
+                clearTimeout(pingTimeout)
+                clearTimeout(pongTimeout)
+                scheduleNextPing()
             })
         }, this.reconnectWait * 1000)
     }
