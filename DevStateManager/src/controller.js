@@ -934,6 +934,10 @@ var DevStateManager = {
                     ret[2].HasBattery = true;
             }
 
+            // rssi facade
+            if(facades.indexOf('Facades/SignalStrength') >  -1) {
+                ret[3].SignalStrength = true;
+
             //When do not satisfy any of the above
             if(Object.keys(ret[1]).length === 0 && Object.keys(ret[2]).length === 0 &&Object.keys(ret[3]).length === 0) {
                 ret[1][facades[0].slice('/')] = true;
@@ -1156,7 +1160,8 @@ var DevStateManager = {
                             "6LoWPAN": 0,
                             "ZigBee": 0,
                             "Virtual": 0,
-                            "Z-Wave": 0
+                            "Z-Wave": 0,
+                            "BLE": 0
                         };
                         Object.keys(resources).forEach(function(deviceId) {
                             if (typeof resourceTypes[resources[deviceId].type] !== 'undefined') {
@@ -1206,6 +1211,8 @@ var DevStateManager = {
                                         self._numberOfDevicesPerProtocol.Bacnet++;
                                     if(resources[deviceId].type.toLowerCase().indexOf('zwave') > -1)
                                         self._numberOfDevicesPerProtocol["Z-Wave"]++;
+                                    if(resources[deviceId].type.toLowerCase().indexOf('ble') > -1)
+                                        self._numberOfDevicesPerProtocol["BLE"]++;
 
                                 }
                             } else {
