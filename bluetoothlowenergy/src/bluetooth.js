@@ -1,22 +1,19 @@
-/**************************************************************************
-#### WigWag Closed License
-
-Copyright 2018. WigWag Inc. and its licensors. All Rights Reserved.
-
-This file is part of deviceJS and subject to a deviceJS license agreement.
-
-Unless otherwise agreed in a written license agreement with WigWag, you
-may not use, copy, modify, distribute, display, perform, or create
-derivative works of the contents
-
-Under all circumstances, unless covered under a separate written agreement:
-1)  WIGWAG MAKES NO WARRANTY OR REPRESENTATIONS ABOUT THE SUITABILITY OF THE
-    CONTENTS FOR ANY PURPOSE; THE CONTENTS ARE PROVIDED "AS IS" WITHOUT ANY
-    EXPRESS OR IMPLIED WARRANTY; AND
-2)  WIGWAG SHALL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, SPECIAL, OR
-    CONSEQUENTIAL DAMAGES ARISING OUT OF OR IN CONNECTION WITH THE USE OR
-    PERFORMANCE OF THE CONTENTS.
-**************************************************************************/
+/*
+* Copyright (c) 2019, Arm Limited and affiliates.
+* SPDX-License-Identifier: Apache-2.0
+*
+* Licensed under the Apache License, Version 2.0 (the “License”);
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*     http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an “AS IS” BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+*/
 
 /**
     @file src/start.js
