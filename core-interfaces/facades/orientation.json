@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Orientation",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "orientation": {
+            "readOnly": true,
+            "schema": {
+                "type": "number"
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Accelerometer",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "accelerometer": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

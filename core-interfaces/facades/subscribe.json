@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Subscribe",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "subscribe": {
+            "readOnly": false,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

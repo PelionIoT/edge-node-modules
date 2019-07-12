@@ -1,0 +1,15 @@
+{
+    "name": "Facades/TVOC",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "tvoc": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

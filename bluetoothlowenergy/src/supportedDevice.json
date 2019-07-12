@@ -1,0 +1,140 @@
+[
+	{ "name":"Project Zero R2" },
+    {
+        "name": "Thingy",
+        "advertisementServiceUuid": "ef6801009b3549339b1052ffa9740042",
+        "controller": "controllers/NordicThingy/controller",
+        "uuids": {
+            "battery": {
+                "serviceID": "180f",
+                "characteristicID": "2a19"
+            },
+            "temperature": {
+                "serviceID": "ef6802009b3549339b1052ffa9740042",
+                "characteristicID": "ef6802019b3549339b1052ffa9740042",
+                "subscribe": true,
+                "threshold": 0.5
+            },
+            "pressure": {
+                "serviceID": "ef6802009b3549339b1052ffa9740042",
+                "characteristicID": "ef6802029b3549339b1052ffa9740042",
+                "subscribe": false,
+                "threshold": 0.5
+            },
+            "humidity": {
+                "serviceID": "ef6802009b3549339b1052ffa9740042",
+                "characteristicID": "ef6802039b3549339b1052ffa9740042",
+                "subscribe": true,
+                "threshold": 3
+            },
+            "co2": {
+                "serviceID": "ef6802009b3549339b1052ffa9740042",
+                "characteristicID": "ef6802049b3549339b1052ffa9740042",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "color": {
+                "serviceID": "ef6802009b3549339b1052ffa9740042",
+                "characteristicID": "ef6802059b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "button": {
+                "serviceID": "ef6803009b3549339b1052ffa9740042",
+                "characteristicID": "ef6803029b3549339b1052ffa9740042",
+                "subscribe": true
+            },
+            "tap": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804029b3549339b1052ffa9740042",
+                "subscribe": true
+            },
+            "orientation": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804039b3549339b1052ffa9740042",
+                "subscribe": true
+            },
+            "quaternion": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804049b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "stepcounter": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804059b3549339b1052ffa9740042",
+                "subscribe": true
+            },
+            "euler": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804079b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "heading": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804099b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "accelerometer": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804069b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "gravity": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef68040a9b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "rotation": {
+                "serviceID": "ef6804009b3549339b1052ffa9740042",
+                "characteristicID": "ef6804089b3549339b1052ffa9740042",
+                "subscribe": false
+            },
+            "rgb": {
+                "serviceID": "ef6803009b3549339b1052ffa9740042",
+                "characteristicID": "ef6803019b3549339b1052ffa9740042"
+            },
+            "settings": {
+                "environment": {
+                    "serviceID": "ef6802009b3549339b1052ffa9740042",
+                    "characteristicID": "ef6802069b3549339b1052ffa9740042",
+                    "subscribe": true,
+                    "interval_index": {
+                        "temperature": 0,
+                        "pressure": 2,
+                        "humidity": 4,
+                        "color": 6,
+                        "co2": 8
+                    }
+                }
+            }
+        },
+        "config": {
+            "name": "Core/Devices/Bluetooth/BLE/NordicThingy",
+            "version": "0.0.1",
+            "interfaces": [
+                "Facades/HasTemperature",
+                "Facades/Humidity",
+                "Facades/CarbonDioxide",
+                "Facades/TVOC",
+                "Facades/Color",
+                "Facades/Pressure",
+                "Facades/HasButton",
+                "Facades/TapDetection",
+                "Facades/Orientation",
+                "Facades/Quaternion",
+                "Facades/StepCounter",
+                "Facades/EulerAngles",
+                "Facades/Heading",
+                "Facades/Gyroscope",
+                "Facades/Magnetometer",
+                "Facades/Accelerometer",
+                "Facades/GravitySensor",
+                "Facades/RotationMatrix",
+                "Facades/RGB",
+                "Facades/Switchable",
+                "Facades/HasBattery",
+                "Facades/SignalStrength",
+                "Facades/Subscribe"
+            ]
+        }
+    }
+]

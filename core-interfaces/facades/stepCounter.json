@@ -1,0 +1,14 @@
+{
+    "name": "Facades/StepCounter",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "stepcounter": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

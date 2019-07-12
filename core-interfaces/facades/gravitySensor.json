@@ -1,0 +1,14 @@
+{
+    "name": "Facades/GravitySensor",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "gravity": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

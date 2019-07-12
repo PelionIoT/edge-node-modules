@@ -1,0 +1,39 @@
+{
+    "name": "bluetoothlowenergy",
+    "version": "0.0.1",
+    "description": "Node module to interact with ble devices",
+    "author": {
+        "name": "Yash",
+        "email": "support@wigwag.com"
+    },
+    "website": {
+        "url": "wigwag.com"
+    },
+    "repository": {},
+    "private": true,
+    "dependencies": {
+        "colors": "1.1.2",
+	"commander": "^2.20.0",
+        "devjs-configurator": "https://github.com/armPelionEdge/devjs-configurator.git",
+        "es6-promise": "^3.0.2",
+        "handlebars": "4.0.5",
+        "jsonminify": "^0.2.3",
+        "mkdirp": "^0.5.1",
+        "noble": "^1.9.1",
+        "node-udev": "https://github.com/armPelionEdge/node-hotplug.git",
+        "promise": "^7.0.4",
+        "underscore": "*"
+    },
+    "devDependencies": { },
+    "devicejs": {
+        "interfaces": [
+            "./BLEInterface.json"
+        ],
+        "resourceTypes": [
+            "./BLEResource.json",
+            "./controllers/devicePairer/devicePairer.json"
+        ],
+        "engines": { "devicejs": ">=0.0.1" },
+        "dependencies": { }
+    }
+}

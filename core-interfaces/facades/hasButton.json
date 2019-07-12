@@ -1,0 +1,14 @@
+{
+    "name": "Facades/HasButton",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "button": {
+            "readOnly": true,
+            "schema": {
+                "type": "boolean"
+            }
+        }
+    },
+    "events": { }
+}

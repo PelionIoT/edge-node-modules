@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Color",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "color": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

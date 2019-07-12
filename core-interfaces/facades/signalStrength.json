@@ -1,0 +1,17 @@
+{
+    "name": "Facades/SignalStrength",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "rssi": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": -200,
+                "maximum": 0
+            }
+        }
+    },
+    "events": {
+    }
+}
