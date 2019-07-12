@@ -1,0 +1,15 @@
+{
+    "name": "Facades/CarbonDioxide",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "co2": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

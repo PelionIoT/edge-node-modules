@@ -1,0 +1,14 @@
+{
+    "name": "Facades/RotationMatrix",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "rotation": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

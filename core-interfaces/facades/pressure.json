@@ -1,0 +1,15 @@
+{
+    "name": "Facades/Pressure",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "pressure": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

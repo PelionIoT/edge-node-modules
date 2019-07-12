@@ -1,0 +1,14 @@
+{
+    "name": "Facades/TapDetection",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "tap": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

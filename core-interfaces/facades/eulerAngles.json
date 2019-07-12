@@ -1,0 +1,14 @@
+{
+    "name": "Facades/EulerAngles",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "euler": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

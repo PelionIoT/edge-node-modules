@@ -1,0 +1,14 @@
+{
+    "name": "Facades/RGB",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "rgb": {
+            "readOnly": false,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,5 @@
+{
+	"name": "Bluetooth/DevicePairer",
+	"version": "0.0.1",
+	"interfaces": [ "Core/Interfaces/Pairable" ]
+}

@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Heading",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "heading": {
+            "readOnly": true,
+            "schema": {
+                "type": "number"
+            }
+        }
+    },
+    "events": { }
+}

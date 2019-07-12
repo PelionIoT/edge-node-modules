@@ -1,0 +1,14 @@
+{
+    "name": "Facades/Gyroscope",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "gyroscope": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}
