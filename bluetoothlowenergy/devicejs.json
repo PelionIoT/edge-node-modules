@@ -20,7 +20,6 @@
         "jsonminify": "^0.2.3",
         "mkdirp": "^0.5.1",
         "noble": "^1.9.1",
-        "node-udev": "https://github.com/armPelionEdge/node-hotplug.git",
         "promise": "^7.0.4",
         "underscore": "*"
     },
