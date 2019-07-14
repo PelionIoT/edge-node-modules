@@ -27,7 +27,6 @@ const noble = require('noble');
 const Logger = require('./../utils/logger');
 const helper = require('./../utils/helper').helper;
 const EventEmitter = require('events').EventEmitter;
-const CreateDoorLock = require('./../controllers/Door-lock-controller/createDoorLock');
 const stringify = require('json-stringify-safe')
 const logger = new Logger({
 	tag: 'BLE',
