@@ -1,5 +1,5 @@
 {
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"logLevel": 5,
 	"activityLength": 100,
 	"platform": "", //Used to identify platform so that module can adapt and run automagically

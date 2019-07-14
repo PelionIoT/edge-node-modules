@@ -178,7 +178,7 @@ BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
 			resolve();
 
 			var eventInterval = setInterval(function() {
-				self.emit("ble-discovered-devices", JSON.stringify(self._peripherals));
+				self.emit("ble-discovered-devices", stringify(self._peripherals));
 			}, 2000);
 
 			//timer to stop the scan
