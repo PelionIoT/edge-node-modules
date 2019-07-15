@@ -31,6 +31,7 @@ var Thingy = {
         this._uuids = options.services;
 
         this._states = {
+            "power": "on",
             "temperature": 0,
             "humidity": 0,
             "co2": 0,
@@ -40,6 +41,10 @@ var Thingy = {
                 green: 0,
                 blue: 0,
                 clear: 0
+            },
+            stepCounter: {
+                steps : 0,
+                time : 0
             },
             "pressure": 0,
             "button": true,
@@ -566,7 +571,7 @@ var Thingy = {
                     var p = [];
                     Object.keys(input).forEach(function(st) {
                         if(self._supportedStates.indexOf(st) > -1) {
-                            if(!self._states.subscribe[st] || input[st] != self._states.subscribe[st]) {
+                            if(typeof self._states.subscribe[st] == 'undefined' || input[st] != self._states.subscribe[st]) {
                                 p.push(
                                     self._ble.notifyCharacteristics(self._peripheralID, self._uuids[st].serviceID, self._uuids[st].characteristicID, self.onNotify[st], input[st]).then(function() {
                                         self._logger.info("Got subscription request for state=" + st + ", subscribe=" + input[st]);
