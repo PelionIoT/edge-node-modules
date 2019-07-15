@@ -887,6 +887,10 @@ var DevStateManager = {
             if(facades.indexOf('Facades/ThermostatMode') >  -1) {
                 ret[3].ThermostatMode = true;
             }
+            if(facades.indexOf('Facades/RGB') >  -1 && facades.indexOf('Facades/Quaternion') > -1) {
+                ret[3].RGB = true;
+                ret[3].Quaternion = true;
+            }
 
 
             if(facades.indexOf('Facades/HasLuminance') > -1) {

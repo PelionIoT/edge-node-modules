@@ -125,7 +125,7 @@ BLE.prototype.state = function () {
 };
 
 BLE.prototype.getPeripherals = function () {
-	return JSON.stringify(this._peripherals);
+	return stringify(this._peripherals);
 };
 
 BLE.prototype.getPeripheral = function (uuid) {
