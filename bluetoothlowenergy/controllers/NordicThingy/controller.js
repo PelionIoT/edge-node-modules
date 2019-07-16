@@ -82,6 +82,11 @@ var Thingy = {
             },
             "rssi": -100,
             "battery": 100,
+            "orientation": 0,
+            "tap": {
+                direction: 0,
+                count: 0
+            },
             "subscribe": {
             }
         };
