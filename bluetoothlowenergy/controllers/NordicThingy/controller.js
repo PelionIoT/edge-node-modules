@@ -61,6 +61,9 @@ var Thingy = {
             "accelerometer": {
                 x:0, y:0, z:0
             },
+            "magnetometer": {
+                x:0, y:0, z:0
+            },
             "gravity": {
                 x:0,y:0,z:0
             },
@@ -506,7 +509,7 @@ var Thingy = {
         },
         stepcounter: {
             get: function() {
-                return this._states.stepcounter;
+                return this._states.stepCounter;
             },
             set: function() {
                 return Promise.reject('Readonly facade!');
