@@ -54,22 +54,25 @@ process.on('SIGINT', function (error) {
     process.exit(1);
 });
 
-var adapter = process.env.NOBLE_HCI_DEVICE_ID || 0;
-function resetAdapter() {
-    exec('hciconfig hci%s reset', adapter, function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call
-        if (error !== null) {
-            logger.error("Failed to reset the adapter, error=" + JSON.stringify(error));
-        } else {
-            logger.info("Reset the bluetooth adapter, hci" + adapter);
-        }
-    });
-}
-resetAdapter();
+
 
 configurator.configure("bluetoothlowenergy", __dirname).then(function (data) {
     options = data;
     global.BLELogLevel = options.logLevel || 5;
     logger.info('Options ' + JSON.stringify(options));
+    var adapter = process.env.NOBLE_HCI_DEVICE_ID || options.hciDeviceID || 0;
+    logger.info("Using hci deviceID - " + adapter);
+    function resetAdapter() {
+        exec('hciconfig hci%s reset', adapter, function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call
+            if (error !== null) {
+                logger.error("Failed to reset the adapter, error=" + JSON.stringify(error));
+            } else {
+                logger.info("Reset the bluetooth adapter, hci" + adapter);
+            }
+        });
+    }
+    resetAdapter();
+
     ble = new BLE();
     var bleControllerID = "BluetoothDriver";
     var blueController = new bluetooth(bleControllerID);
