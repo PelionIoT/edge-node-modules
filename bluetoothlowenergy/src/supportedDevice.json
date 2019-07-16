@@ -56,7 +56,8 @@
             "quaternion": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef6804049b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 50
             },
             "stepcounter": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
@@ -66,27 +67,32 @@
             "euler": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef6804079b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 50
             },
             "heading": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef6804099b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 15
             },
             "accelerometer": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef6804069b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 50
             },
             "gravity": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef68040a9b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 50
             },
             "rotation": {
                 "serviceID": "ef6804009b3549339b1052ffa9740042",
                 "characteristicID": "ef6804089b3549339b1052ffa9740042",
-                "subscribe": false
+                "subscribe": false,
+                "throttleRate": 50
             },
             "rgb": {
                 "serviceID": "ef6803009b3549339b1052ffa9740042",

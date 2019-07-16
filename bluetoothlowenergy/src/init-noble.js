@@ -194,7 +194,7 @@ BLE.prototype.stopScan = function () {
 	var self = this
 	clearFlag = true;
 	//ddb.shared.delete("BluetoothDriver.scanResult")
-	ddb.shared.delete("BluetoothDriver.scanResult")
+	// ddb.shared.delete("BluetoothDriver.scanResult")
 	ddb.shared.put('BluetoothDriver.scanResult', stringify(this._peripherals));
 	noble.stopScanning()
 	//return noble.stopScanning();

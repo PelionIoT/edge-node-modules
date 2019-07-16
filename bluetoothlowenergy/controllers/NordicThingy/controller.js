@@ -111,11 +111,14 @@ var Thingy = {
                 co2 : data.readUInt16LE(0),
                 tvoc : data.readUInt16LE(2)
             };
+            if(Math.abs(self._states.co2 - gas.co2) > self._uuids.co2.threshold ||
+                Math.abs(self._states.tvoc - gas.tvoc) > self._uuids.co2.threshold) {
                 self._logger.info("Gas: " + JSON.stringify(gas));
                 self._states.co2 = gas.co2;
-                self._states.tvoc = gas.tvoc;
                 dev$.publishResourceStateChange(self._deviceID, "co2", gas.co2);
+                self._states.tvoc = gas.tvoc;
                 dev$.publishResourceStateChange(self._deviceID, "tvoc", gas.tvoc);
+            }
         };
 
         this.onColor = function(data) {
@@ -125,17 +128,18 @@ var Thingy = {
                 blue :  data.readUInt16LE(4),
                 clear : data.readUInt16LE(6)
             };
-                self._logger.info("Color: " + JSON.stringify(color));
-                self._states.color = color;
-                dev$.publishResourceStateChange(self._deviceID, "color", color);
+            self._logger.info("Color: " + JSON.stringify(color));
+            self._states.color = color;
+            dev$.publishResourceStateChange(self._deviceID, "color", color);
         };
 
         this.onPressure = function(data) {
             var pressure = data.readInt32LE(0) + (data.readUInt8(4)/100);
-
+            if(Math.abs(self._states.pressure - pressure) > self._uuids.pressure.threshold) {
                 self._logger.info("Pressure: " + JSON.stringify(pressure));
                 self._states.pressure = pressure;
                 dev$.publishResourceStateChange(self._deviceID, "pressure", pressure);
+            }
         };
 
         this.onButton = function(data) {
@@ -163,11 +167,12 @@ var Thingy = {
 
         this.onOrientation = function(data) {
             var orientation = data.readUInt8(0);
-                self._states.orientation = orientation;
+            self._states.orientation = orientation;
             self._logger.info("orientation: " + JSON.stringify(orientation));
             dev$.publishResourceStateChange(self._deviceID, "orientation", orientation);
         };
 
+        this._quaternionThrottleCount = 0;
         this.onQuaternion = function(data) {
             var quaternion = {
                 w : data.readInt32LE(0)/(1<<30),
@@ -175,9 +180,13 @@ var Thingy = {
                 y : data.readInt32LE(8)/(1<<30),
                 z : data.readInt32LE(12)/(1<<30)
             };
+            if(!self._quaternionThrottleCount || (self._quaternionThrottleCount > self._uuids.quaternion.throttleRate)) {
+                self._quaternionThrottleCount = 1;
                 self._states.quaternion = quaternion;
-            self._logger.info("quaternion: " + JSON.stringify(quaternion));
-            dev$.publishResourceStateChange(self._deviceID, "quaternion", quaternion);
+                self._logger.info("quaternion: " + JSON.stringify(quaternion));
+                dev$.publishResourceStateChange(self._deviceID, "quaternion", quaternion);
+            }
+            self._quaternionThrottleCount++;
         };
 
         this.onStepCounter = function(data) {
@@ -185,41 +194,58 @@ var Thingy = {
                 steps : data.readUInt32LE(0),
                 time : data.readUInt32LE(4)
             };
-                self._states.stepcounter = stepCounter;
+            self._states.stepcounter = stepCounter;
             self._logger.info("stepCounter: " + JSON.stringify(stepCounter));
             dev$.publishResourceStateChange(self._deviceID, "stepcounter", stepCounter);
         };
 
+        this._eulerThrottleCount = 0;
         this.onEulerAngles = function(data) {
             var euler = {
                 roll  : data.readInt32LE(0)/(1<<16),
                 pitch : data.readInt32LE(4)/(1<<16),
                 yaw   : data.readInt32LE(8)/(1<<16)
             };
+
+            if(!self._eulerThrottleCount || (self._eulerThrottleCount > self._uuids.euler.throttleRate)) {
+                self._eulerThrottleCount = 1;
                 self._states.euler = euler;
-            self._logger.info("Euler Angles: " + JSON.stringify(euler));
-            dev$.publishResourceStateChange(self._deviceID, "euler", euler);
+                self._logger.info("Euler Angles: " + JSON.stringify(euler));
+                dev$.publishResourceStateChange(self._deviceID, "euler", euler);
+            }
+            self._eulerThrottleCount++;
         };
 
         //Heading - http://www.chrobotics.com/library/heading-course-and-crab-angle
+        this._headingThrottleCount = 0;
         this.onHeading = function(data) {
             var heading = data.readInt32LE(0)/(1<<16);
+            if(!self._headingThrottleCount || (self._headingThrottleCount > self._uuids.heading.throttleRate)) {
+                self._headingThrottleCount = 1;
                 self._states.heading = heading;
-            self._logger.info("Heading: " + JSON.stringify(heading));
-            dev$.publishResourceStateChange(self._deviceID, "heading", heading);
+                self._logger.info("Heading: " + JSON.stringify(heading));
+                dev$.publishResourceStateChange(self._deviceID, "heading", heading);
+            }
+            self._headingThrottleCount++;
         };
 
+        this._gravityThrottleCount = 0;
         this.onGravity = function(data) {
             var gravity = {
                 x : data.readFloatLE(0),
                 y : data.readFloatLE(4),
                 z : data.readFloatLE(8)
             };
+            if(!self._gravityThrottleCount || (self._gravityThrottleCount > self._uuids.gravity.throttleRate)) {
+                self._gravityThrottleCount = 1;
                 self._states.gravity = gravity;
-            self._logger.info("Gravity: " + JSON.stringify(gravity));
-            dev$.publishResourceStateChange(self._deviceID, "gravity", gravity);
+                self._logger.info("Gravity: " + JSON.stringify(gravity));
+                dev$.publishResourceStateChange(self._deviceID, "gravity", gravity);
+            }
+            self._gravityThrottleCount++;
         };
 
+        this._accelerometerThrottleCount = 0;
         this.onAccelerometer = function(data) {
             var raw_data = {
                 accelerometer : {
@@ -238,17 +264,22 @@ var Thingy = {
                     z : data.readInt16LE(16)/(1<<4)
                 },
             };
+
+            if(!self._accelerometerThrottleCount || (self._accelerometerThrottleCount > self._uuids.accelerometer.throttleRate)) {
+                self._accelerometerThrottleCount = 1;
                 self._states.accelerometer = raw_data.accelerometer;
-            self._logger.info("accelerometer: " + JSON.stringify(raw_data.accelerometer));
-            dev$.publishResourceStateChange(self._deviceID, "accelerometer", raw_data.accelerometer);
+                self._logger.info("accelerometer: " + JSON.stringify(raw_data.accelerometer));
+                dev$.publishResourceStateChange(self._deviceID, "accelerometer", raw_data.accelerometer);
 
                 self._states.gyroscope = raw_data.gyroscope;
-            self._logger.info("gyroscope: " + JSON.stringify(raw_data.gyroscope));
-            dev$.publishResourceStateChange(self._deviceID, "gyroscope", raw_data.gyroscope);
+                self._logger.info("gyroscope: " + JSON.stringify(raw_data.gyroscope));
+                dev$.publishResourceStateChange(self._deviceID, "gyroscope", raw_data.gyroscope);
 
                 self._states.magnetometer = raw_data.magnetometer;
-            self._logger.info("magnetometer: " + JSON.stringify(raw_data.compass));
-            dev$.publishResourceStateChange(self._deviceID, "magnetometer", raw_data.compass);
+                self._logger.info("magnetometer: " + JSON.stringify(raw_data.compass));
+                dev$.publishResourceStateChange(self._deviceID, "magnetometer", raw_data.compass);
+            }
+            self._accelerometerThrottleCount++;
         };
 
         this.onRotation = function(data) {
