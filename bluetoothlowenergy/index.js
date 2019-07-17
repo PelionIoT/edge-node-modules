@@ -60,7 +60,10 @@ configurator.configure("bluetoothlowenergy", __dirname).then(function (data) {
     options = data;
     global.BLELogLevel = options.logLevel || 5;
     logger.info('Options ' + JSON.stringify(options));
-    var adapter = process.env.NOBLE_HCI_DEVICE_ID || options.hciDeviceID || 0;
+    if(options.hciDeviceID) {
+        process.env.NOBLE_HCI_DEVICE_ID = options.hciDeviceID;
+    }
+    var adapter = process.env.NOBLE_HCI_DEVICE_ID || 0;
     logger.info("Using hci deviceID - " + adapter);
     function resetAdapter() {
         exec('hciconfig hci%s reset', adapter, function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call

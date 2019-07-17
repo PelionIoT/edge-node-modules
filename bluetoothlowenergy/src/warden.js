@@ -31,8 +31,21 @@ var connecteddevice = [];
 var interval = null;
 
 var Warden = function(options) {
+	var self = this;
 	this._ble = options.ble;
 	this._deviceController = {};
+	this._onboardedDevices = [];
+	this.monitorOnboardedDevices();
+	this._createControllerInProgress = {};
+
+	ddb.shared.get('BluetoothDriver.onboarded').then(function (data) {
+		try {
+			self._onboardedDevices = JSON.parse(data.siblings);
+		} catch(err) {
+			self._onboardedDevices = [];
+			logger.error("Got error in reteriving the onboarded devices " + err);
+		}
+	});
 };
 
 Warden.prototype.createSignalStrengthController = function (uuids, peripheral, timer) {
@@ -108,9 +121,52 @@ Warden.prototype.stopController = function(uuid) {
 	if(this._deviceController[uuid]) {
 		this._deviceController[uuid].stop();
 		this._deviceController[uuid] = null;
+		this._onboardedDevices.splice(this._onboardedDevices.indexOf(uuid), 1);
+		ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(self._onboardedDevices));
 		return Promise.resolve();
 	} else {
 		return Promise.reject("No device controller found for this device!");
+	}
+};
+
+
+Warden.prototype.monitorOnboardedDevices = function() {
+	var self  = this;
+	if(!this._monitoringOnboardedDevices) {
+		logger.info("STARTING TO MONITOR THE ONBOARDED DEVICES!");
+		this._monitoringOnboardedDevices = true;
+		self._ble.on('ble-discovered-devices', function(peripherals) {
+			var devices = JSON.parse(peripherals);
+			// console.log("Found devices " + Object.keys(devices));
+			Object.keys(devices).forEach(function(uuid) {
+				if(devices[uuid] && devices[uuid].state == "disconnected" && self._onboardedDevices.indexOf(uuid) > -1) {
+					if(!self._deviceController[uuid] || !self._deviceController[uuid]._connected) {
+						if(!self._createControllerInProgress[uuid]) {
+							self._createControllerInProgress[uuid] = true;
+							logger.info("Creating controller for --- " + uuid);
+							self.createController(uuid).then(function() {
+								self._createControllerInProgress[uuid] = false;
+							}, function() {
+								self._createControllerInProgress[uuid] = false;
+							});
+						} else {
+							logger.warn("Device controller creation is in progress!");
+						}
+					}
+				}
+			});
+		});
+		setInterval(function() {
+			self._onboardedDevices.forEach(function(uuid) {
+				if(!self._deviceController[uuid] || !self._deviceController[uuid]._connected) {
+					logger.info("Looking for device - " + uuid);
+					self._ble.startScan(["ef6801009b3549339b1052ffa9740042"], false, 10000).then(function () {
+					}, (err) => {
+						logger.warn(err);
+					});
+				}
+			});
+		}, 10000);
 	}
 };
 
@@ -159,12 +215,19 @@ Warden.prototype.createController = function(uuid) {
 				                initStates: initStates || {}
 				            }).then(function() {
 				                ddb.shared.put('WigWagUI:appData.resource.' + deviceID + '.name', deviceID);
+				                if(self._onboardedDevices.indexOf(uuid) < 0) {
+				                	if(!self._onboardedDevices) self._onboardedDevices = [];
+				                	self._onboardedDevices.push(uuid);
+				                	ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(self._onboardedDevices));
+				                }
+				                self._deviceController[uuid]._subscribeToStates();
 								resolve("Device controller created successfully with resource name - " + data.config.name);
 				            }, function(err) {
 				                reject(err);
 				            });
 				        } else {
 				        	logger.warn("Device controller already exists!");
+				            self._deviceController[uuid]._subscribeToStates();
 				        	resolve("Device controller already exists!");
 				        }
 			        });
