@@ -113,6 +113,7 @@ var BLE = function (options) {
 			state: peripheral.state,
 			supported: false,
 		};
+		// console.log(self._peripherals);
 
 		self._peripheral[peripheral.uuid] = peripheral;
 	});
@@ -163,6 +164,8 @@ noble.on('scanStop', function () {
 
 var clearFlag = false;
 
+var stopScanTimer = null;
+var eventInterval = null;
 BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
     var self = this;
 	if (!(uuids instanceof Array)) {
@@ -171,18 +174,20 @@ BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
 	if (self._peripherals !== null) self._peripherals = {};
 	return new Promise(function (resolve, reject) {
 		logger.debug('Start scanning BLE...');
+		clearTimeout(stopScanTimer);
+		clearInterval(eventInterval);
 		noble.startScanning(uuids, !!allowduplicate, function (err, data) {
 			if (err) {
 				return reject('Failed to start with error ' + err + ' BLE state is- ' + self._state);
 			}
 			resolve();
 
-			var eventInterval = setInterval(function() {
+			eventInterval = setInterval(function() {
 				self.emit("ble-discovered-devices", stringify(self._peripherals));
 			}, 2000);
 
 			//timer to stop the scan
-			setTimeout(function () {
+			stopScanTimer = setTimeout(function () {
 				clearInterval(eventInterval);
 				self.stopScan();
 			}, timer);
@@ -191,13 +196,11 @@ BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
 };
 
 BLE.prototype.stopScan = function () {
-	var self = this
 	clearFlag = true;
-	//ddb.shared.delete("BluetoothDriver.scanResult")
-	// ddb.shared.delete("BluetoothDriver.scanResult")
-	ddb.shared.put('BluetoothDriver.scanResult', stringify(this._peripherals));
-	noble.stopScanning()
-	//return noble.stopScanning();
+	if(Object.keys(this._peripherals).length > 0) {
+		ddb.shared.put('BluetoothDriver.scanResult', stringify(this._peripherals));
+	}
+	noble.stopScanning();
 };
 
 function updateState(Peripheral, uuid, state) {
@@ -209,6 +212,7 @@ function updateState(Peripheral, uuid, state) {
 				neardevices[uuid].state = state;
 				ddb.shared.put('BluetoothDriver.scanResult', JSON.stringify(neardevices));
 			} else {
+				// console.log(neardevices);
 				logger.warn('Device not found in the database! uuid=' + uuid);
 			}
 		} catch(err) {
@@ -216,6 +220,7 @@ function updateState(Peripheral, uuid, state) {
 		}
 	});
 }
+
 
 BLE.prototype.connect = function (peripheralUuid) {
 	var self = this;

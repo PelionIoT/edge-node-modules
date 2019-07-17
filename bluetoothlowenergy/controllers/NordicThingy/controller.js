@@ -328,15 +328,18 @@ var Thingy = {
             "rotation": this.onRotation
         };
 
-        Object.keys(this._uuids).forEach(function(st) {
-            if(typeof self._uuids[st].subscribe !== 'undefined') {
-                self.state.subscribe.set({[st]: self._uuids[st].subscribe});
-            }
-        });
+        this._subscribeToStates = function() {
+            Object.keys(self._uuids).forEach(function(st) {
+                if(typeof self._uuids[st].subscribe !== 'undefined') {
+                    self.state.subscribe.set({[st]: self._uuids[st].subscribe});
+                }
+            });
+        };
 
         this._updateRSSI = function() {
             if(!self._isRssiRunning) {
                 self._rssiInterval = setInterval(function() {
+                    // console.log('get rssi value!' + self._connected);
                     self.state.rssi.get().then(function(ssi) {
                         if(Math.abs(self._states.rssi - ssi) > 2) {
                             self._states.rssi = ssi;
@@ -362,12 +365,14 @@ var Thingy = {
         this._ble.on('disconnect-'+this._peripheralID, function() {
             self._logger.debug("Got disconnect event!");
             self._stopRSSI();
+            self._connected = false;
             self.emit('unreachable');
         });
         this._ble.removeAllListeners('connect-'+this._peripheralID);
         this._ble.on('connect-'+this._peripheralID, function() {
             self._logger.debug("Got connect event!");
             self._updateRSSI();
+            self._connected = true;
             self.emit('reachable');
         });
         this._logger.info("Device controller initialized successfully!");
@@ -610,14 +615,14 @@ var Thingy = {
                     var p = [];
                     Object.keys(input).forEach(function(st) {
                         if(self._supportedStates.indexOf(st) > -1) {
-                            if(typeof self._states.subscribe[st] == 'undefined' || input[st] != self._states.subscribe[st]) {
+                            // if(typeof self._states.subscribe[st] == 'undefined' || input[st] != self._states.subscribe[st]) {
                                 p.push(
                                     self._ble.notifyCharacteristics(self._peripheralID, self._uuids[st].serviceID, self._uuids[st].characteristicID, self.onNotify[st], input[st]).then(function() {
                                         self._logger.info("Got subscription request for state=" + st + ", subscribe=" + input[st]);
                                         self._states.subscribe[st] = input[st];
                                     })
                                 );
-                            }
+                            // }
                         } else {
                             self._logger.warn("State is not supported by this device! Supported states are - " + JSON.stringify(self._supportedStates) + " received - " + st);
                         }

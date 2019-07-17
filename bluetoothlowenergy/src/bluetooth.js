@@ -47,9 +47,25 @@ var Bluetooth = {
         this._warden = obj.warden;
         this._deviceID = obj.deviceID;
 
-        this._ble.removeAllListeners('ble-discovered-devices');
         this._ble.on('ble-discovered-devices', function(data) {
-            dev$.publishResourceStateChange(self._deviceID, "peripherals", data);
+            try {
+                var newdevices = {};
+                data = JSON.parse(data);
+                Object.keys(data).forEach(function(uuid) {
+                    newdevices[uuid] = JSON.parse(JSON.stringify(data[uuid]));
+                    delete newdevices[uuid].services;
+                    delete newdevices[uuid].advertisement;
+                });
+                if(Object.keys(newdevices).length > 0) {
+                    dev$.publishResourceStateChange(self._deviceID, "peripherals", JSON.stringify(newdevices)).then(function() {
+
+                    }, function(err) {
+                        logger.error("Failed to send discover devices " + JSON.stringify(err));
+                    });
+                }
+            } catch(err) {
+                logger.error("Catch: failed to send discover devices " + JSON.stringify(err));
+            }
         });
     },
     stop: function () {},
@@ -149,7 +165,7 @@ var Bluetooth = {
     commands: {
         startScan: function (timer, duplicates) {
             timer = timer | 10000;
-            duplicates = duplicates | false
+            duplicates = duplicates | false;
             return this._ble.startScan([], duplicates, timer);
         },
         stopScan: function () {
