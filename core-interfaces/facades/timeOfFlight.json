@@ -1,0 +1,15 @@
+{
+    "name": "Facades/TimeOfFlight",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "timeOfFlight": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

@@ -1,0 +1,15 @@
+{
+    "name": "Facades/GasResistance",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "gasResistance": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

@@ -105,6 +105,11 @@
             "./facades/rotationMatrix.json",
             "./facades/rgb.json",
             "./facades/subscribe.json",
+            "./facades/airQualityScore.json",
+            "./facades/airQualityAccuracyScore.json",
+            "./facades/gasResistance.json",
+            "./facades/bvoc.json",
+            "./facades/timeOfFlight.json",
             "./facades/zoom.json"
         ],
         "resourceTypes": [ ],

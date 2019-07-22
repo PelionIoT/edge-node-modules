@@ -1,0 +1,15 @@
+{
+    "name": "Facades/BVOC",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "bvoc": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}

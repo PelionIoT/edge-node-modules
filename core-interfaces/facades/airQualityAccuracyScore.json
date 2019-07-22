@@ -1,0 +1,15 @@
+{
+    "name": "Facades/AirQualityAccuracyScore",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "airQualityAccuracyScore": {
+            "readOnly": true,
+            "schema": {
+                "type": "number",
+                "minimum": 0
+            }
+        }
+    },
+    "events": { }
+}
