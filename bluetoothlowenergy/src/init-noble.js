@@ -86,6 +86,7 @@ var BLE = function (options) {
 	var self = this;
 	this._state = 'unknown';
 	this._peripherals = {};
+	this._discoveredDevices = {};
 	this._peripheral = {};
 	this.devices = {};
 	this._userdevices = [];
@@ -100,7 +101,7 @@ var BLE = function (options) {
 		//logger.info('Discovered device ' + peripheral.address + ' rssi ' + peripheral.rssi);
 		logger.debug('Discovered device ' + peripheral.address + ' rssi ' + peripheral.rssi + ' ' + peripheral.advertisement.localName);
 
-		self._peripherals[peripheral.uuid] = {
+		self._discoveredDevices[peripheral.uuid] = {
 			name: peripheral.advertisement.localName,
 			id: peripheral.id,
 			uuid: peripheral.uuid,
@@ -126,12 +127,12 @@ BLE.prototype.state = function () {
 };
 
 BLE.prototype.getPeripherals = function () {
-	return stringify(this._peripherals);
+	return stringify(this._discoveredDevices);
 };
 
 BLE.prototype.getPeripheral = function (uuid) {
-	//console.log(this._peripheral[uuid]);
-	return this._peripherals[uuid];
+	// console.log(this._peripherals[uuid]);
+	return this._peripherals[uuid] || this._discoveredDevices[uuid] ;
 };
 
 BLE.prototype.myAddress = function () {
@@ -171,7 +172,7 @@ BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
 	if (!(uuids instanceof Array)) {
 		return Promise.reject('uuids should be of type array');
 	}
-	if (self._peripherals !== null) self._peripherals = {};
+	if (self._discoveredDevices !== null) self._discoveredDevices = {};
 	return new Promise(function (resolve, reject) {
 		logger.debug('Start scanning BLE...');
 		clearTimeout(stopScanTimer);
@@ -181,30 +182,29 @@ BLE.prototype.startScan = function (uuids, allowduplicate, timer) {
 				return reject('Failed to start with error ' + err + ' BLE state is- ' + self._state);
 			}
 			resolve();
-
-			eventInterval = setInterval(function() {
-				self.emit("ble-discovered-devices", stringify(self._peripherals));
-			}, 2000);
-
-			//timer to stop the scan
-			stopScanTimer = setTimeout(function () {
-				clearInterval(eventInterval);
-				self.stopScan();
-			}, timer);
 		});
+
+		eventInterval = setInterval(function() {
+			self.emit("ble-discovered-devices", stringify(self._discoveredDevices));
+		}, 2000);
+
+		//timer to stop the scan
+		stopScanTimer = setTimeout(function () {
+			clearInterval(eventInterval);
+			self.stopScan();
+		}, timer);
 	});
 };
 
 BLE.prototype.stopScan = function () {
 	clearFlag = true;
-	if(Object.keys(this._peripherals).length > 0) {
-		ddb.shared.put('BluetoothDriver.scanResult', stringify(this._peripherals));
+	if(Object.keys(this._discoveredDevices).length > 0) {
+		ddb.shared.put('BluetoothDriver.scanResult', stringify(this._discoveredDevices));
 	}
 	noble.stopScanning();
 };
 
 function updateState(Peripheral, uuid, state) {
-	var self = Peripheral;
 	ddb.shared.get('BluetoothDriver.scanResult').then(function (data) {
 		try {
 			var neardevices = JSON.parse(data.siblings);
@@ -225,6 +225,9 @@ function updateState(Peripheral, uuid, state) {
 BLE.prototype.connect = function (peripheralUuid) {
 	var self = this;
 	var peripheral = self._peripheral[peripheralUuid];
+
+	if(Object.keys(self._peripherals).indexOf(peripheralUuid) == -1)
+		self._peripherals[peripheralUuid] = JSON.parse(JSON.stringify(self._discoveredDevices[peripheralUuid]));
 
 	if(!peripheral) return Promise.reject('Not found in the database!');
 
@@ -256,6 +259,7 @@ BLE.prototype.connect = function (peripheralUuid) {
 			logger.info('Connected successfully. Now discovering services and characteristics!');
 			self.discoverAllServicesAndCharacteristics(peripheralUuid).then(function () {
 				logger.info('Discovered services and characteristics for ' + peripheralUuid);
+				// console.log(self._peripherals[peripheralUuid]);
 				self._peripherals[peripheralUuid].services = [];
 				self._peripheral[peripheralUuid].services.forEach(function (eachService) {
 					var characteristics = [];
@@ -288,7 +292,7 @@ BLE.prototype.connect = function (peripheralUuid) {
 				return reject('Failed to connect ' + err);
 			}
 		}, function(err) {
-			console.log(err)
+			console.log(err);
 			return reject(err);
 		});
 	});

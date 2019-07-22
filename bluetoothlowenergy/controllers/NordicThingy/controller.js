@@ -372,9 +372,10 @@ var Thingy = {
         this._ble.on('connect-'+this._peripheralID, function() {
             self._logger.debug("Got connect event!");
             self._updateRSSI();
-            self._connected = true;
+            // self._connected = true;
             self.emit('reachable');
         });
+        self._connected = true;
         this._logger.info("Device controller initialized successfully!");
 
         //This validates that device onboarded successfully

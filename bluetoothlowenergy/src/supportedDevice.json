@@ -1,6 +1,123 @@
 [
 	{ "name":"Project Zero R2" },
     {
+        "name": "EP Agora",
+        "advertisementServiceUuid": "000000018dd44087a16a04a7c8e01734",
+        "controller": "controllers/EPAgora/controller",
+        "uuids": {
+            "temperature": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "2a6e",
+                "subscribe": true,
+                "threshold": 0.5
+            },
+            "humidity": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "2a6f",
+                "subscribe": true,
+                "threshold": 3
+            },
+            "pressure": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "2a6d",
+                "subscribe": true,
+                "threshold": 0.5
+            },
+            "co2": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "000010018dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "bvoc": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "000020018dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "airQualityScore": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "000030018dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "airQualityAccuracyScore": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "000040018dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "gasResistance": {
+                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "characteristicID": "000050018dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 10
+            },
+            "accelerometer": {
+                "serviceID": "000000048dd44087a16a04a7c8e01734",
+                "characteristicID": "000010038dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "throttleRate": 5
+            },
+            "gyroscope": {
+                "serviceID": "000000048dd44087a16a04a7c8e01734",
+                "characteristicID": "000020038dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "throttleRate": 5
+            },
+            "magnetometer": {
+                "serviceID": "000000048dd44087a16a04a7c8e01734",
+                "characteristicID": "000030048dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "throttleRate": 5
+            },
+            "luminance": {
+                "serviceID": "000000058dd44087a16a04a7c8e01734",
+                "characteristicID": "000010058dd44087a16a04a7c8e01734",
+                "subscribe": true,
+                "threshold": 1
+            },
+            "timeOfFlight": {
+                "serviceID": "000000068dd44087a16a04a7c8e01734",
+                "characteristicID": "000010068dd44087a16a04a7c8e01734",
+                "subscribe": true
+            },
+            "power": {
+                "serviceID": "000000088dd44087a16a04a7c8e01734",
+                "characteristicID": "000010088dd44087a16a04a7c8e01734",
+                "subscribe": true
+            },
+            "battery": {
+                "serviceID": "000000098dd44087a16a04a7c8e01734",
+                "characteristicID": "000010098dd44087a16a04a7c8e01734",
+                "subscribe": true
+            }
+        },
+        "config": {
+            "name": "Core/Devices/Bluetooth/BLE/EPAgora",
+            "version": "0.0.1",
+            "interfaces": [
+                "Facades/HasTemperature",
+                "Facades/Humidity",
+                "Facades/CarbonDioxide",
+                "Facades/BVOC",
+                "Facades/GasResistance",
+                "Facades/AirQualityScore",
+                "Facades/AirQualityAccuracyScore",
+                "Facades/HasLuminance",
+                "Facades/TimeOfFlight",
+                "Facades/Pressure",
+                "Facades/Gyroscope",
+                "Facades/Magnetometer",
+                "Facades/Accelerometer",
+                "Facades/Switchable",
+                "Facades/HasBattery",
+                "Facades/SignalStrength",
+                "Facades/Subscribe"
+            ]
+        }
+    },
+    {
         "name": "Thingy",
         "advertisementServiceUuid": "ef6801009b3549339b1052ffa9740042",
         "controller": "controllers/NordicThingy/controller",

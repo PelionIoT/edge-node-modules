@@ -35,16 +35,59 @@ var Warden = function(options) {
 	this._ble = options.ble;
 	this._deviceController = {};
 	this._onboardedDevices = [];
-	this.monitorOnboardedDevices();
-	this._createControllerInProgress = {};
+	this._createControllerQueue = [];
+	this._retryCreatingDeviceController = {};
+};
 
-	ddb.shared.get('BluetoothDriver.onboarded').then(function (data) {
-		try {
-			self._onboardedDevices = JSON.parse(data.siblings);
-		} catch(err) {
-			self._onboardedDevices = [];
-			logger.error("Got error in reteriving the onboarded devices " + err);
+Warden.prototype.start = function() {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		self.monitorOnboardedDevices();
+		ddb.shared.get('BluetoothDriver.onboarded').then(function (data) {
+			try {
+				self._onboardedDevices = JSON.parse(data.siblings);
+				resolve();
+			} catch(err) {
+				self._onboardedDevices = [];
+				logger.error("Got error in reteriving the onboarded devices " + err);
+				reject(err);
+			}
+		});
+	});
+};
+
+Warden.prototype.createController = function(uuid) {
+	var self = this;
+	return new Promise(function(resolve, reject) {
+		if(self._createControllerQueue.indexOf(uuid) > -1) {
+			self._retryCreatingDeviceController[uuid]++;
+			if(self._retryCreatingDeviceController[uuid] > 10) 
+				self._createControllerQueue.splice(self._createControllerQueue.indexOf(uuid), 1);
+			logger.warn("Creating controller for " + uuid + " is in progress!");
+			return reject();
 		}
+		// if(!self._deviceController[uuid]) {
+			try {
+				self._createControllerQueue.push(uuid);
+				self._retryCreatingDeviceController[uuid] = 0;
+				self.startCreatingController(uuid).then(function() {
+					self._createControllerQueue.splice(self._createControllerQueue.indexOf(uuid), 1);
+					resolve();
+				}, function(err) {
+					self._createControllerQueue.splice(self._createControllerQueue.indexOf(uuid), 1);
+					logger.error("Failed to create controller " + err);
+					reject(err);
+				});
+			} catch(err) {
+				self._createControllerQueue.splice(self._createControllerQueue.indexOf(uuid), 1);
+				logger.error("Catch failed to create controller " + err);
+				reject(err);
+			}
+		// } else {
+  //       	logger.warn("Device controller already exists!");
+  //           self._deviceController[uuid]._subscribeToStates();
+  //       	resolve("Device controller already exists!");
+		// }
 	});
 };
 
@@ -122,9 +165,11 @@ Warden.prototype.stopController = function(uuid) {
 		this._deviceController[uuid].stop();
 		this._deviceController[uuid] = null;
 		this._onboardedDevices.splice(this._onboardedDevices.indexOf(uuid), 1);
-		ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(self._onboardedDevices));
+		ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(this._onboardedDevices));
 		return Promise.resolve();
 	} else {
+		this._onboardedDevices.splice(this._onboardedDevices.indexOf(uuid), 1);
+		ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(this._onboardedDevices));
 		return Promise.reject("No device controller found for this device!");
 	}
 };
@@ -141,17 +186,28 @@ Warden.prototype.monitorOnboardedDevices = function() {
 			Object.keys(devices).forEach(function(uuid) {
 				if(devices[uuid] && devices[uuid].state == "disconnected" && self._onboardedDevices.indexOf(uuid) > -1) {
 					if(!self._deviceController[uuid] || !self._deviceController[uuid]._connected) {
-						if(!self._createControllerInProgress[uuid]) {
-							self._createControllerInProgress[uuid] = true;
-							logger.info("Creating controller for --- " + uuid);
-							self.createController(uuid).then(function() {
-								self._createControllerInProgress[uuid] = false;
-							}, function() {
-								self._createControllerInProgress[uuid] = false;
-							});
-						} else {
-							logger.warn("Device controller creation is in progress!");
+						logger.info("Go create controller for - " + uuid);
+						try {
+							self.createController(uuid);
+						} catch(err) {
+							logger.error("Failed to create controller " + err);
 						}
+						// if(!self._createControllerInProgress[uuid]) {
+						// 	self._createControllerInProgress[uuid] = true;
+						// 	logger.info("Creating controller for --- " + uuid);
+						// 	console.log(self._createControllerInProgress);
+						// 	self.createController(uuid).then(function() {
+						// 		self._createControllerInProgress[uuid] = false;
+						// 	}, function() {
+						// 		self._createControllerInProgress[uuid] = false;
+						// 	});
+						// 	//temporary fix
+						// 	setTimeout(function() {
+						// 		self._createControllerInProgress[uuid] = false;
+						// 	}, 10000);
+						// } else {
+						// 	logger.warn("Device controller creation is in progress!");
+						// }
 					}
 				}
 			});
@@ -160,7 +216,7 @@ Warden.prototype.monitorOnboardedDevices = function() {
 			self._onboardedDevices.forEach(function(uuid) {
 				if(!self._deviceController[uuid] || !self._deviceController[uuid]._connected) {
 					logger.info("Looking for device - " + uuid);
-					self._ble.startScan(["ef6801009b3549339b1052ffa9740042"], false, 10000).then(function () {
+					self._ble.startScan(["ef6801009b3549339b1052ffa9740042", "000000018dd44087a16a04a7c8e01734"], false, 10000).then(function () {
 					}, (err) => {
 						logger.warn(err);
 					});
@@ -170,23 +226,29 @@ Warden.prototype.monitorOnboardedDevices = function() {
 	}
 };
 
-Warden.prototype.createController = function(uuid) {
+Warden.prototype.startCreatingController = function(uuid) {
 	var self = this;
 	return new Promise(function(resolve, reject) {
 		//Check if we support this device
+		logger.info("1");
 		var peri = self._ble.getPeripheral(uuid);
 		if(!peri) {
 			reject("Unable to find the device. Please rescan!");
 		}
+		logger.info("2");
 		return isSupported(peri).then(function(data) {
+			logger.info("3");
 			self._ble.connect(uuid).then(function() {
+				logger.info("4");
 				var deviceID = "BLE_" + (data.name.replace(' ', '') || "_Device") + "_" + peri.id;
 				logger.info("Device " + deviceID + " is supported!");
 				// console.log("Device is supported!" , data);
 				//Add resource type
 				var deviceController = require("./../" + data.controller);
 				dev$.addResourceType(data.config).then(function() {
+					logger.info("5");
 		            dev$.listInterfaceTypes().then(function(interfaceTypes) {
+		            	logger.info("6");
 			            var devInterfaceStates = [];
 			            data.config.interfaces.forEach(function(intf) {
 			                if(typeof interfaceTypes[intf] !== 'undefined' && intf.indexOf("Facades") > -1) {
@@ -196,11 +258,12 @@ Warden.prototype.createController = function(uuid) {
 			                        reject('Failed to parse interface ' + e);
 			                    }
 			                } else {
-			                    console.log('\x1b[33m THIS SHOULD NOT HAVE HAPPENED. FOUND INTERFACE WHICH IS NOT SUPPORTED BY DEVICEJS');
+			                    console.log('\x1b[33m THIS SHOULD NOT HAVE HAPPENED. FOUND INTERFACE WHICH IS NOT SUPPORTED BY DEVICEJS ' + intf);
 			                }
 			            });
-
+			            logger.info("7");
 			            if(!self._deviceController[uuid]) {
+			            	logger.info("8");
 			            	logger.info("Creating device controller...");
 				            Device = dev$.resource(data.config.name, deviceController);
 				            self._deviceController[uuid] = new Device(deviceID);
@@ -214,30 +277,39 @@ Warden.prototype.createController = function(uuid) {
 				                supportedStates: devInterfaceStates,
 				                initStates: initStates || {}
 				            }).then(function() {
+				            	logger.info("9");
 				                ddb.shared.put('WigWagUI:appData.resource.' + deviceID + '.name', deviceID);
 				                if(self._onboardedDevices.indexOf(uuid) < 0) {
+				                	logger.info("10");
 				                	if(!self._onboardedDevices) self._onboardedDevices = [];
 				                	self._onboardedDevices.push(uuid);
 				                	ddb.shared.put('BluetoothDriver.onboarded', JSON.stringify(self._onboardedDevices));
 				                }
+				                self._deviceController[uuid]._connected = true;
 				                self._deviceController[uuid]._subscribeToStates();
+				                logger.info("Device controller created successfully with resource name - " + data.config.name);
 								resolve("Device controller created successfully with resource name - " + data.config.name);
 				            }, function(err) {
+				            	logger.error("Error1: "+err);
 				                reject(err);
 				            });
 				        } else {
 				        	logger.warn("Device controller already exists!");
+				        	self._deviceController[uuid]._connected = true;
 				            self._deviceController[uuid]._subscribeToStates();
 				        	resolve("Device controller already exists!");
 				        }
 			        });
-		        }, function(err) {logger.error("Error: "+err);
+		        }, function(err) {
+		        	logger.error("Error2: "+err);
 		            reject(err);
 		        });
 			}, function(err){
+				logger.error("Error3: "+err);
 				reject(err);
 			});
 		}, function(err) {
+			logger.error("Error4: "+err);
 			reject(err);
 		});
 	});
