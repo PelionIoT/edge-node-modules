@@ -6,13 +6,13 @@
         "controller": "controllers/EPAgora/controller",
         "uuids": {
             "temperature": {
-                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "serviceID": "000000028dd44087a16a04a7c8e01734",
                 "characteristicID": "2a6e",
                 "subscribe": true,
                 "threshold": 0.5
             },
             "humidity": {
-                "serviceID": "000000018dd44087a16a04a7c8e01734",
+                "serviceID": "000000028dd44087a16a04a7c8e01734",
                 "characteristicID": "2a6f",
                 "subscribe": true,
                 "threshold": 3
