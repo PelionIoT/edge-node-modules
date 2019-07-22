@@ -65,41 +65,49 @@ var EPAgora = {
         this.onTemperature = function(data) {
             self._states.temperature = data.readInt16LE(0)/10;
             self._logger.info("temperature: " + self._states.temperature);
+            dev$.publishResourceStateChange(self._deviceID, "temperature", self._states.temperature);
         };
 
         this.onHumidity = function(data) {
             self._states.humidity = data.readUInt16LE(0)/10;
             self._logger.info("humidity: " + self._states.humidity);
+            dev$.publishResourceStateChange(self._deviceID, "humidity", self._states.humidity);
         };
 
         this.onCo2 = function(data) {
             self._states.co2 = data.readInt32LE(0)/(1<<30);
             self._logger.info("co2: " + self._states.co2);
+            dev$.publishResourceStateChange(self._deviceID, "co2", self._states.co2);
         };
 
         this.onPressure = function(data) {
             self._states.pressure = data.readUInt32LE(0)/1000;
             self._logger.info("pressure: " + self._states.pressure);
+            dev$.publishResourceStateChange(self._deviceID, "pressure", self._states.pressure);
         };
 
         this.onBvoc = function(data) {
             self._states.bvoc = data.readInt32LE(0)/(1<<30);
             self._logger.info("bvoc: " + self._states.bvoc);
+            dev$.publishResourceStateChange(self._deviceID, "bvoc", self._states.bvoc);
         };
 
         this.onAirQualityScore = function(data) {
             self._states.airQualityScore = data.readUInt16LE(0);
             self._logger.info("airQualityScore: " + self._states.airQualityScore);
+            dev$.publishResourceStateChange(self._deviceID, "airQualityScore", self._states.airQualityScore);
         };
 
         this.onAirQualityAccuracyScore = function(data) {
             self._states.airQualityAccuracyScore = data.readUInt8(0);
             self._logger.info("airQualityAccuracyScore: " + self._states.airQualityAccuracyScore);
+            dev$.publishResourceStateChange(self._deviceID, "airQualityAccuracyScore", self._states.airQualityAccuracyScore);
         };
 
         this.onGasResistance = function(data) {
             self._states.gas = data.readUInt32LE(0);
             self._logger.info("gasResistance: " + self._states.gas);
+            dev$.publishResourceStateChange(self._deviceID, "gasResistance", self._states.gasResistance);
         };
 
         this.onAccelerometer = function(data) {
@@ -109,6 +117,7 @@ var EPAgora = {
                 z : data.readInt32LE(8)/(1<<30)
             };
             self._logger.info("accelerometer: " + JSON.stringify(self._states.accelerometer));
+            dev$.publishResourceStateChange(self._deviceID, "accelerometer", self._states.accelerometer);
         };
 
         this.onGyroscope = function(data) {
@@ -118,6 +127,7 @@ var EPAgora = {
                 z : data.readInt32LE(8)/(1<<30)
             };
             self._logger.info("gyroscope: " + JSON.stringify(self._states.gyroscope));
+            dev$.publishResourceStateChange(self._deviceID, "gyroscope", self._states.gyroscope);
         };
 
         this.onMagnetometer = function(data) {
@@ -127,27 +137,32 @@ var EPAgora = {
                 z : data.readInt32LE(8)/(1<<30)
             };
             self._logger.info("magnetometer: " + JSON.stringify(self._states.magnetometer));
+            dev$.publishResourceStateChange(self._deviceID, "magnetometer", self._states.magnetometer);
         };
 
         this.onLuminance = function(data) {
             self._states.luminance = data.readUInt32LE(0);
             self._logger.info("luminance: " + self._states.luminance);
+            dev$.publishResourceStateChange(self._deviceID, "luminance", self._states.luminance);
         };
 
         this.onTimeOfFlight = function(data) {
             self._states.tof = data.readUInt16LE(0);
             self._logger.info("timeOfFlight: " + self._states.tof);
+            dev$.publishResourceStateChange(self._deviceID, "timeOfFlight", self._states.timeOfFlight);
         };
 
         this.onPower = function(data) {
             if(!data[0]) self._states.power = 'off';
             else self._states.power = 'on';
             self._logger.info("power: " + self._states.power);
+            dev$.publishResourceStateChange(self._deviceID, "power", self._states.power);
         };
 
         this.onBattery = function(data) {
             self._states.battery = data.readUInt32LE(0);
             self._logger.info("battery: " + self._states.battery);
+            dev$.publishResourceStateChange(self._deviceID, "battery", self._states.battery);
         };
 
         this.onNotify = {
