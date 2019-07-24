@@ -17,6 +17,7 @@
 
 'use strict';
 const Logger = require('./../../utils/logger');
+const fp = require('ieee-float');
 
 //Reference- https://nordicsemiconductor.github.io/Nordic-Thingy52-FW/documentation/firmware_architecture.html
 //https://infocenter.nordicsemi.com/pdf/Thingy_UG_v1.1.pdf
@@ -69,35 +70,37 @@ var EPAgora = {
         };
 
         this.onHumidity = function(data) {
-            self._states.humidity = data.readUInt16LE(0)/10;
+            self._states.humidity = data.readUInt16LE(0)/100;
             self._logger.info("humidity: " + self._states.humidity);
             dev$.publishResourceStateChange(self._deviceID, "humidity", self._states.humidity);
         };
 
         this.onCo2 = function(data) {
-            self._states.co2 = data.readInt32LE(0)/(1<<30);
+            self._states.co2 = fp.readFloatLE(data);
             self._logger.info("co2: " + self._states.co2);
             dev$.publishResourceStateChange(self._deviceID, "co2", self._states.co2);
         };
 
         this.onPressure = function(data) {
-            self._states.pressure = data.readUInt32LE(0)/1000;
+            self._states.pressure = data.readUInt32LE(0)/10;
             self._logger.info("pressure: " + self._states.pressure);
             dev$.publishResourceStateChange(self._deviceID, "pressure", self._states.pressure);
         };
 
         this.onBvoc = function(data) {
-            self._states.bvoc = data.readInt32LE(0)/(1<<30);
+            self._states.bvoc = fp.readFloatLE(data).toFixed(5)/1;
             self._logger.info("bvoc: " + self._states.bvoc);
             dev$.publishResourceStateChange(self._deviceID, "bvoc", self._states.bvoc);
         };
 
+        //unitless
         this.onAirQualityScore = function(data) {
             self._states.airQualityScore = data.readUInt16LE(0);
             self._logger.info("airQualityScore: " + self._states.airQualityScore);
             dev$.publishResourceStateChange(self._deviceID, "airQualityScore", self._states.airQualityScore);
         };
 
+        //unitless
         this.onAirQualityAccuracyScore = function(data) {
             self._states.airQualityAccuracyScore = data.readUInt8(0);
             self._logger.info("airQualityAccuracyScore: " + self._states.airQualityAccuracyScore);
@@ -141,7 +144,7 @@ var EPAgora = {
         };
 
         this.onLuminance = function(data) {
-            self._states.luminance = data.readUInt32LE(0);
+            self._states.luminance = fp.readFloatLE(data).toFixed(3)/1;
             self._logger.info("luminance: " + self._states.luminance);
             dev$.publishResourceStateChange(self._deviceID, "luminance", self._states.luminance);
         };
@@ -160,7 +163,7 @@ var EPAgora = {
         };
 
         this.onBattery = function(data) {
-            self._states.battery = data.readUInt32LE(0);
+            self._states.battery = fp.readFloatLE(data).toFixed(3)/1;
             self._logger.info("battery: " + self._states.battery);
             dev$.publishResourceStateChange(self._deviceID, "battery", self._states.battery);
         };
