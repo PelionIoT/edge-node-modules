@@ -37,7 +37,6 @@ const logger = new Logger({
     color: 'green'
 });
 
-var exec = require('child_process').exec;
 var options;
 
 var port = [];
@@ -66,57 +65,62 @@ configurator.configure("bluetoothlowenergy", __dirname).then(function (data) {
     if(options.hciDeviceID) {
         process.env.NOBLE_HCI_DEVICE_ID = options.hciDeviceID;
     }
-    var adapter = process.env.NOBLE_HCI_DEVICE_ID || 0;
-    logger.info("Using hci deviceID - " + adapter);
-    function resetAdapter() {
-        exec('hciconfig hci%s up', adapter, function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call
-            if (error !== null) {
-                logger.error("Failed to reset the adapter, error=" + JSON.stringify(error));
+
+    ddb.shared.get('BluetoothDriver.hciadapter').then(function (data) {
+        try {
+            if(data && data.siblings) {
+                process.env.NOBLE_HCI_DEVICE_ID = JSON.parse(data.siblings);
             } else {
-                logger.info("Reset the bluetooth adapter, hci" + adapter);
+                ddb.shared.put('BluetoothDriver.hciadapter', JSON.stringify(process.env.NOBLE_HCI_DEVICE_ID));
             }
+        } catch(err) {
+            logger.error("Failed to get bluetooth hci adapter " + err);
+            logger.warn("Reverting back to default apapter - " + process.env.NOBLE_HCI_DEVICE_ID);
+        }
+
+        logger.warn("Using hci adapter - " + process.env.NOBLE_HCI_DEVICE_ID);
+
+        ble = new BLE();
+        var bleControllerID = "BluetoothDriver";
+        var blueController = new bluetooth(bleControllerID);
+        //    var beaconController = new bluetooth("BluetoothDriver");
+
+        var warden = new Warden({
+            ble: ble
         });
-    }
-    resetAdapter();
+        warden.start().then(function() {
+            logger.info('Warden started successfully!');
+            blueController.start({
+                deviceID: bleControllerID,
+                ble: ble,
+                warden: warden,
+                adapter: process.env.NOBLE_HCI_DEVICE_ID
+            }).then(function () {
+                blueController.commands.resetAdapter();
+                logger.info('Bluetooth controller started successfully!');
+            }, function (err) {
+                logger.error('Failed to start bluetooth controller ' + err);
+            });
+            var interval = setInterval(function () {
+                if (ble.state() == 'poweredOn') {
+                    clearInterval(interval);
+                    ble.startScan([], false, 10000).then(function () {
 
-    ble = new BLE();
-    var bleControllerID = "BluetoothDriver";
-    var blueController = new bluetooth(bleControllerID);
-    //    var beaconController = new bluetooth("BluetoothDriver");
-
-    var warden = new Warden({
-        ble: ble
-    });
-    warden.start().then(function() {
-        logger.info('Warden started successfully!');
-        blueController.start({
-            deviceID: bleControllerID,
-            ble: ble,
-            warden: warden
-        }).then(function () {
-            logger.info('Bluetooth controller started successfully!');
-        }, function (err) {
-            logger.error('Failed to start bluetooth controller ' + err);
+                    }, function (err) {
+                        logger.error("Scan failed " + err);
+                    });
+                } else {
+                    logger.warn('BLE is not ready! Got state- ' + ble.state());
+                    blueController.commands.resetAdapter();
+                }
+            }, 5000);
+        }, function(err) {
+            logger.error("Failed to start warden!");
+            setTimeout(function() {
+                logger.error("Shutting down! Restart and try again!");
+                process.exit(1);
+            }, 5000);
         });
-        var interval = setInterval(function () {
-            if (ble.state() == 'poweredOn') {
-                clearInterval(interval);
-                ble.startScan([], false, 10000).then(function () {
-
-                }, function (err) {
-                    logger.error("Scan failed " + err);
-                });
-            } else {
-                logger.warn('BLE is not ready! Got state- ' + ble.state());
-                resetAdapter();
-            }
-        }, 5000);
-    }, function(err) {
-        logger.error("Failed to start warden!");
-        setTimeout(function() {
-            logger.error("Shutting down! Restart and try again!");
-            process.exit(1);
-        }, 5000);
     });
     //    devicePairer = new DevicePairer('Bluetooth/DevicePairer');
     //    startPairer();

@@ -23,6 +23,7 @@
 **/
 
 var Logger = require('./../utils/logger');
+var exec = require('child_process').exec;
 
 var logger = new Logger({
     tag: 'Bluetooth',
@@ -46,6 +47,7 @@ var Bluetooth = {
         this._ble = obj.ble;
         this._warden = obj.warden;
         this._deviceID = obj.deviceID;
+        this._adapter = obj.adapter;
 
         this._ble.on('ble-discovered-devices', function(data) {
             try {
@@ -152,13 +154,27 @@ var Bluetooth = {
                 return this._ble.discoverCharacteristics(uuid);
             }
         },
-
         rssi: {
             get: function () {
                 return Promise.reject('Writeonly facade!');
             },
             set: function (uuid) {
                 return this._ble.getRssi(uuid);
+            }
+        },
+        adapter: {
+            get: function() {
+                return Promise.resolve(this._adapter);
+            },
+            set: function(port) {
+                if(typeof port == 'number') {
+                    this._adapter = port;
+                    ddb.shared.put('BluetoothDriver.hciadapter', JSON.stringify(this._adapter));
+                    logger.warn('Bluetooth host port changed to - ' + port);
+                    return Promise.resolve();
+                } else {
+                    return Promise.reject('Port should be a number');
+                }
             }
         }
     },
@@ -225,6 +241,37 @@ var Bluetooth = {
         },
         startMonitorRSSI: function (uuid, polltime, scantime) {
             return this._ble.createRSSIcontrollers(uuid, this._ble.getPeripherals(), polltime, scantime);
+        },
+        resetAdapter: function() {
+            var self = this;
+            logger.info("Using hci adpater - " + self._adapter);
+            return new Promise(function(resolve, reject) {
+                exec('hciconfig hci' + self._adapter + ' up', function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call
+                    if (error !== null) {
+                        logger.error("Failed to reset the adapter, error=" + JSON.stringify(error));
+                        reject(error);
+                    } else {
+                        logger.info("Reset the bluetooth adapter, hci" + self._adapter);
+                        resolve();
+                    }
+                });
+            });
+        },
+        adapterState: function() {
+            return Promise.resolve(this._ble.state());
+        },
+        listAdapter: function() {
+            return new Promise(function(resolve, reject) {
+                exec('hciconfig -a', function (error, stdout, stderr) { //command line utility for node to restart bluetooth-subprocess call
+                    if (error !== null) {
+                        logger.error("Failed to reset the adapter, error=" + JSON.stringify(error));
+                        reject(error);
+                    } else {
+                        logger.warn("Found hciconfig - " + JSON.stringify(stdout));
+                        resolve(stdout);
+                    }
+                });
+            });
         }
     }
 };

@@ -45,7 +45,9 @@ Warden.prototype.start = function() {
 		self.monitorOnboardedDevices();
 		ddb.shared.get('BluetoothDriver.onboarded').then(function (data) {
 			try {
-				self._onboardedDevices = JSON.parse(data.siblings);
+				if(data && data.siblings) {
+					self._onboardedDevices = JSON.parse(data.siblings);
+				}
 				resolve();
 			} catch(err) {
 				self._onboardedDevices = [];
@@ -182,7 +184,7 @@ Warden.prototype.monitorOnboardedDevices = function() {
 		this._monitoringOnboardedDevices = true;
 		self._ble.on('ble-discovered-devices', function(peripherals) {
 			var devices = JSON.parse(peripherals);
-			// console.log("Found devices " + Object.keys(devices));
+			logger.info("Found devices " + Object.keys(devices));
 			Object.keys(devices).forEach(function(uuid) {
 				if(devices[uuid] && devices[uuid].state == "disconnected" && self._onboardedDevices.indexOf(uuid) > -1) {
 					if(!self._deviceController[uuid] || !self._deviceController[uuid]._connected) {
