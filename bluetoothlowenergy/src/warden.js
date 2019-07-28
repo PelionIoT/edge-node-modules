@@ -260,7 +260,8 @@ Warden.prototype.startCreatingController = function(uuid) {
 			                        reject('Failed to parse interface ' + e);
 			                    }
 			                } else {
-			                    console.log('\x1b[33m THIS SHOULD NOT HAVE HAPPENED. FOUND INTERFACE WHICH IS NOT SUPPORTED BY DEVICEJS ' + intf);
+			                	if(intf.indexOf("Core/Interfaces") == -1)
+			                    	console.log('\x1b[33m THIS SHOULD NOT HAVE HAPPENED. FOUND INTERFACE WHICH IS NOT SUPPORTED BY DEVICEJS ' + intf);
 			                }
 			            });
 			            logger.info("7");

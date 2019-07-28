@@ -5,6 +5,44 @@
         "advertisementServiceUuid": "000000018dd44087a16a04a7c8e01734",
         "controller": "controllers/EPAgora/controller",
         "uuids": {
+            "metadata": {
+                "deviceName": {
+                    "serviceID": "1800",
+                    "characteristicID": "2a00"
+                },
+                "appearance": {
+                    "serviceID": "1800",
+                    "characteristicID": "2a01"
+                },
+                "manufacturerName":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a29"
+                },
+                "modelNumber":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a24"
+                },
+                "serialNumber":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a25"
+                },
+                "hardwareRevision":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a27"
+                },
+                "firmwareRevision":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a26"
+                },
+                "softwareRevision":{
+                    "serviceID": "180a",
+                    "characteristicID": "2a28"
+                }
+            },
+            "appearance": {
+                "serviceID": "1800",
+                "characteristicID": "2a01"
+            },
             "temperature": {
                 "serviceID": "000000028dd44087a16a04a7c8e01734",
                 "characteristicID": "2a6e",
@@ -113,7 +151,8 @@
                 "Facades/Switchable",
                 "Facades/HasBattery",
                 "Facades/SignalStrength",
-                "Facades/Subscribe"
+                "Facades/Subscribe",
+                "Core/Interfaces/Metadata"
             ]
         }
     },

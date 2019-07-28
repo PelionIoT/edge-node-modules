@@ -30,6 +30,7 @@ var EPAgora = {
         this._deviceID = options.deviceID;
         this._supportedStates = options.supportedStates;
         this._uuids = options.services;
+        this._metadata = {};
 
         this._states = {
             subscribe: {},
@@ -64,30 +65,34 @@ var EPAgora = {
         this.emit('reachable');
 
         this.onTemperature = function(data) {
+            //console.log(data);
             self._states.temperature = data.readInt16LE(0)/10;
             self._logger.info("temperature: " + self._states.temperature);
             dev$.publishResourceStateChange(self._deviceID, "temperature", self._states.temperature);
         };
 
         this.onHumidity = function(data) {
-            self._states.humidity = data.readUInt16LE(0)/100;
+            //console.log(data);
+            self._states.humidity = data.readUInt16LE(0)/10;
             self._logger.info("humidity: " + self._states.humidity);
             dev$.publishResourceStateChange(self._deviceID, "humidity", self._states.humidity);
         };
 
         this.onCo2 = function(data) {
+            //console.log(data);
             self._states.co2 = fp.readFloatLE(data);
             self._logger.info("co2: " + self._states.co2);
             dev$.publishResourceStateChange(self._deviceID, "co2", self._states.co2);
         };
 
         this.onPressure = function(data) {
-            self._states.pressure = data.readUInt32LE(0)/10;
+            self._states.pressure = data.readUInt32LE(0)/10000;
             self._logger.info("pressure: " + self._states.pressure);
             dev$.publishResourceStateChange(self._deviceID, "pressure", self._states.pressure);
         };
 
         this.onBvoc = function(data) {
+            //console.log(data);
             self._states.bvoc = fp.readFloatLE(data).toFixed(5)/1;
             self._logger.info("bvoc: " + self._states.bvoc);
             dev$.publishResourceStateChange(self._deviceID, "bvoc", self._states.bvoc);
@@ -95,6 +100,7 @@ var EPAgora = {
 
         //unitless
         this.onAirQualityScore = function(data) {
+            //console.log(data);
             self._states.airQualityScore = data.readUInt16LE(0);
             self._logger.info("airQualityScore: " + self._states.airQualityScore);
             dev$.publishResourceStateChange(self._deviceID, "airQualityScore", self._states.airQualityScore);
@@ -102,60 +108,68 @@ var EPAgora = {
 
         //unitless
         this.onAirQualityAccuracyScore = function(data) {
+            //console.log(data);
             self._states.airQualityAccuracyScore = data.readUInt8(0);
             self._logger.info("airQualityAccuracyScore: " + self._states.airQualityAccuracyScore);
             dev$.publishResourceStateChange(self._deviceID, "airQualityAccuracyScore", self._states.airQualityAccuracyScore);
         };
 
         this.onGasResistance = function(data) {
+            //console.log(data);
             self._states.gas = data.readUInt32LE(0);
             self._logger.info("gasResistance: " + self._states.gas);
             dev$.publishResourceStateChange(self._deviceID, "gasResistance", self._states.gasResistance);
         };
 
         this.onAccelerometer = function(data) {
+            //console.log(data);
             self._states.accelerometer = {
-                x : data.readInt32LE(0)/(1<<30),
-                y : data.readInt32LE(4)/(1<<30),
-                z : data.readInt32LE(8)/(1<<30)
+                x : data.readFloatLE(0),
+                y : data.readFloatLE(4),
+                z : data.readFloatLE(8)
             };
             self._logger.info("accelerometer: " + JSON.stringify(self._states.accelerometer));
             dev$.publishResourceStateChange(self._deviceID, "accelerometer", self._states.accelerometer);
         };
 
         this.onGyroscope = function(data) {
+            //console.log(data);
             self._states.gyroscope = {
-                x : data.readInt32LE(0)/(1<<30),
-                y : data.readInt32LE(4)/(1<<30),
-                z : data.readInt32LE(8)/(1<<30)
+                x : data.readFloatLE(0),
+                y : data.readFloatLE(4),
+                z : data.readFloatLE(8)
             };
             self._logger.info("gyroscope: " + JSON.stringify(self._states.gyroscope));
             dev$.publishResourceStateChange(self._deviceID, "gyroscope", self._states.gyroscope);
         };
 
         this.onMagnetometer = function(data) {
+            //console.log(data);
             self._states.magnetometer = {
-                x : data.readInt32LE(0)/(1<<30),
-                y : data.readInt32LE(4)/(1<<30),
-                z : data.readInt32LE(8)/(1<<30)
+                x : data.readFloatLE(0),
+                y : data.readFloatLE(4),
+                z : data.readFloatLE(8)
             };
             self._logger.info("magnetometer: " + JSON.stringify(self._states.magnetometer));
             dev$.publishResourceStateChange(self._deviceID, "magnetometer", self._states.magnetometer);
         };
 
         this.onLuminance = function(data) {
+            //console.log(data);
             self._states.luminance = fp.readFloatLE(data).toFixed(3)/1;
             self._logger.info("luminance: " + self._states.luminance);
             dev$.publishResourceStateChange(self._deviceID, "luminance", self._states.luminance);
         };
 
         this.onTimeOfFlight = function(data) {
+            //console.log(data);
             self._states.tof = data.readUInt16LE(0);
             self._logger.info("timeOfFlight: " + self._states.tof);
             dev$.publishResourceStateChange(self._deviceID, "timeOfFlight", self._states.timeOfFlight);
         };
 
         this.onPower = function(data) {
+            //console.log(data);
             if(!data[0]) self._states.power = 'off';
             else self._states.power = 'on';
             self._logger.info("power: " + self._states.power);
@@ -163,6 +177,7 @@ var EPAgora = {
         };
 
         this.onBattery = function(data) {
+            //console.log(data);
             self._states.battery = fp.readFloatLE(data).toFixed(3)/1;
             self._logger.info("battery: " + self._states.battery);
             dev$.publishResourceStateChange(self._deviceID, "battery", self._states.battery);
@@ -441,7 +456,7 @@ var EPAgora = {
             get: function() {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    self._ble.readCharacteristic(self._peripheralID, self._uuids.magnetometer.serviceID, self._uuids.magnetometer.characteristicID).then(function(data) {
+                    self._ble.readCharacteristic(self._peripheralID, self._uuids.humidity.serviceID, self._uuids.humidity.characteristicID).then(function(data) {
                         self.onNotify.humidity(data);
                         resolve(self._states.humidity);
                     }, function(err) {
@@ -457,7 +472,7 @@ var EPAgora = {
             get: function() {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    self._ble.readCharacteristic(self._peripheralID, self._uuids.magnetometer.serviceID, self._uuids.magnetometer.characteristicID).then(function(data) {
+                    self._ble.readCharacteristic(self._peripheralID, self._uuids.co2.serviceID, self._uuids.co2.characteristicID).then(function(data) {
                         self.onNotify.co2(data);
                         resolve(self._states.co2);
                     }, function(err) {
@@ -473,7 +488,7 @@ var EPAgora = {
             get: function() {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    self._ble.readCharacteristic(self._peripheralID, self._uuids.magnetometer.serviceID, self._uuids.magnetometer.characteristicID).then(function(data) {
+                    self._ble.readCharacteristic(self._peripheralID, self._uuids.bvoc.serviceID, self._uuids.bvoc.characteristicID).then(function(data) {
                         self.onNotify.bvoc(data);
                         resolve(self._states.bvoc);
                     }, function(err) {
@@ -489,7 +504,7 @@ var EPAgora = {
             get: function() {
                 var self = this;
                 return new Promise(function(resolve, reject) {
-                    self._ble.readCharacteristic(self._peripheralID, self._uuids.magnetometer.serviceID, self._uuids.magnetometer.characteristicID).then(function(data) {
+                    self._ble.readCharacteristic(self._peripheralID, self._uuids.pressure.serviceID, self._uuids.pressure.characteristicID).then(function(data) {
                         self.onNotify.pressure(data);
                         resolve(self._states.pressure);
                     }, function(err) {
@@ -609,6 +624,47 @@ var EPAgora = {
         });
     },
     commands: {
+        //Example - dev$.selectByID("BLE_EPAgora_fd4327cc04d4").call('metadata', null).then(function(a) { console.log(a.BLE_EPAgora_fd4327cc04d4.response) })
+        metadata: function(prop) {
+            var self = this;
+            var p = [];
+            return new Promise(function(resolve, reject) {
+                if(!prop || (typeof prop == 'object' && prop.selection && prop.commandID)) {
+                    Object.keys(self._uuids.metadata).forEach(function(state) {
+                        p.push(
+                            new Promise(function(resolve, reject) {
+                                self._ble.readCharacteristic(self._peripheralID, self._uuids.metadata[state].serviceID, self._uuids.metadata[state].characteristicID).then(function(data) {
+                                    self._logger.info("Metadata: Info=" +state + " data=" + data);
+                                    self._metadata[state] = data.toString();
+                                    resolve(data);
+                                }, function(err) {
+                                    reject(err);
+                                });
+                            })
+                        );
+                    });
+                    Promise.all(p).then(function(data) {
+                        resolve(self._metadata);
+                    }, function(err) {
+                        reject(err);
+                    });
+                } else {
+                    if(Object.keys(self._uuids.metadata).indexOf(prop) == -1) {
+                        self._logger.warn('Unknown device metadata property requested - ' + prop);
+                        return reject("Unknown device metadata property requested - " + JSON.stringify(prop));
+                    }
+                    var infoobj = {};
+                    self._ble.readCharacteristic(self._peripheralID, self._uuids.metadata[prop].serviceID, self._uuids.metadata[prop].characteristicID).then(function(data) {
+                        self._logger.info("Metadata: Info=" +prop + " data=" + data);
+                        self._metadata[prop] = data.toString();
+                        infoobj[prop] = data.toString();
+                        resolve(infoobj);
+                    }, function(err) {
+                        reject(err);
+                    });
+                }
+            });
+        }
     }
 };
 
