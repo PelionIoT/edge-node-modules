@@ -1,0 +1,400 @@
+{
+    "name": "EP Agora",
+    "id": "fd4327cc04d4",
+    "uuid": "fd4327cc04d4",
+    "address": "fd:43:27:cc:04:d4",
+    "addressType": "random",
+    "connectable": true,
+    "advertisement": {
+        "localName": "EP Agora",
+        "serviceData": [],
+        "serviceUuids": [
+            "000000018dd44087a16a04a7c8e01734"
+        ],
+        "solicitationServiceUuids": [],
+        "serviceSolicitationUuids": []
+    },
+    "rssi": -76,
+    "services": [
+        {
+            "uuid": "1800",
+            "name": "Generic Access",
+            "type": "org.bluetooth.service.generic_access",
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "2a00",
+                    "name": "Device Name",
+                    "type": "org.bluetooth.characteristic.gap.device_name",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a01",
+                    "name": "Appearance",
+                    "type": "org.bluetooth.characteristic.gap.appearance",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a04",
+                    "name": "Peripheral Preferred Connection Parameters",
+                    "type": "org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "1801",
+            "name": "Generic Attribute",
+            "type": "org.bluetooth.service.generic_attribute",
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "2a05",
+                    "name": "Service Changed",
+                    "type": "org.bluetooth.characteristic.gatt.service_changed",
+                    "properties": [
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "180a",
+            "name": "Device Information",
+            "type": "org.bluetooth.service.device_information",
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "2a29",
+                    "name": "Manufacturer Name String",
+                    "type": "org.bluetooth.characteristic.manufacturer_name_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a24",
+                    "name": "Model Number String",
+                    "type": "org.bluetooth.characteristic.model_number_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a25",
+                    "name": "Serial Number String",
+                    "type": "org.bluetooth.characteristic.serial_number_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a27",
+                    "name": "Hardware Revision String",
+                    "type": "org.bluetooth.characteristic.hardware_revision_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a26",
+                    "name": "Firmware Revision String",
+                    "type": "org.bluetooth.characteristic.firmware_revision_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a28",
+                    "name": "Software Revision String",
+                    "type": "org.bluetooth.characteristic.software_revision_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000018dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "2a6e",
+                    "name": "Temperature",
+                    "type": "org.bluetooth.characteristic.temperature",
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a6f",
+                    "name": "Humidity",
+                    "type": "org.bluetooth.characteristic.humidity",
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a6d",
+                    "name": "Pressure",
+                    "type": "org.bluetooth.characteristic.pressure",
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000010018dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000020018dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000030018dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000040018dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000050018dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000028dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "2a6e",
+                    "name": "Temperature",
+                    "type": "org.bluetooth.characteristic.temperature",
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "2a6f",
+                    "name": "Humidity",
+                    "type": "org.bluetooth.characteristic.humidity",
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000038dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010038dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000020038dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000048dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010038dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000020038dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                },
+                {
+                    "uuid": "000030048dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000058dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010058dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000068dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010068dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000088dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010088dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        },
+        {
+            "uuid": "000000098dd44087a16a04a7c8e01734",
+            "name": null,
+            "type": null,
+            "includedServiceUuids": null,
+            "characteristics": [
+                {
+                    "uuid": "000010098dd44087a16a04a7c8e01734",
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify",
+                        "indicate"
+                    ],
+                    "descriptors": null
+                }
+            ]
+        }
+    ],
+    "state": "disconnected",
+    "supported": false
+}

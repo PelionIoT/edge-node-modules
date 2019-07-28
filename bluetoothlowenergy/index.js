@@ -62,7 +62,7 @@ configurator.configure("bluetoothlowenergy", __dirname).then(function (data) {
     options = data;
     global.BLELogLevel = options.logLevel || 5;
     logger.info('Options ' + JSON.stringify(options));
-    if(options.hciDeviceID) {
+    if(typeof options.hciDeviceID !== 'undefined') {
         process.env.NOBLE_HCI_DEVICE_ID = options.hciDeviceID;
     }
 
