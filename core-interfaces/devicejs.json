@@ -109,6 +109,7 @@
             "./facades/airQualityAccuracyScore.json",
             "./facades/gasResistance.json",
             "./facades/bvoc.json",
+            "./facades/deviceInformation.json",
             "./facades/timeOfFlight.json",
             "./facades/zoom.json"
         ],

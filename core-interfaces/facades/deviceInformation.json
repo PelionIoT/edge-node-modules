@@ -1,0 +1,14 @@
+{
+    "name": "Facades/DeviceInformation",
+    "version": "0.0.1",
+    "commands": { },
+    "state": {
+        "deviceInformation": {
+            "readOnly": true,
+            "schema": {
+                "type": "object"
+            }
+        }
+    },
+    "events": { }
+}
