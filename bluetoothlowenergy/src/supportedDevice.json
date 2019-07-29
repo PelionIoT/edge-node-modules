@@ -152,6 +152,7 @@
                 "Facades/HasBattery",
                 "Facades/SignalStrength",
                 "Facades/Subscribe",
+                "Facades/DeviceInformation",
                 "Core/Interfaces/Metadata"
             ]
         }
