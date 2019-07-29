@@ -653,6 +653,7 @@ var EPAgora = {
                         );
                     });
                     Promise.all(p).then(function(data) {
+                        dev$.publishResourceStateChange(self._deviceID, "deviceInformation", self._metadata);
                         resolve(self._metadata);
                     }, function(err) {
                         reject(err);
