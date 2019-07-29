@@ -63,10 +63,12 @@ Warden.prototype.createController = function(uuid) {
 	return new Promise(function(resolve, reject) {
 		if(self._createControllerQueue.indexOf(uuid) > -1) {
 			self._retryCreatingDeviceController[uuid]++;
-			if(self._retryCreatingDeviceController[uuid] > 4)
+			if(self._retryCreatingDeviceController[uuid] > 4) {
 				self._createControllerQueue.splice(self._createControllerQueue.indexOf(uuid), 1);
-			logger.warn("Creating controller for " + uuid + " is in progress!");
-			return reject();
+			} else {
+				logger.warn("Creating controller for " + uuid + " is in progress!");
+				return reject();
+			}
 		}
 		// if(!self._deviceController[uuid]) {
 			try {
