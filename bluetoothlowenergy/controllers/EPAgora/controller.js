@@ -258,7 +258,7 @@ var EPAgora = {
         this._ble.disconnect(this._peripheralID);
     },
     state: {
-        metadata: {
+        deviceInformation: {
             get: function() {
                 var self = this;
                 return self.commands.metadata(null);
