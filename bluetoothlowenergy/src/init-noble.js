@@ -231,31 +231,8 @@ BLE.prototype.connect = function (peripheralUuid) {
 
 	if(!peripheral) return Promise.reject('Not found in the database!');
 
-	peripheral.removeAllListeners('connect');
-	peripheral.on('connect', function () {
-		logger.info("connected " + peripheralUuid);
-		updateState(self, peripheralUuid, true);
-		self.emit('connect-'+peripheralUuid, null);
-		self.stopScan();
-	});
-
-	peripheral.removeAllListeners('disconnect');
-	peripheral.on('disconnect', function () {
-		logger.warn("disconnected " + peripheralUuid);
-		updateState(self, peripheralUuid, false);
-		self.emit('disconnect-'+peripheralUuid, null);
-	});
-
-	return new Promise(function (resolve, reject) {
-		if (peripheral.state == 'connected') {
-			logger.warn('Already connected!');
-			return reject('Already connected!');
-		}
-
-		self._peripheral[peripheralUuid].once('connect', function (err) {
-			if (err) {
-				return reject("Failed " + err);
-			}
+	function getServicesAndCharacteristics() {
+		return new Promise(function(resolve, reject) {
 			logger.info('Connected successfully. Now discovering services and characteristics!');
 			self.discoverAllServicesAndCharacteristics(peripheralUuid).then(function () {
 				logger.info('Discovered services and characteristics for ' + peripheralUuid);
@@ -278,24 +255,66 @@ BLE.prototype.connect = function (peripheralUuid) {
 						type: eachService.type,
 						includedServiceUuids: eachService.includedServiceUuids,
 						characteristics: characteristics
-					})
+					});
 
+					updateState(self, peripheralUuid, true);
+					self.emit('connect-'+peripheralUuid, null);
+					self.stopScan();
 					resolve("Connected successfully!");
 				});
 			}, function (err) {
 				return reject("Failed " + err);
 			});
 		});
+	}
+	function tryToConnect() {
+		return new Promise(function (resolve, reject) {
+			peripheral.removeAllListeners('connect');
+			peripheral.on('connect', function () {
+				logger.info("connected " + peripheralUuid);
+				getServicesAndCharacteristics().then(function() {
+					resolve();
+				}, function(err) {
+					reject(err);
+				});
+			});
 
-		self._peripheral[peripheralUuid].connect(function (err) {
-			if (err) {
-				return reject('Failed to connect ' + err);
-			}
-		}, function(err) {
-			console.log(err);
-			return reject(err);
+			peripheral.removeAllListeners('disconnect');
+			peripheral.on('disconnect', function () {
+				logger.warn("disconnected " + peripheralUuid);
+				updateState(self, peripheralUuid, false);
+				self.emit('disconnect-'+peripheralUuid, null);
+			});
+
+			// self._peripheral[peripheralUuid].once('connect', function (err) {
+			// 	if (err) {
+			// 		logger.error("Failed to connect with device " + JSON.stringify(err));
+			// 		return reject("Failed " + err);
+			// 	}
+			// });
+
+			logger.info("Trying to connect with device!");
+			self._peripheral[peripheralUuid].connect(function (err) {
+				if (err) {
+					return reject('Failed to connect ' + err);
+				}
+			}, function(err) {
+				console.log(err);
+				return reject(err);
+			});
 		});
-	});
+	}
+
+	if (peripheral.state == 'connected') {
+		logger.warn('Already connected!');
+		// self.disconnect(peripheralUuid).then(function() {
+			return getServicesAndCharacteristics();
+		// }, function(err) {
+			// return reject(err);
+		// });
+	} else {
+		return tryToConnect();
+	}
 };
 
 BLE.prototype.disconnect = function (peripheralUuid) {
@@ -305,7 +324,7 @@ BLE.prototype.disconnect = function (peripheralUuid) {
 	return new Promise(function (resolve, reject) {
 		self._peripheral[peripheralUuid].disconnect(function (error) {
 			if (error) {
-				reject('Not able to disconnect')
+				return reject('Not able to disconnect')
 			}
 			resolve('disconnected');
 		})

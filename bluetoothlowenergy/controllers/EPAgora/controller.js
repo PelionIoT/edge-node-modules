@@ -258,6 +258,15 @@ var EPAgora = {
         this._ble.disconnect(this._peripheralID);
     },
     state: {
+        metadata: {
+            get: function() {
+                var self = this;
+                return self.commands.metadata(null);
+            },
+            set: function() {
+                return Promise.reject('Readonly facade!');
+            }
+        },
         rssi: {
             get: function() {
                 var self = this;
