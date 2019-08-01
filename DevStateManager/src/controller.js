@@ -891,6 +891,10 @@ var DevStateManager = {
                 ret[3].RGB = true;
                 ret[3].Quaternion = true;
             }
+            if(facades.indexOf('Facades/TimeOfFlight') >  -1 && facades.indexOf('Facades/AirQualityScore') > -1) {
+                ret[3].AirQualityScore = true;
+                ret[3].TimeOfFlight = true;
+            }
 
 
             if(facades.indexOf('Facades/HasLuminance') > -1) {
