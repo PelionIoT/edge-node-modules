@@ -161,10 +161,11 @@ var EPAgora = {
             dev$.publishResourceStateChange(self._deviceID, "luminance", self._states.luminance);
         };
 
+        //centimeters
         this.onTimeOfFlight = function(data) {
             //console.log(data);
-            self._states.tof = data.readUInt16LE(0);
-            self._logger.info("timeOfFlight: " + self._states.tof);
+            self._states.timeOfFlight = data.readInt16LE(0)/10;
+            self._logger.info("timeOfFlight: " + self._states.timeOfFlight);
             dev$.publishResourceStateChange(self._deviceID, "timeOfFlight", self._states.timeOfFlight);
         };
 
@@ -249,6 +250,9 @@ var EPAgora = {
             self.emit('reachable');
         });
         self._connected = true;
+
+        //Get the device metadata
+        self.state.deviceInformation.get();
         this._logger.info("Device controller initialized successfully!");
     },
     stop: function() {
