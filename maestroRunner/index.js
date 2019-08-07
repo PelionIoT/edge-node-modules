@@ -445,7 +445,7 @@ if(process.env.DEVJS_ROOT && process.env.DEVJS_CONFIG_FILE) {
 
             },subVars);
         } else {
-            ERRROR_OUT("No stdout provided")
+            ERROR_OUT("No stdout provided")
         }
     })
 
