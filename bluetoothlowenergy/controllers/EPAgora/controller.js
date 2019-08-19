@@ -215,6 +215,7 @@ var EPAgora = {
         this._updateRSSI = function() {
             if(!self._isRssiRunning) {
                 self._rssiInterval = setInterval(function() {
+                    self._isRssiRunning = true;
                     // console.log('get rssi value!' + self._connected);
                     self.state.rssi.get().then(function(ssi) {
                         if(Math.abs(self._states.rssi - ssi) > 2) {
