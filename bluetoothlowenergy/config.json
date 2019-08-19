@@ -1,5 +1,5 @@
 {
-    "hciDeviceID": 1,
+    "hciDeviceID": 0,
 	"version": "1.0.2",
 	"logLevel": 5,
 	"activityLength": 100,

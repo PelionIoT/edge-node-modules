@@ -164,7 +164,9 @@ var EPAgora = {
         //centimeters
         this.onTimeOfFlight = function(data) {
             //console.log(data);
-            self._states.timeOfFlight = data.readInt16LE(0)/10;
+            self._states.timeOfFlight = data.readUInt16LE(0);
+            if(self._states.timeOfFlight > 65000) self._states.timeOfFlight = -1;
+            else self._states.timeOfFlight = self._states.timeOfFlight/10;
             self._logger.info("timeOfFlight: " + self._states.timeOfFlight);
             dev$.publishResourceStateChange(self._deviceID, "timeOfFlight", self._states.timeOfFlight);
         };
