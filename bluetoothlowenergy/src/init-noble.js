@@ -23,7 +23,7 @@
 **/
 
 'use strict';
-const noble = require('noble');
+const noble = require('@abandonware/noble');
 const Logger = require('./../utils/logger');
 const helper = require('./../utils/helper').helper;
 const EventEmitter = require('events').EventEmitter;

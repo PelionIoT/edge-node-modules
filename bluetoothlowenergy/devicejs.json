@@ -20,7 +20,7 @@
         "handlebars": "4.0.5",
         "jsonminify": "^0.2.3",
         "mkdirp": "^0.5.1",
-        "noble": "^1.9.1",
+        "@abandonware/noble": "git+https://github.com/voxel-dot-at/noble.git#9f17a2e0524df8136b364e10edbac27d83081a65",
         "promise": "^7.0.4",
         "underscore": "*"
     },
