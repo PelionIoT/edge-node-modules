@@ -65,14 +65,18 @@ let loadConfig = (configFile) => {
     }
 
     try {
-        parsedConfig.certificate = fs.readFileSync(path.resolve(configFile, parsedConfig.certificate), 'utf8')
+        if(parsedConfig.certificate) {
+            parsedConfig.certificate = fs.readFileSync(path.resolve(configFile, parsedConfig.certificate), 'utf8')
+        }
     }
     catch(error) {
         throw new Error('Unable to read TLS certificate file at: ' + path.resolve(configFile, parsedConfig.certificate))
     }
 
     try {
-        parsedConfig.key = fs.readFileSync(path.resolve(configFile, parsedConfig.key), 'utf8')
+        if(parsedConfig.key) {
+            parsedConfig.key = fs.readFileSync(path.resolve(configFile, parsedConfig.key), 'utf8')
+        }
     }
     catch(error) {
         throw new Error('Unable to read TLS key file at: ' + path.resolve(configFile, parsedConfig.key))
