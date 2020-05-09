@@ -667,7 +667,7 @@ var RelayStatsProvider = {
             return new Promise(function(resolve, reject) {
                 allProcesses().then(list => {
                     let inefficient = list.query({
-                        mem: '>2'
+                        mem: '>0'
                     });
                     resolve(inefficient);
                 });
