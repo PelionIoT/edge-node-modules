@@ -21,7 +21,6 @@ const fs = require('fs');
 const path = require('path')
 const exec = require('child_process').exec;
 const execSync = require('child_process').execSync;
-const semver = require('semver')
 const request = require('request')
 const os = require('os');
 
@@ -205,7 +204,7 @@ function getSoftwareVersion(versionsFile) {
                 return;
             }
 
-            let wigwagFirmwareVersion;
+            let wigwagFirmwareVersion = 'N/A';
 
             for(let i = 0; i < parsedVersion.packages.length; i += 1) {
                 let packageInfo = parsedVersion.packages[i];
@@ -218,19 +217,7 @@ function getSoftwareVersion(versionsFile) {
                     continue;
                 }
 
-                if(!semver.valid(packageInfo.version)) {
-                    log.error('WigWag-Firmware version number is not a proper semantic version');
-                    resolve('WigWag-Firmware version number is not a proper semantic version');
-                    return;
-                }
-
                 wigwagFirmwareVersion = packageInfo.version;
-            }
-
-            if(!wigwagFirmwareVersion) {
-                log.error('No WigWag-Firmware package found in packages array');
-                resolve('No WigWag-Firmware package found in packages array');
-                return;
             }
 
             resolve(wigwagFirmwareVersion);
@@ -286,7 +273,7 @@ function getDevicedbVersion() {
                     resolve('');
                 }
             } else {
-                console.error('RelayStats failed to get devicedb version ', err);
+                console.error('RelayStats failed to get devicedb version ');
                 resolve('');
             }
         });
