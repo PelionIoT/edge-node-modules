@@ -2,6 +2,7 @@
 This repository hosts all the node modules which are ported on Pelion Edge.
 
 ### Install
+Tested with node version 8.11.2.
 To install all the node modules, run the following script -
 ```
 install-all.sh
