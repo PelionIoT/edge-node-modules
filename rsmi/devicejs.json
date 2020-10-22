@@ -19,7 +19,7 @@
         "mkdirp": "^0.5.1",
         "jsonminify" : "^0.2.3",
         "es6-promise": "^3.0.2",
-        "node-znp": "git+ssh://git@github.com:armPelionEdge/node-znp.git#master",
+        "node-znp": "https://github.com/armPelionEdge/node-znp#master",
         "commander": "2.9.0"
     },
     "devDependencies": {},
