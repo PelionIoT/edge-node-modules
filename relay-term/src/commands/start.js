@@ -17,7 +17,7 @@
  */
 
 const validate = require('jsonschema').validate
-const pty = require('pty.js')
+const pty = require('node-pty')
 const fs = require('fs')
 const process = require('process')
 const path = require('path')
