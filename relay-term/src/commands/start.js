@@ -136,11 +136,12 @@ let execute = (configFile) => {
 
         term.on('data', (data) => {
             t.send(sessionID, data)
-        }).on('exit', () => {
-            sessions.delete(sessionID)
-            console.log('Terminal ' + sessionID + ' exited. Notifying cloud that this session is terminated...')
-            term.destroy()
-            t.end(sessionID)
+            term.on('exit', () => {
+                sessions.delete(sessionID)
+                console.log('Terminal ' + sessionID + ' exited. Notifying cloud that this session is terminated...')
+                term.destroy()
+                t.end(sessionID)
+            })
         })
 
         sessions.set(sessionID, term)
