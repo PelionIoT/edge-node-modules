@@ -1,5 +1,5 @@
 {
-    "cloud": "wss://cloud.laptop:8443/relay-term",
+    "cloud": "http://gateways.local:8080/relay-term",
     "noValidate": true,
     "certificate": "",
     "key": ""
