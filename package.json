@@ -18,7 +18,7 @@
     "chalk": "^2.1.0",
     "colors": "1.1.2",
     "commander": "2.9.0",
-    "devjs-configurator": "http://github.com/PelionIoT/devjs-configurator#master",
+    "devjs-configurator": "https://github.com/PelionIoT/devjs-configurator#master",
     "es6-promise": "^3.0.2",
     "express": "^4.16.3",
     "express-device": "^0.4.2",
