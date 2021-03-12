@@ -14,7 +14,7 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "bonjour": "^3.5.0",
-    "bufferutil": "^3.0.5",
+    "bufferutil": "^4.0.3",
     "chalk": "^2.1.0",
     "colors": "1.1.2",
     "commander": "2.9.0",
