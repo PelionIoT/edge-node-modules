@@ -24,7 +24,7 @@
     "express-device": "^0.4.2",
     "formidable": "^1.1.1",
     "grease-log-client": "https://github.com/PelionIoT/grease-log-client",
-    "handlebars": "4.0.5",
+    "handlebars": "4.7.7",
     "http": "0.0.0",
     "iconv": "^2.3.4",
     "inquirer": "6.2.2",
